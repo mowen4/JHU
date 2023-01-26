@@ -44,22 +44,32 @@ class Triangle
 
         void determineTriangleType()
         {
+
+            std::cout << a << b << c << std::endl;
+            
+            bool noType = true;
+            
             if(!isValidTriangle())
             {
-                std::cout << "You have entered invalid lengths for the sides of a real triangle.";
+                std::cout << "You have entered invalid lengths for the sides of a real triangle." << endl;
+                noType = false;
             }
-
-            if (a == b && b == c)
+            if (a == b && b == c && a == c)
             {
                 std::cout << "It is Equilateral" << std::endl;
+                noType = false;
             }
-            else if (a == b || a == c || b == c)
+            if (a == b || a == c || b == c)
             {
                 std::cout << "It is Isosceles" << std::endl;
-
+                noType = false;
             }
-            //if Right triangle using trig
-            else
+            if ((a*a + b*b == c*c) || (b*b + c*c == a*a))
+            {
+                std::cout << "It is a Right Triangle" << std::endl;
+                noType = false;
+            }
+            if (noType)
             {
                 std::cout << "It is none of the standard types" << std::endl;
             }
