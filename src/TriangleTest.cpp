@@ -44,8 +44,9 @@ class Triangle
 
         void determineTriangleType()
         {
-            if(!isValidTriangle()){
-                std::cout << "You have entered invalid lengths for the sides of a real triangle."
+            if(!isValidTriangle())
+            {
+                std::cout << "You have entered invalid lengths for the sides of a real triangle.";
             }
 
             if (a == b && b == c)
@@ -72,7 +73,7 @@ class Triangle
             }
             //no side can have a negative or zero length
             else if (a <= 0 || b <= 0 || c <= 0){
-                return false
+                return false;
             }
 
             return true;
