@@ -44,9 +44,11 @@ class Triangle
 
         void determineTriangleType()
         {
-            //is it a valid triangle? using pyhagorean 
+            if(!isValidTriangle()){
+                std::cout << "You have entered invalid lengths for the sides of a real triangle."
+            }
 
-            if (a == b && b == c && a == c)
+            if (a == b && b == c)
             {
                 std::cout << "It is Equilateral" << std::endl;
             }
@@ -60,8 +62,20 @@ class Triangle
             {
                 std::cout << "It is none of the standard types" << std::endl;
             }
+        }
 
+        bool isValidTriangle()
+        {
+            //the sum of any two sides must be greater than the length of the third side
+            if(a + b <= c || a + c <= b || b + c <= a){
+                return false;
+            }
+            //no side can have a negative or zero length
+            else if (a <= 0 || b <= 0 || c <= 0){
+                return false
+            }
 
+            return true;
         }
 
 };
