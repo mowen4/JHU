@@ -7,7 +7,7 @@ using namespace std;
 class Triangle
 {
     private:
-        int a, b ,c;   
+        int side1, side2,side3;   
 
     public:
          
@@ -18,9 +18,9 @@ class Triangle
 
         Triangle(int x, int y, int z)
         {
-            a = x;
-            b = y;
-            c = z;
+            side1 = x;
+            side2 = y;
+            side3 = z;
         }
 
 
@@ -32,14 +32,14 @@ class Triangle
             //check if trianle has valid side lengths
             if(isValidTriangle())
             {
-                 //if a==b and b==c then a==b==c
-                if (a == b && b == c)
+                 //Transitive property: if a==b and b==c then a==b==c
+                if (side1 == side2 && side2 == side3)
                 {
                     std::cout << "It is Equilateral" << std::endl;
                     type = equilateral;
                 }
                 //if any pair of sides is equal then it is also Isosceles
-                else if (a == b || a == c || b == c)
+                else if (side1 == side2 || side1 == side3 || side2 == side3)
                 {
                     std::cout << "It is Isosceles" << std::endl;
                     type = isosceles;
@@ -61,11 +61,11 @@ class Triangle
         bool isValidTriangle()
         {
             //the sum of any two sides must be greater than the length of the third side
-            if(a + b <= c || a + c <= b || b + c <= a){
+            if(side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1){
                 return false;
             }
             //no side can have a negative or zero length
-            else if (a <= 0 || b <= 0 || c <= 0){
+            else if (side1 <= 0 || side2 <= 0 || side3 <= 0){
                 return false;
             }
 
