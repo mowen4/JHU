@@ -20,7 +20,7 @@ class Triangle
             side3 = z;
         }
 
-
+        //determines triangle type from side lengths
         void determineTriangleType()
         {
 
@@ -55,6 +55,7 @@ class Triangle
             }
         }
 
+        //checks if side lengths can form a valid real triangle
         bool isValidTriangle()
         {
             //the sum of any two sides must be greater than the length of the third side
