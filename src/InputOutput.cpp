@@ -45,8 +45,7 @@ class InputOutput
                     cin.clear();
 
                     cin.ignore(2147483647, '\n' );
-                } while ( !input_ok );
-            
+                } while ( !input_ok );            
             }
         }
 };

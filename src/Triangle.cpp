@@ -6,9 +6,6 @@ using namespace std;
 
 class Triangle
 {
-    private:
-        int side1, side2,side3;   
-
     public:
          
         //Triangle types, for unit testing
@@ -71,6 +68,9 @@ class Triangle
 
             return true;
         }
+
+    private:
+        int side1, side2,side3;   
 
 };
 
