@@ -1,7 +1,6 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <time.h>
 
 using namespace std;
 
@@ -12,9 +11,7 @@ class InputOutput
     public:
         void getInputs(int inputs[3])
         {
-            //temporary local variables
-            int temp = 0;
-            bool input_ok;
+            //temporary local variable
 
             std::cout << "Triangle Tester" << std::endl;
             
@@ -48,4 +45,8 @@ class InputOutput
                 } while ( !input_ok );            
             }
         }
+    
+    private:
+            int temp = 0;
+            bool input_ok;
 };

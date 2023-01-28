@@ -1,6 +1,4 @@
-#include <iostream>
 #include <stdlib.h>
-#include <time.h>
 
 using namespace std;
 
@@ -11,7 +9,6 @@ class Triangle
         //Triangle types, for unit testing
         enum TriangleType {equilateral, isosceles, scalene, invalid};
         TriangleType type;   
-     
 
         Triangle(int x, int y, int z)
         {
@@ -54,6 +51,9 @@ class Triangle
                 type = invalid;
             }
         }
+    private:
+
+        int side1, side2,side3;  
 
         //checks if side lengths can form a valid real triangle
         bool isValidTriangle()
@@ -70,8 +70,7 @@ class Triangle
             return true;
         }
 
-    private:
-        int side1, side2,side3;   
+         
 
 };
 
