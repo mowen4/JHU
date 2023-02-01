@@ -32,7 +32,7 @@ public:
     {
         values.insert(values.end(), input.begin(), input.end());
         std::cout << "Appending all values to the end of the vector. New vector length: " << values.size() << "." <<std::endl;
-        numberOfElements = values.size();
+        numberOfElements += values.size();
     }
 
     //computes the average value of all the values in the vector
