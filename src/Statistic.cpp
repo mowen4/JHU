@@ -64,11 +64,11 @@ public:
 
         return STD;
     }
-
-    private:
+private:
     //values holds the collection of doubles over which we will compute the average and std deviation
     vector<double> values;
     //the number of elements in v 
     long double numberOfElements = 0;
+    
 };
 
