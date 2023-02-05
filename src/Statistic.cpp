@@ -7,11 +7,7 @@ using namespace std;
 
 class Statistic
 {
-private:
-    //values holds the collection of doubles over which we will compute the average and std deviation
-    vector<double> values;
-    //the number of elements in v 
-    long double numberOfElements = 0;
+
 public:
     // Constructor: initialize private data
     //Statistic();
@@ -36,7 +32,7 @@ public:
     }
 
     //computes the average value of all the values in the vector
-    double getAverage()
+    double getAverage() const
     {        
         long double sum = 0;        
         double average = 0.0;
@@ -52,7 +48,7 @@ public:
     }
 
     //computes the standard deviation of the values in the vector
-    double getStandardDeviation()
+    double getStandardDeviation() const
     {
         double standardDeviation = 0.0;
         double mean = getAverage();
@@ -68,5 +64,11 @@ public:
 
         return STD;
     }
+
+    private:
+    //values holds the collection of doubles over which we will compute the average and std deviation
+    vector<double> values;
+    //the number of elements in v 
+    long double numberOfElements = 0;
 };
 
