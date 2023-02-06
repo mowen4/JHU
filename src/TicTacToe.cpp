@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
-#include <array>
 
 using namespace std;
 
@@ -39,14 +37,12 @@ void Game::promptUserforMove(char playerMarker)
 {
     std::cout << "Enter row and column: ";
     int row, col;
-    array<int, 2> userMoves;
     cin >> row >> col;
     addXorO(playerMarker, row, col);
 }
 
 void Game::showBoard()
 {
-    // system("CLS");
     cout << "-------------" << endl;
     cout << "| " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << " |" << endl;
     cout << "-------------" << endl;
