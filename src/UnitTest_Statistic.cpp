@@ -6,7 +6,7 @@
 #include <vector>
 #include <cmath>
 
-
+//validate that GetAverage outputs the expected value
 TEST_CASE("Average values added to vector", "[getAverage]")
 {
     Statistic stat;
@@ -15,6 +15,7 @@ TEST_CASE("Average values added to vector", "[getAverage]")
     REQUIRE(stat.getAverage() == 3.0);    
 }
 
+//validate that getStandardDeviation outputs the expected value
 TEST_CASE("Get standard deviation of values added to vector", "[getStandardDeviation]")
 {
     Statistic stat;
@@ -33,7 +34,7 @@ TEST_CASE("Get standard deviation of values added to vector", "[getStandardDevia
     REQUIRE(stat.getStandardDeviation() == stdDev);    
 }
 
-
+//validate that getAverage() outputs the expected value after adding a vector
 TEST_CASE("Add a vector of items to statistic and compute average", "[addList]")
 {
     Statistic stat;

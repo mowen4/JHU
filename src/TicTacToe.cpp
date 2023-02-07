@@ -1,20 +1,23 @@
 #include <iostream>
+#include <vector>
+#include <cstdlib>
 
 using namespace std;
 
 class Game
 {
-public:
-    Game();
-    void clearBoard();
-    void showBoard();
-    bool isGameOver();
-    void promptUserforMove(char XorO);
+    public:
+        Game();
+        void clearBoard();
+        void showBoard();
+        bool isGameOver();
+        void promptUserforMove(char XorO);
+        void makeComputerMove(char XorO);
 
-private:
-    int moveNumber = 1;
-    char board[3][3] = {' '};
-    void addXorO(char XorO, int i, int j);
+    private:
+        int moveNumber = 1;
+        char board[3][3] = {' '};
+        void addXorO(char XorO, int i, int j);
 };
 
 Game::Game()
@@ -24,10 +27,8 @@ Game::Game()
 
 void Game::clearBoard()
 {
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
             board[i][j] = ' ';
         }
     }
@@ -36,9 +37,53 @@ void Game::clearBoard()
 void Game::promptUserforMove(char playerMarker)
 {
     std::cout << "Enter row and column: ";
-    int row, col;
-    cin >> row >> col;
-    addXorO(playerMarker, row, col);
+    bool validEntryReceived = false;
+    while(!validEntryReceived){
+        int row, col;
+        cin >> row >> col;
+        if(1 <= row && row <=3 && 1 <= col && col <= 3){
+            if(board[row-1][col-1] == ' '){
+                validEntryReceived = true;
+                addXorO(playerMarker, row, col);
+            }
+            else{
+                cout << "That space is already occupied, please choose another: ";
+            }
+        }
+        else{
+                cout << "Valid row and column choices are 1, 2, or 3. Please try again: ";
+        }
+    }
+}
+
+
+void Game::makeComputerMove(char computerMarker){
+    //Add available spaces to vector. Available spaces will be numbered according to the grid below
+    //0 1 2
+    //3 4 5
+    //6 7 8
+    vector<int> availableSpaces;
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){            
+            if(board[i][j] == ' '){
+                cout << (i*3+j); //debug, print out available spaces being considered
+                availableSpaces.push_back(i*3+j);
+            }
+        }
+    }
+    //todo: make sure available spaces isn't empty?
+
+    //choose a space from the available spaces at random
+    int randomIndex = rand() % availableSpaces.size();
+    cout << "\n" << randomIndex << "\n";
+    int chosenSpace = availableSpaces[randomIndex];
+    cout << "\n" << chosenSpace << "\n";
+    //example chosen space and its row, column:  5/3 = 1 (second row).  5 % 3 = 2 (third column)
+    int row = (chosenSpace / 3) + 1; //integer division by 3 gets the one-indexed row
+    int column = (chosenSpace % 3) + 1; //chosen space mod 3 to get the one-indexed column  
+        
+    addXorO(computerMarker, row, column);   
+
 }
 
 void Game::showBoard()
@@ -115,8 +160,9 @@ int main()
         }
         else
         {
-            g.promptUserforMove('O');
+            g.makeComputerMove('O');
         }
+        //TODO: Only swap the turn if a valid move was played (e.g. can't be a move into a spot already played or a coordinate outside the grid space)
         xturn = !xturn;
         g.showBoard();
     }
