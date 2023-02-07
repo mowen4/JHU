@@ -151,10 +151,10 @@ int main()
 {
     Game g;
     g.showBoard();
-    bool xturn = true;
+    bool playerTurn = true;
     while (!g.isGameOver())
     {
-        if (xturn)
+        if (playerTurn)
         {
             g.promptUserforMove('X');
         }
@@ -163,7 +163,7 @@ int main()
             g.makeComputerMove('O');
         }
         //TODO: Only swap the turn if a valid move was played (e.g. can't be a move into a spot already played or a coordinate outside the grid space)
-        xturn = !xturn;
+        playerTurn = !playerTurn;
         g.showBoard();
     }
     return 0;
