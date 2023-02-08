@@ -19,14 +19,15 @@ class Game
         bool isGameOver();
         void promptUserforMove(char XorO);
         void makeComputerMove(char XorO);
-        void updateAvailableSpaces(int row, int col);
+        
 
-    private:
+    private:        
         int moveNumber = 1;
         //each space in board will hold either an X or O once a move is played
         char board[3][3] = {' '};               
         vector<int> availableSpaces = {0,1,2,3,4,5,6,7,8};
         void addXorO(char XorO, int i, int j);
+        void updateAvailableSpaces(int row, int col);
 };
 
 /// @brief constructs a new game with an empty board and all spaces available
@@ -51,8 +52,6 @@ void Game::clearBoard()
     //refill list of available spaces
     availableSpaces = {0,1,2,3,4,5,6,7,8};
 }
-
-
 
 
 /// @brief removes the selected space from the list of availableSpaces
@@ -216,7 +215,7 @@ int main()
         {
             g.makeComputerMove('O');
         }        
-        xturn = !xturn;
+        playerTurn = !playerTurn;
         g.showBoard();
     }
     return 0;
