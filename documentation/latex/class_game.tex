@@ -1,0 +1,120 @@
+\hypertarget{class_game}{}\doxysection{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+
+
+The \mbox{\hyperlink{class_game}{Game}} class holds the code from playing a tic-\/tac-\/toe game.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}} ()
+\begin{DoxyCompactList}\small\item\em constructs a new game with an empty board and all spaces available \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a4dc3913e3a87b3ccce42af24e8fb375f}{clear\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Resets the game board. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a40398fe00688643590cd9d688ef262df}{show\+Board}} ()
+\begin{DoxyCompactList}\small\item\em displays the board in the terminal \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_a102ce6e5a222e403aa7a0465ff6281dc}{is\+Game\+Over}} ()
+\begin{DoxyCompactList}\small\item\em checks if the game is in a terminal state \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a06f336a537a87a7f87191ddfb949a110}{prompt\+Userfor\+Move}} (char XorO)
+\begin{DoxyCompactList}\small\item\em Gets user input and plays the user\textquotesingle{}s move. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_af99586aecf3188f5adfc6da9cdcd009c}{make\+Computer\+Move}} (char XorO)
+\begin{DoxyCompactList}\small\item\em Makes a move for the computer, chosen at random from the available spaces. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a0af122cee659a57690ad382e2adb6499}{update\+Available\+Spaces}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em removes the selected space from the list of available\+Spaces \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_game}{Game}} class holds the code from playing a tic-\/tac-\/toe game. 
+
+This class holds data members for storing the tic tac toe board state, current move number, and remaining available moves It holds functions for allowing a human player to make a move as well as for a computer to make a move The game is played via terminal input and the board is printed to the terminal as well 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_ad59df6562a58a614fda24622d3715b65}\label{class_game_ad59df6562a58a614fda24622d3715b65}} 
+\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{Game()}{Game()}}
+{\footnotesize\ttfamily Game\+::\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+constructs a new game with an empty board and all spaces available 
+
+The constructor for \mbox{\hyperlink{class_game}{Game}}. Calls clear\+Board to set the game board to the correct initial state. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_a4dc3913e3a87b3ccce42af24e8fb375f}\label{class_game_a4dc3913e3a87b3ccce42af24e8fb375f}} 
+\index{Game@{Game}!clearBoard@{clearBoard}}
+\index{clearBoard@{clearBoard}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{clearBoard()}{clearBoard()}}
+{\footnotesize\ttfamily void Game\+::clear\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets the game board. 
+
+Sets all spaces in board\mbox{[}\mbox{]}\mbox{[}\mbox{]} to an empty space and sets available\+Spaces to include all spaces on the board \mbox{\Hypertarget{class_game_a102ce6e5a222e403aa7a0465ff6281dc}\label{class_game_a102ce6e5a222e403aa7a0465ff6281dc}} 
+\index{Game@{Game}!isGameOver@{isGameOver}}
+\index{isGameOver@{isGameOver}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{isGameOver()}{isGameOver()}}
+{\footnotesize\ttfamily bool Game\+::is\+Game\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+checks if the game is in a terminal state 
+
+Checks the board for three markers of the same type in a row in horizontal, vertical or diagonal directions \begin{DoxyReturn}{Returns}
+Returns true if the game is over, otherwise returns false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_af99586aecf3188f5adfc6da9cdcd009c}\label{class_game_af99586aecf3188f5adfc6da9cdcd009c}} 
+\index{Game@{Game}!makeComputerMove@{makeComputerMove}}
+\index{makeComputerMove@{makeComputerMove}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{makeComputerMove()}{makeComputerMove()}}
+{\footnotesize\ttfamily void Game\+::make\+Computer\+Move (\begin{DoxyParamCaption}\item[{char}]{computer\+Marker }\end{DoxyParamCaption})}
+
+
+
+Makes a move for the computer, chosen at random from the available spaces. 
+
+This function selects a move for the computer at random from the list of available spaces. The game board and available spaces are updated. 
+\begin{DoxyParams}{Parameters}
+{\em computer\+Marker} & the marker used by the computer, either \textquotesingle{}X\textquotesingle{} or \textquotesingle{}O\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_a06f336a537a87a7f87191ddfb949a110}\label{class_game_a06f336a537a87a7f87191ddfb949a110}} 
+\index{Game@{Game}!promptUserforMove@{promptUserforMove}}
+\index{promptUserforMove@{promptUserforMove}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{promptUserforMove()}{promptUserforMove()}}
+{\footnotesize\ttfamily void Game\+::prompt\+Userfor\+Move (\begin{DoxyParamCaption}\item[{char}]{player\+Marker }\end{DoxyParamCaption})}
+
+
+
+Gets user input and plays the user\textquotesingle{}s move. 
+
+This function will prompt the user for their next game move. The move should be the row followed by a space and then the column. If the space is already occupied, the user is prompted for a different move If the selected row or column are outside the playable area, the user is prompted for a different move Once a valid move is entered, the game board and available spaces are updated. 
+\begin{DoxyParams}{Parameters}
+{\em player\+Marker} & This is the marker used by the player, either \textquotesingle{}X\textquotesingle{} or \textquotesingle{}O\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_a40398fe00688643590cd9d688ef262df}\label{class_game_a40398fe00688643590cd9d688ef262df}} 
+\index{Game@{Game}!showBoard@{showBoard}}
+\index{showBoard@{showBoard}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{showBoard()}{showBoard()}}
+{\footnotesize\ttfamily void Game\+::show\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+displays the board in the terminal 
+
+Displays the game board in the terminal. Each column is separated by a vertical bar and the rows are separated by dashes \mbox{\Hypertarget{class_game_a0af122cee659a57690ad382e2adb6499}\label{class_game_a0af122cee659a57690ad382e2adb6499}} 
+\index{Game@{Game}!updateAvailableSpaces@{updateAvailableSpaces}}
+\index{updateAvailableSpaces@{updateAvailableSpaces}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{updateAvailableSpaces()}{updateAvailableSpaces()}}
+{\footnotesize\ttfamily void Game\+::update\+Available\+Spaces (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})}
+
+
+
+removes the selected space from the list of available\+Spaces 
+
+removes a square from the available\+Spaces vector based on the selected move (row, col) integers in the available\+Spaces vector coorespond to the grid below this allows us to track available spaces and precludes the need to scan the board before each computer move 0 1 2 3 4 5 6 7 8 ~\newline
+ 
