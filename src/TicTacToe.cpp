@@ -189,18 +189,20 @@ bool Game::isGameOver()
 
     if (moveNumber++ == 10)
     {
-        cout << "Stalemate" << endl;
+        cout << "Tie Game" << endl;
         return true;
     }
 
     return false;
 }
 
-/// @brief  program entry point
-///
-/// This main function is the driver for the tic tac toe board game. 
-/// @return  returns a zero on successful completion of the program
-int main()
+class GameDriver: protected Game
+{
+    public:
+        void run();
+};
+
+void GameDriver::run()
 {
     Game g;
     g.showBoard();
@@ -218,5 +220,16 @@ int main()
         playerTurn = !playerTurn;
         g.showBoard();
     }
+}
+
+/// @brief  program entry point
+///
+/// This main function is the driver for the tic tac toe board game. 
+/// @return  returns a zero on successful completion of the program
+int main()
+{
+    GameDriver gd;
+    gd.run();
+
     return 0;
 }
