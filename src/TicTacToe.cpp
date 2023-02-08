@@ -165,10 +165,10 @@ int main()
 {
     Game g;
     g.showBoard();
-    bool xturn = true;
+    bool playerTurn = true;
     while (!g.isGameOver())
     {
-        if (xturn)
+        if (playerTurn)
         {
             g.promptUserforMove('X');
         }
