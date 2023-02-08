@@ -204,21 +204,20 @@ class GameDriver: protected Game
 
 void GameDriver::run()
 {
-    Game g;
-    g.showBoard();
+    showBoard();
     bool playerTurn = true;
-    while (!g.isGameOver())
+    while (!isGameOver())
     {
         if (playerTurn)
         {
-            g.promptUserforMove('X');
+            promptUserforMove('X');
         }
         else
         {
-            g.makeComputerMove('O');
+            makeComputerMove('O');
         }        
         playerTurn = !playerTurn;
-        g.showBoard();
+        showBoard();
     }
 }
 
