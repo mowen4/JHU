@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,10 +14,13 @@ class Game
         bool isGameOver();
         void promptUserforMove(char XorO);
         void makeComputerMove(char XorO);
+        void updateAvailableSpaces(int row, int col);
 
     private:
         int moveNumber = 1;
-        char board[3][3] = {' '};
+        //each space in board will hold either an X or O once a move is played
+        char board[3][3] = {' '};               
+        vector<int> availableSpaces = {0,1,2,3,4,5,6,7,8};
         void addXorO(char XorO, int i, int j);
 };
 
@@ -25,15 +29,32 @@ Game::Game()
     clearBoard();
 }
 
+//resets the game
 void Game::clearBoard()
 {
+    //resets the board
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             board[i][j] = ' ';
         }
     }
+    //refill list of available spaces
+    availableSpaces = {0,1,2,3,4,5,6,7,8};
 }
 
+//removes a square from the availableSpaces vector based on the selected move (row, col)
+//integers in the availableSpaces vector coorespond to the grid below 
+//this allows us to track available spaces and precludes the need to scan the board before each computer move
+//0 1 2
+//3 4 5
+//6 7 8        
+void Game::updateAvailableSpaces(int row, int col){
+    int selectedSpace = (row-1)*3 + (col-1);
+    auto item = std::find(availableSpaces.begin(), availableSpaces.end(), selectedSpace);    
+    availableSpaces.erase(item);
+}
+
+//gets user input and plays the user's move
 void Game::promptUserforMove(char playerMarker)
 {
     std::cout << "Enter row and column: ";
@@ -45,6 +66,7 @@ void Game::promptUserforMove(char playerMarker)
             if(board[row-1][col-1] == ' '){
                 validEntryReceived = true;
                 addXorO(playerMarker, row, col);
+                updateAvailableSpaces(row, col);
             }
             else{
                 cout << "That space is already occupied, please choose another: ";
@@ -56,23 +78,8 @@ void Game::promptUserforMove(char playerMarker)
     }
 }
 
-
-void Game::makeComputerMove(char computerMarker){
-    //Add available spaces to vector. Available spaces will be numbered according to the grid below
-    //0 1 2
-    //3 4 5
-    //6 7 8
-    vector<int> availableSpaces;
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){            
-            if(board[i][j] == ' '){
-                cout << (i*3+j); //debug, print out available spaces being considered
-                availableSpaces.push_back(i*3+j);
-            }
-        }
-    }
-    //todo: make sure available spaces isn't empty?
-
+//makes a move for the computer, chosen at random from the available spaces
+void Game::makeComputerMove(char computerMarker){    
     //choose a space from the available spaces at random
     int randomIndex = rand() % availableSpaces.size();
     cout << "\n" << randomIndex << "\n";
@@ -80,12 +87,16 @@ void Game::makeComputerMove(char computerMarker){
     cout << "\n" << chosenSpace << "\n";
     //example chosen space and its row, column:  5/3 = 1 (second row).  5 % 3 = 2 (third column)
     int row = (chosenSpace / 3) + 1; //integer division by 3 gets the one-indexed row
-    int column = (chosenSpace % 3) + 1; //chosen space mod 3 to get the one-indexed column  
-        
-    addXorO(computerMarker, row, column);   
+    int col = (chosenSpace % 3) + 1; //chosen space mod 3 to get the one-indexed column  
+
+    //place the space on the board    
+    addXorO(computerMarker, row, col);   
+    //update the list of available spaces to remove the move just played
+    updateAvailableSpaces(row, col);
 
 }
 
+//displays the board in the terminal
 void Game::showBoard()
 {
     cout << "-------------" << endl;
@@ -97,11 +108,13 @@ void Game::showBoard()
     cout << "-------------" << endl;
 }
 
+//adds the passed in character to the board at the specified coordinates
 void Game::addXorO(char character, int i, int j)
 {
     board[--i][--j] = character;
 }
 
+//checks if the game is in a terminal state and returns true if it is, otherwise false
 bool Game::isGameOver()
 {
     int x, y;
@@ -147,6 +160,7 @@ bool Game::isGameOver()
     return false;
 }
 
+//program entry point
 int main()
 {
     Game g;
@@ -161,8 +175,7 @@ int main()
         else
         {
             g.makeComputerMove('O');
-        }
-        //TODO: Only swap the turn if a valid move was played (e.g. can't be a move into a spot already played or a coordinate outside the grid space)
+        }        
         xturn = !xturn;
         g.showBoard();
     }
