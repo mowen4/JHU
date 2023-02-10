@@ -196,12 +196,18 @@ bool Game::isGameOver()
     return false;
 }
 
+/// @brief This class assists in running the Game
+///
+/// This class gets called by the int main() function and assists with running the game and keeping track of whose turn it is. 
 class GameDriver: protected Game
 {
     public:
         void run();
 };
 
+/// @brief Runs the game and makes calls for each player to make a move. 
+///
+/// Asks each player to make a move based on whose turn it is. Updates the playerTurn variable after each move is completed.
 void GameDriver::run()
 {
     showBoard();
