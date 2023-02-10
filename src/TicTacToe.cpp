@@ -106,10 +106,9 @@ void Game::promptUserforMove(char playerMarker)
 
 void Game::makeComputerMove(char computerMarker){    
     //choose a space from the available spaces at random
-    int randomIndex = rand() % availableSpaces.size();
-    cout << "\n" << randomIndex << "\n";
+    int randomIndex = rand() % availableSpaces.size();   
     int chosenSpace = availableSpaces[randomIndex];
-    cout << "\n" << chosenSpace << "\n";
+   
     //example chosen space and its row, column:  5/3 = 1 (second row).  5 % 3 = 2 (third column)
     int row = (chosenSpace / 3) + 1; //integer division by 3 gets the one-indexed row
     int col = (chosenSpace % 3) + 1; //chosen space mod 3 to get the one-indexed column  
