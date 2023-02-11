@@ -24,7 +24,7 @@ class Game
     private:        
         int moveNumber = 1;
         //each space in board will hold either an X or O once a move is played
-        char board[3][3] = {' '};               
+        char board[3][3];               
         vector<int> availableSpaces = {0,1,2,3,4,5,6,7,8};
         void addXorO(char XorO, int i, int j);
         void updateAvailableSpaces(int row, int col);
