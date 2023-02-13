@@ -82,5 +82,6 @@
         "xtree": "cpp",
         "array": "cpp"
     },
-    "editor.rulers": [80,120]
+    "editor.rulers": [80,120],
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 80}"
 }

@@ -89,6 +89,8 @@ int main() {
     std::cout << c.value << c.suit << std::endl;
     c = d.dealTopCard();
     std::cout << c.value << c.suit << std::endl;
+    c = d.dealTopCard();
+    std::cout << c.value << c.suit << std::endl;
 
     return 0;
 }
