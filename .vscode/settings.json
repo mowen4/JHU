@@ -81,5 +81,6 @@
         "xloctime": "cpp",
         "xtree": "cpp",
         "array": "cpp"
-    }
+    },
+    "editor.rulers": [80,120]
 }
