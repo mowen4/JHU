@@ -13,6 +13,7 @@ const map<char, int> cardValues = {
     {'9', 9}, {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}};
 
 const char Suits[4] = {'S', 'H', 'D', 'C'};
+
 const char Values[13] = {'2', '3', '4', '5', '6', '7', '8',
                          '9', 'T', 'J', 'Q', 'K', 'A'};
 
@@ -57,13 +58,37 @@ card Deck::dealTopCard() {
 class Hand {
    public:
     void addCard(card c);
-    void isHandFull();
-
+    void showHand();
+    bool isHandFull();
+    void discardHand();
    private:
     vector<card> cards;
 
    protected:
 };
+
+void Hand::discardHand() {
+    cards.clear();
+}
+
+void Hand::addCard(card c){
+    cards.push_back(c);
+}
+
+void Hand::showHand() {
+    for (card c : cards) {
+        std::cout << c.value << c.suit << " ";
+    }
+    std::cout << std::endl;
+}
+
+bool Hand::isHandFull() {
+    if (cards.size() >= 5) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 // Enum to store the possible hand rankings
 enum HandRanking {
@@ -81,16 +106,15 @@ enum HandRanking {
 
 int main() {
     Deck d;
-    card c = d.dealTopCard();
-    std::cout << c.value << c.suit << std::endl;
-    c = d.dealTopCard();
-    std::cout << c.value << c.suit << std::endl;
-    c = d.dealTopCard();
-    std::cout << c.value << c.suit << std::endl;
-    c = d.dealTopCard();
-    std::cout << c.value << c.suit << std::endl;
-    c = d.dealTopCard();
-    std::cout << c.value << c.suit << std::endl;
+    Hand h;
+    h.addCard(d.dealTopCard());
+    h.addCard(d.dealTopCard());
+    h.addCard(d.dealTopCard());
+    h.addCard(d.dealTopCard());
+    h.addCard(d.dealTopCard());
+
+    h.showHand();
+
 
     return 0;
 }
