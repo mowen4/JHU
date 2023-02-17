@@ -24,11 +24,18 @@ const char Values[13] = {'2', '3', '4', '5', '6', '7', '8',
 struct card {
   char value;
   char suit;
+  int rank;
 
   // overriding < operator to allow for sort() function calls
-  bool operator<(const card &card) const { return (cardValues[value] < cardValues[card.value]); }
-  // overriding > as well for good measure
-  bool operator>(const card &card) const { return (cardValues[value] > cardValues[card.value]); }
+  bool operator<(const card &card) const { return (rank < card.rank); }
+  // overridng comparison to ints for easier comparisons in tie breakers
+  bool operator<(int compareValue) const { return (rank < compareValue); }
+  // overriding > as well for easier comparison in tie breakers
+  bool operator>(const card &card) const { return (rank > card.rank); }
+  bool operator>(int compareValue) const { return (rank > compareValue); }
+  // for simplifying comparing if cards have equal value
+  bool operator==(const card &card) const { return (rank == card.rank); }
+  bool operator==(int compareValue) const { return (rank == compareValue); }
 };
 
 class Deck {
@@ -48,6 +55,7 @@ Deck::Deck() {
       card c;
       c.suit = s;
       c.value = v;
+      c.rank = cardValues[c.value];
       deck.push_back(c);
     }
   }
@@ -133,7 +141,7 @@ public:
 private:
   vector<card> cards;
   HandRanking rank;
-    
+
   bool isRoyalFlush();
   bool isStraightFlush();
   bool isFourOfAKind();
@@ -192,9 +200,7 @@ void Hand::setRank() {
   }
 }
 
-vector<card> Hand::getCards(){
-    return cards;
-}
+vector<card> Hand::getCards() { return cards; }
 
 bool Hand::isRoyalFlush() {
   if (isFlush() && isStraight() && cards[4].value == 'A') {
@@ -248,7 +254,7 @@ bool Hand::isStraight() {
   for (int i = 0; i < cards.size() - 1; i++) {
     // doing subtraction so lookup the value in the map since you can't
     // subtract 7 from 'A'
-    if (cardValues[cards[i + 1].value] - cardValues[cards[i].value] != 1) {
+    if (cards[i + 1].rank - cards[i].rank != 1) {
       return false;
     }
   }
@@ -296,23 +302,23 @@ public:
   void addPlayerHand();
   void showPlayerHands();
   void determineHandWinner();
-  
 
 private:
   Deck deck;
   int numberOfPlayers = 0;
   int handSize = 5;
-  void breakTie(HandRanking tiedRank);  
-  void highCardTieBreaker();
-  void onePairTieBreaker();
-  void twoPairsTieBreaker();
-  void threeOfAKindTieBreaker();
-  void straightTieBreaker();
-  void flushTieBreaker();
-  void fullHouseTieBreaker();
-  void fourOfAKindTieBreaker();  
-  void straightFlushTieBreaker();
-  void royalFlushTieBreaker();
+  void breakTie(HandRanking tiedRank, vector<card> player1,
+                vector<card> player2);
+  int highCardTieBreaker(vector<card> player1, vector<card> player2);
+  int onePairTieBreaker(vector<card> player1, vector<card> player2);
+  int twoPairsTieBreaker(vector<card> player1, vector<card> player2);
+  int threeOfAKindTieBreaker(vector<card> player1, vector<card> player2);
+  int straightTieBreaker(vector<card> player1, vector<card> player2);
+  int flushTieBreaker(vector<card> player1, vector<card> player2);
+  int fullHouseTieBreaker(vector<card> player1, vector<card> player2);
+  int fourOfAKindTieBreaker(vector<card> player1, vector<card> player2);
+  int straightFlushTieBreaker(vector<card> player1, vector<card> player2);
+  int royalFlushTieBreaker(vector<card> player1, vector<card> player2);
 
 protected:
 };
@@ -353,127 +359,191 @@ void PokerGame::determineHandWinner() {
     cout << "Both players have a hand of the same rank, checking tie-breakers.";
     std::cout << std::endl;
     HandRanking tiedRank = playerHands[0].getRank();
-    breakTie(tiedRank);
+    vector<card> player1 = playerHands[0].getCards();
+    vector<card> player2 = playerHands[1].getCards();
+    breakTie(tiedRank, player1, player2);
   }
 }
 
-void PokerGame::breakTie(HandRanking tiedRank) {
-  switch (tiedRank)
-    {
-    case HandRanking::HighCard:
-      highCardTieBreaker();
-      break;
-    case HandRanking::OnePair:
-      onePairTieBreaker();
-      break;
-    case HandRanking::TwoPairs:
-      twoPairsTieBreaker();
-      break;
-    case HandRanking::ThreeOfAKind:
-      threeOfAKindTieBreaker();
-      break;
-    case HandRanking::Straight:
-      straightTieBreaker();
-      break;
-    case HandRanking::Flush:
-      flushTieBreaker();
-      break;
-    case HandRanking::FullHouse:
-      fullHouseTieBreaker();
-      break;
-    case HandRanking::FourOfAKind:
-      fourOfAKindTieBreaker();
-      break;
-    case HandRanking::StraightFlush:
-      straightFlushTieBreaker();
-      break;
-    case HandRanking::RoyalFlush:
-      royalFlushTieBreaker();
-      break;
-    default:
-      //This should not happen
-      std::cout << "Invalid hand rank for tie breaking!";
-      break;
-    }
+void PokerGame::breakTie(HandRanking tiedRank, vector<card> player1,
+                         vector<card> player2) {
+  int winner = -1;
+  switch (tiedRank) {
+  case HandRanking::HighCard:
+    winner = highCardTieBreaker(player1, player2);
+    break;
+  case HandRanking::OnePair:
+    winner = onePairTieBreaker(player1, player2);
+    break;
+  case HandRanking::TwoPairs:
+    winner = twoPairsTieBreaker(player1, player2);
+    break;
+  case HandRanking::ThreeOfAKind:
+    winner = threeOfAKindTieBreaker(player1, player2);
+    break;
+  case HandRanking::Straight:
+    winner = straightTieBreaker(player1, player2);
+    break;
+  case HandRanking::Flush:
+    winner = flushTieBreaker(player1, player2);
+    break;
+  case HandRanking::FullHouse:
+    winner = fullHouseTieBreaker(player1, player2);
+    break;
+  case HandRanking::FourOfAKind:
+    winner = fourOfAKindTieBreaker(player1, player2);
+    break;
+  case HandRanking::StraightFlush:
+    winner = straightFlushTieBreaker(player1, player2);
+    break;
+  case HandRanking::RoyalFlush:
+    winner = royalFlushTieBreaker(player1, player2);
+    break;
+  default:
+    // This should not happen
+    std::cout << "Invalid hand rank for tie breaking!";
+    break;
+  }
+
+  if (winner == 1) {
+    std::cout << "Player 1 wins the tie breaker.";
+  } else if (winner == 2) {
+    std::cout << "Player 2 wins the tie breaker.";
+  } else {
+    std::cout << "It's a tie! The hands are of equal rank.";
+  }
 }
 
 /// @brief Break Ties between two hands of rank 'High Card'
 ///
-/// This will check both hands which are sorted in ascending order. 
-/// By iterating from the end toward the beginning, we must find the first 
-/// instance where the cards do not match and the hand with the higher card 
+/// This will check both hands which are sorted in ascending order.
+/// By iterating from the end toward the beginning, we must find the first
+/// instance where the cards do not match and the hand with the higher card
 /// is the winner.
-void PokerGame::highCardTieBreaker(){
-    vector<card> player1 = playerHands[0].getCards();
-    vector<card> player2 = playerHands[1].getCards();
-    for(int i = handSize-1; i >= 0; i--){
-        if(player1[i].value == player2[i].value){
-            continue;
-        }
-        else if(player1[i].value > player2[i].value){
-            std::cout << "Player 1 wins the tie breaker.";
-            break;
-        }
-        else{
-            std::cout << "Player 2 wins the tie breaker.";
-            break;
-        }
-        if(i == 0){
-            std::cout << "It's a tie! The hands are of equal rank.";
-        }
+int PokerGame::highCardTieBreaker(vector<card> player1, vector<card> player2) {
+  for (int i = handSize - 1; i >= 0; i--) {
+    if (player1[i] > player2[i]) {
+      return 1;
+    } else if (player1[i] < player2[i]) {
+      return 2;
     }
-    
+    if (i == 0) {
+      return -1;
+    }
+  }
 }
 
-void PokerGame::onePairTieBreaker(){
-
+/// @brief Break ties between two hands that contain one pair
+///
+/// The code will first see if one pair is higher than the other. If they are
+/// the same pair value, high card rules will be used as backup tie breakers.
+int PokerGame::onePairTieBreaker(vector<card> player1, vector<card> player2) {
+  int pairValuePlayer1 = -1;
+  int pairValuePlayer2 = -1;
+  for (int i = 1; i < handSize; i++) {
+    if (player1[i] == player1[i - 1]) {
+      pairValuePlayer1 = player1[i].rank;
+    }
+    if (player2[i] == player2[i - 1]) {
+      pairValuePlayer2 = player2[i].rank;
+    }
+  }
+  if (pairValuePlayer1 > pairValuePlayer2) {
+    return 1;
+  } else if (pairValuePlayer1 < pairValuePlayer2) {
+    return 2;
+  } else {
+    // the pairs are the same, resolve the tie by looking for best high-card
+    for (int i = handSize - 1; i >= 0; i--) {
+      if (player1[i] > player2[i]) {
+        return 1;
+      } else if (player1[i] < player2[i]) {
+        return 2;
+      }
+    }
+  }
+  return -1;
 }
 
-void PokerGame::twoPairsTieBreaker(){
+int PokerGame::twoPairsTieBreaker(vector<card> player1, vector<card> player2) {
+  // Find the highest pair and the highest non-paired card in each hand
+  int player1Pair1 = -1;
+  int player1Pair2 = -1;
+  int player2Pair1 = -1;
+  int player2Pair2 = -1;
+  for (int i = 0; i < handSize - 1; i++) {
+    if (player1[i] == player1[i + 1] && player1[i] > player1Pair1) {
+      player1Pair2 = player1Pair1;
+      player1Pair1 = player1[i].rank;
+    } else if (player1[i] == player1[i + 1] && player1[i] > player1Pair2) {
+      player1Pair2 = player1[i].rank;
+    }
+    if (player2[i] == player2[i + 1] && player2[i] > player2Pair1) {
+      player2Pair2 = player2Pair1;
+      player2Pair1 = player2[i].rank;
+    } else if (player2[i] == player2[i + 1] && player2[i] > player2Pair2) {
+      player2Pair2 = player2[i].rank;
+    }
+  }
 
+  if (player1Pair1 > player2Pair1) {
+    return 1;
+  } else if (player2Pair1 > player1Pair1) {
+    return 2;
+  } else {
+    // in this case the highest pair is equal
+    if (player1Pair2 > player2Pair2) {
+      return 1;
+    } else if (player2Pair2 > player1Pair2) {
+      return 2;
+    } else {
+      // both pairs are the same, resolve the tie by looking for best high-card
+      for (int i = handSize - 1; i >= 0; i--) {
+        if (player1[i] > player2[i]) {
+          return 1;
+        } else if (player1[i] < player2[i]) {
+          return 2;
+        }
+      }
+    }
+  }
+
+  return -1;
 }
 
-void PokerGame::threeOfAKindTieBreaker(){
-
+int PokerGame::threeOfAKindTieBreaker(vector<card> player1,
+                                      vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::straightTieBreaker(){
-
+int PokerGame::straightTieBreaker(vector<card> player1, vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::flushTieBreaker(){
-
+int PokerGame::flushTieBreaker(vector<card> player1, vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::fullHouseTieBreaker(){
-
+int PokerGame::fullHouseTieBreaker(vector<card> player1, vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::fourOfAKindTieBreaker(){
-
+int PokerGame::fourOfAKindTieBreaker(vector<card> player1,
+                                     vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::straightFlushTieBreaker(){
-
+int PokerGame::straightFlushTieBreaker(vector<card> player1,
+                                       vector<card> player2) {
+  return -1;
 }
 
-void PokerGame::royalFlushTieBreaker(){
-
+int PokerGame::royalFlushTieBreaker(vector<card> player1,
+                                    vector<card> player2) {
+  return -1;
 }
 
 int main() {
-  // Deck d;
-  // Hand h;
-  // h.addCard(d.dealTopCard());
-  // h.addCard(d.dealTopCard());
-  // h.addCard(d.dealTopCard());
-  // h.addCard(d.dealTopCard());
-  // h.addCard(d.dealTopCard());
-
-  // h.showHand();
-  // h.setRank();
-
-  // cout << h.getRank();
   PokerGame game;
   game.addPlayerHand();
   game.addPlayerHand();
