@@ -1,0 +1,54 @@
+\hypertarget{class_game_driver}{}\doxysection{Game\+Driver Class Reference}
+\label{class_game_driver}\index{GameDriver@{GameDriver}}
+
+
+This class assists in running the \mbox{\hyperlink{class_game}{Game}}.  
+
+
+Inheritance diagram for Game\+Driver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_driver}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_driver_a9dd668f7db2a894e27f8043cb70476d2}{run}} ()
+\begin{DoxyCompactList}\small\item\em Runs the game and makes calls for each player to make a move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_game}{Game}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}} ()
+\begin{DoxyCompactList}\small\item\em constructs a new game with an empty board and all spaces available \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a4dc3913e3a87b3ccce42af24e8fb375f}{clear\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Resets the game board. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a40398fe00688643590cd9d688ef262df}{show\+Board}} ()
+\begin{DoxyCompactList}\small\item\em displays the board in the terminal \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_a102ce6e5a222e403aa7a0465ff6281dc}{is\+Game\+Over}} ()
+\begin{DoxyCompactList}\small\item\em checks if the game is in a terminal state \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a06f336a537a87a7f87191ddfb949a110}{prompt\+Userfor\+Move}} (char XorO)
+\begin{DoxyCompactList}\small\item\em Gets user input and plays the user\textquotesingle{}s move. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_af99586aecf3188f5adfc6da9cdcd009c}{make\+Computer\+Move}} (char XorO)
+\begin{DoxyCompactList}\small\item\em Makes a move for the computer, chosen at random from the available spaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class assists in running the \mbox{\hyperlink{class_game}{Game}}. 
+
+This class gets called by the int \mbox{\hyperlink{_statistic_main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}} function and assists with running the game and keeping track of whose turn it is. ~\newline
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_driver_a9dd668f7db2a894e27f8043cb70476d2}\label{class_game_driver_a9dd668f7db2a894e27f8043cb70476d2}} 
+\index{GameDriver@{GameDriver}!run@{run}}
+\index{run@{run}!GameDriver@{GameDriver}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Game\+Driver\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Runs the game and makes calls for each player to make a move. 
+
+Asks each player to make a move based on whose turn it is. Updates the player\+Turn variable after each move is completed. 

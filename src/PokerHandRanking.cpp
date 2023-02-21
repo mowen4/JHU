@@ -507,22 +507,22 @@ int PokerGame::royalFlushTieBreaker(vector<card> player1,
 }
 
 int main() {
-    Deck d;
-    Hand h;
+    Deck deck;
+    Hand hand;
 
-    h.addCard(d.dealTopCard());
-    h.addCard(d.dealTopCard());
-    h.addCard(d.dealTopCard());
-    h.addCard(d.dealTopCard());
-    h.addCard(d.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
 
-    h.setRank();
+    hand.setRank();
 
-    // PokerGame game;
-    // game.addPlayerHand();
-    // game.addPlayerHand();
-    // game.showPlayerHands();
-    // game.determineHandWinner();
+    PokerGame game;
+    game.addPlayerHand();
+    game.addPlayerHand();
+    game.showPlayerHands();
+    game.determineHandWinner();
 
     return 0;
 }
