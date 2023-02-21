@@ -142,8 +142,14 @@ class Hand {
     vector<card> cards;
     HandRanking rank;
     // boolean flags for hand type determination
-    bool pair, twoPair, threeAKind, fourAKind = false;
-    bool straight, flush, straightFlush, royalFlush = false;
+    bool pair = false;
+    bool twoPair = false;
+    bool threeAKind = false;
+    bool fourAKind = false;
+    bool straight = false;
+    bool flush = false;
+    bool straightFlush = false;
+    bool royalFlush = false;
     // arrays to store counts of card values
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
     int suitCounts[4] = {0};   // Club Diamond Heart Spade
@@ -156,8 +162,14 @@ void Hand::discardHand() {
     cards.clear();
     handCounts[13] = {0};
     suitCounts[4] = {0};
-    pair, twoPair, threeAKind, fourAKind = false;
-    straight, flush, straightFlush, royalFlush = false;
+    pair = false;
+    twoPair = false;
+    threeAKind = false;
+    fourAKind = false;
+    straight = false;
+    flush = false;
+    straightFlush = false;
+    royalFlush = false;
 }
 
 void Hand::sortHand() { sort(cards.begin(), cards.end()); }
