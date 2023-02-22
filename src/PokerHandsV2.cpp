@@ -253,3 +253,18 @@ void Hand::setRank() {
 }
 
 vector<card> Hand::getCards() { return cards; }
+
+int main() {
+    Deck deck;
+    Hand hand;
+
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+    hand.addCard(deck.dealTopCard());
+
+    hand.setRank();
+
+    return 0;
+}

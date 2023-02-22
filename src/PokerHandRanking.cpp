@@ -137,14 +137,15 @@ class Hand {
     HandRanking getRank();
     void setRank();
     vector<card> getCards();
-    // int* getHandCounts();
-    // int* getSuitCounts();
+    
+    // arrays to store counts of card values
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
     int suitCounts[4] = {0};   // Club Diamond Heart Spade
 
    private:
     vector<card> cards;
     HandRanking rank;
+
     // boolean flags for hand type determination
     bool pair = false;
     bool twoPair = false;
@@ -154,8 +155,6 @@ class Hand {
     bool fourAKind = false;
     bool straightFlush = false;
     bool royalFlush = false;
-    // arrays to store counts of card values
-    
 
    protected:
 };
@@ -195,10 +194,6 @@ bool Hand::isHandFull() {
 }
 
 HandRanking Hand::getRank() { return rank; }
-
-// int* Hand::getHandCounts() { return handCounts; }
-
-// int* Hand::getSuitCounts() { return suitCounts; }
 
 vector<card> Hand::getCards() { return cards; }
 
@@ -323,7 +318,7 @@ void PokerGame::determineHandWinner() {
     for (int i = 0; i < numberOfPlayers; i++) {
         playerHands[i].setRank();
         cout << "Player " << (i + 1)
-             << "has hand of type: " << playerHands[i].getRank();
+             << " has hand of type: " << playerHands[i].getRank();
         std::cout << std::endl;
     }
     // TODO: Generalize determining a winner to a process that supports more
@@ -517,12 +512,36 @@ int PokerGame::threeOfAKindTieBreaker(Hand player1, Hand player2) {
 }
 
 int PokerGame::straightTieBreaker(Hand player1, Hand player2) {
-    //find the first entry with value = 1 and that's where the straight starts
-    int* address1 = find(begin(player1.handCounts), end(player1.handCounts), 1);
-    int* address2 = find(begin(player2.handCounts), end(player2.handCounts), 1);
+    return highCardTieBreaker(player1, player2);
+}
+
+int PokerGame::flushTieBreaker(Hand player1, Hand player2) {
+    
+    int i = 12;
+
+    for (i; i >= 0; i--){
+
+      if(player1.handCounts[i] > player2.handCounts[i]){
+        return 1;
+      } else if (player1.handCounts[i] < player2.handCounts[i]){
+        return 2;
+      }
+    }
+
+    return -1;
+}
+
+int PokerGame::fullHouseTieBreaker(Hand player1, Hand player2) {
+    return threeOfAKindTieBreaker(player1, player2);
+}
+
+int PokerGame::fourOfAKindTieBreaker(Hand player1, Hand player2) {
+    //Find the entry in the handCounts array with a value of 3   
+    int* address1 = find(begin(player1.handCounts), end(player1.handCounts), 4);
+    int* address2 = find(begin(player2.handCounts), end(player2.handCounts), 4);    
     //subtract beginning-of-array address to get the index
     int index1 = address1 - begin(player1.handCounts);
-    int index2 = address2 - begin(player2.handCounts);    
+    int index2 = address2 - begin(player2.handCounts);
     if(index1 > index2){
         return 1;
     }
@@ -530,53 +549,16 @@ int PokerGame::straightTieBreaker(Hand player1, Hand player2) {
         return 2;
     }
 
-    //this default shouldn't happen, can't have equal 3 of a kinds with 1 deck.
-    return -1;
-}
-
-int PokerGame::flushTieBreaker(Hand player1, Hand player2) {
-    int tryAgain = 5;    
-    int i = 12;
-    int j = 12;    
-    while(tryAgain > 0){
-        //start at the end of the array to find the highest card in the flush
-        for(i; i >=0; i--){
-            if(player1.handCounts[i] == 1){
-                break;
-            }
-        }
-        for(j; j >=0; j--){
-            if(player2.handCounts[j] == 1){
-                break;
-            }
-        }
-        if(i > j){
-            return 1;
-        }
-        if(j > i){
-            return 2;
-        }        
-        tryAgain--;
-    }
-
-    //all 5 cards in both flushes were the same, its a tie.
-    return -1;
-}
-
-int PokerGame::fullHouseTieBreaker(Hand player1, Hand player2) {
-    return -1;
-}
-
-int PokerGame::fourOfAKindTieBreaker(Hand player1, Hand player2) {
+    //this default shouldn't happen, can't have equal 4 of a kinds with 1 deck.
     return -1;
 }
 
 int PokerGame::straightFlushTieBreaker(Hand player1, Hand player2) {
-    return -1;
+    return highCardTieBreaker(player1, player2);
 }
 
 int PokerGame::royalFlushTieBreaker(Hand player1, Hand player2) {
-    return -1;
+    return highCardTieBreaker(player1, player2);
 }
 
 int main() {
