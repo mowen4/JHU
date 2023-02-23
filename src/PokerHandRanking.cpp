@@ -8,16 +8,12 @@
 
 using namespace std;
 
-// TODO: wouldn't compile with map set as a const after I started indexing in
-// the map to try to rank the hand. Not sure what I was doing wrong but I feel
-// like const makes sense for this but don't want to check in a build that won't
-// compile so putting this TODO here.
+
 map<char, int> cardValues = {
     {'2', 2}, {'3', 3},  {'4', 4},  {'5', 5},  {'6', 6},  {'7', 7}, {'8', 8},
     {'9', 9}, {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}};
 
 const char Suits[4] = {'S', 'H', 'D', 'C'};
-
 const char Values[13] = {'2', '3', '4', '5', '6', '7', '8',
                          '9', 'T', 'J', 'Q', 'K', 'A'};
 
@@ -38,6 +34,10 @@ struct card {
     bool operator==(int compareValue) const { return (rank == compareValue); }
 };
 
+/// @brief Class representing a deck of cards
+///
+/// A class that represents a deck of 52 standard playing cards. Has function 
+/// a function for dealing out cards. Deck is shuffled at creation time
 class Deck {
    public:
     Deck();
@@ -48,6 +48,7 @@ class Deck {
     deque<card> deck;
 };
 
+//Deck constructor. Adds all of the cards to the deck and then shuffles them. 
 Deck::Deck() {
     vector<card> temp;
     for (char s : Suits) {
@@ -66,6 +67,8 @@ Deck::Deck() {
 
 Deck::~Deck() {}
 
+/// @brief Deals the top card from the deck
+/// @return card 
 card Deck::dealTopCard() {
     card c = deck.front();
     deck.pop_front();
@@ -86,8 +89,11 @@ enum HandRanking {
     RoyalFlush
 };
 
-// overriding the << operator so that we can output the HandRanking enum text
-// instead of the int value
+/// @brief Overriding the ostream << operator 
+/// Overiding this to make displaying Hand Rankings easier with cout
+/// @param os 
+/// @param rank 
+/// @return 
 std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
     switch (rank) {
         case HandRanking::HighCard:
@@ -126,25 +132,33 @@ std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
     }
     return os;
 }
-
+/// @brief Class to hold a poker hand
+/// 
+/// The Hand class holds a collection of Card objects in the vector 'cards.' The
+/// functions support functionality for putting cards into the hand, sorting the
+/// hand, and displaying the hand. There are also properties for ma
 class Hand {
    public:
+    Hand(int maxHandSize);
+    
     void addCard(card c);
-    void showHand();
+    void showHand() const;
     bool isHandFull();
     void discardHand();
     void sortHand();
-    HandRanking getRank();
     void setRank();
-    vector<card> getCards();
+    HandRanking getRank() const;    
+    vector<card> getCards() const;
     
-    // arrays to store counts of card values
+    // array to store counts of card values in the hand
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
+    // array to store counts of suits within the hand
     int suitCounts[4] = {0};   // Club Diamond Heart Spade
 
    private:
     vector<card> cards;
     HandRanking rank;
+    int maximumHandSize;
 
     // boolean flags for hand type determination
     bool pair = false;
@@ -159,6 +173,14 @@ class Hand {
    protected:
 };
 
+
+Hand::Hand(int maxSize = 5){
+    maximumHandSize = maxSize;
+}
+
+/// @brief Discard the hand
+/// 
+/// Sets the hand and its properties back to the default, empty state
 void Hand::discardHand() {
     // clear hand and reset all calculated values to 0 and false
     cards.clear();
@@ -174,29 +196,45 @@ void Hand::discardHand() {
     royalFlush = false;
 }
 
+/// @brief Sort the hand ascending
 void Hand::sortHand() { sort(cards.begin(), cards.end()); }
 
+/// @brief Add a card to the cards vector
+/// @param c The card to be added
 void Hand::addCard(card c) { cards.push_back(c); }
 
-void Hand::showHand() {
+/// @brief Displays the hand in the terminal
+/// Display format example: Three of Hearts is represented as 3H
+void Hand::showHand() const {
     for (card c : cards) {
         std::cout << c.value << c.suit << " ";
     }
     std::cout << std::endl;
 }
 
+/// @brief Returns true if the card
+/// @return 
 bool Hand::isHandFull() {
-    if (cards.size() >= 5) {
+    if (cards.size() >= maximumHandSize) {
         return true;
     } else {
         return false;
     }
 }
 
-HandRanking Hand::getRank() { return rank; }
+/// @brief Returns the rank property
+/// @return 
+HandRanking Hand::getRank() const { return rank; }
 
-vector<card> Hand::getCards() { return cards; }
+/// @brief Returns the cards vector
+/// @return 
+vector<card> Hand::getCards() const { return cards; }
 
+/// @brief function to set the rank for the hand
+///
+/// Sets the rank (e.g. flush, two pair). Performs a single pass through the 
+/// cards vector to set the values in the handCounts and suitCounts arrays then
+/// uses the values in those arrays to determine the hand rank
 void Hand::setRank() {
     for (card c : cards) {
         handCounts[c.rank - 2]++;
@@ -217,7 +255,7 @@ void Hand::setRank() {
                 break;
         }
     }
-
+    
     if (count(handCounts, handCounts + 13, 2) == 1) {
         pair = true;
     }
@@ -268,8 +306,11 @@ void Hand::setRank() {
     }
 }
 
-// Stubbing out some method names that a poker game might need
-// TODO: Use this class to run a game of poker with two players...?
+/// @brief Class for facilitating the running of a poker game
+///
+/// Holds a set of cards (player hands) for each player in the game. Has 
+/// functions for determining the winner and display the hands. Can break a tie
+/// if two hands have the same rank
 class PokerGame {
    public:
     vector<Hand> playerHands;
@@ -292,11 +333,11 @@ class PokerGame {
     int fullHouseTieBreaker(Hand player1, Hand player2);
     int fourOfAKindTieBreaker(Hand player1, Hand player2);
     int straightFlushTieBreaker(Hand player1, Hand player2);
-    int royalFlushTieBreaker(Hand player1, Hand player2);
 
    protected:
 };
 
+/// @brief Adds a new hand to the playerHands array
 void PokerGame::addPlayerHand() {
     Hand hand;
     for (int i = 0; i < handSize; i++) {
@@ -307,6 +348,7 @@ void PokerGame::addPlayerHand() {
     numberOfPlayers++;
 }
 
+/// @brief Displays all cards in all player hands.
 void PokerGame::showPlayerHands() {
     for (int i = 0; i < numberOfPlayers; i++) {
         std::cout << "Showing hand for player " << (i + 1) << "\n";
@@ -314,6 +356,7 @@ void PokerGame::showPlayerHands() {
     }
 }
 
+/// @brief Determines which player has the best hand
 void PokerGame::determineHandWinner() {
     for (int i = 0; i < numberOfPlayers; i++) {
         playerHands[i].setRank();
@@ -340,6 +383,10 @@ void PokerGame::determineHandWinner() {
     }
 }
 
+/// @brief Determines the winner if two player hands are of equal rank
+/// @param tiedRank The rank of the hands of the tied players
+/// @param player1 
+/// @param player2 
 void PokerGame::breakTie(HandRanking tiedRank, Hand player1, Hand player2){
     int winner = -1;
     switch (tiedRank) {
@@ -371,7 +418,7 @@ void PokerGame::breakTie(HandRanking tiedRank, Hand player1, Hand player2){
             winner = straightFlushTieBreaker(player1, player2);
             break;
         case HandRanking::RoyalFlush:
-            winner = royalFlushTieBreaker(player1, player2);
+            winner = -1; //If both are royal flushes its a tie.
             break;
         default:
             // This should not happen
@@ -410,7 +457,7 @@ int PokerGame::highCardTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
-/// @brief Break ties between two hands that contain one pair
+/// @brief Break ties between two hands of rank 'one pair'
 ///
 /// The code will first see if one pair is higher than the other. If they are
 /// the same pair value, high card rules will be used as backup tie breakers.
@@ -444,6 +491,10 @@ int PokerGame::onePairTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
+/// @brief Breaks the tie for two hands of rank 'two pairs'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::twoPairsTieBreaker(Hand player1, Hand player2) {
     // Find the highest pair and the highest non-paired card in each hand
     auto cards1 = player1.getCards();
@@ -493,6 +544,10 @@ int PokerGame::twoPairsTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
+/// @brief Breaks ties for two hands of rank 'three of a kind'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::threeOfAKindTieBreaker(Hand player1, Hand player2) { 
     //Find the entry in the handCounts array with a value of 3   
     int* address1 = find(begin(player1.handCounts), end(player1.handCounts), 3);
@@ -511,10 +566,18 @@ int PokerGame::threeOfAKindTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
+/// @brief Breaks ties for two hands of rank 'straight'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::straightTieBreaker(Hand player1, Hand player2) {
     return highCardTieBreaker(player1, player2);
 }
 
+/// @brief Breaks ties for two hands of rank 'flush'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::flushTieBreaker(Hand player1, Hand player2) {
     
     int i = 12;
@@ -531,10 +594,18 @@ int PokerGame::flushTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
+/// @brief Breaks ties for two hands of rank 'full house'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::fullHouseTieBreaker(Hand player1, Hand player2) {
     return threeOfAKindTieBreaker(player1, player2);
 }
 
+/// @brief Breaks ties for two hands of rank 'four of a kind'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::fourOfAKindTieBreaker(Hand player1, Hand player2) {
     //Find the entry in the handCounts array with a value of 3   
     int* address1 = find(begin(player1.handCounts), end(player1.handCounts), 4);
@@ -553,13 +624,15 @@ int PokerGame::fourOfAKindTieBreaker(Hand player1, Hand player2) {
     return -1;
 }
 
+/// @brief Breaks ties for two hands of rank 'stright flush'
+/// @param player1 
+/// @param player2 
+/// @return 
 int PokerGame::straightFlushTieBreaker(Hand player1, Hand player2) {
     return highCardTieBreaker(player1, player2);
 }
 
-int PokerGame::royalFlushTieBreaker(Hand player1, Hand player2) {
-    return highCardTieBreaker(player1, player2);
-}
+
 
 int main() {
     Deck deck;
