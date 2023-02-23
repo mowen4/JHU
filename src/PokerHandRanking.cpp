@@ -5,6 +5,7 @@
 #include <map>
 #include <random>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -633,7 +634,10 @@ int PokerGame::straightFlushTieBreaker(Hand player1, Hand player2) {
 }
 
 
-
+/// @brief int main is the program entry point
+///
+/// Runs the code for comparing poker hands. 
+/// @return 
 int main() {
     Deck deck;
     Hand hand;
