@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JHU: Game Class Reference</title>
+<title>My Project: Game Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,9 +31,9 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="ISO_C++_Logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">JHU<span id="projectnumber">&#160;1.1</span>
+   <div id="projectname">My Project
    </div>
-   <div id="projectbrief">Class Projects for Object Oriented C++</div>
+   <div id="projectbrief">JHU C++</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -106,6 +106,16 @@ $(document).ready(function(){initNavTree('class_game.html',''); initResizable();
 
 <p>The <a class="el" href="class_game.html" title="The Game class holds the code from playing a tic-tac-toe game.">Game</a> class holds the code from playing a tic-tac-toe game.  
  <a href="class_game.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for Game:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_game__inherit__graph.png" border="0" usemap="#a_game_inherit__map" alt="Inheritance graph"/></div>
+</div>
+<div class="dynheader">
+Collaboration diagram for Game:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_game__coll__graph.png" border="0" usemap="#a_game_coll__map" alt="Collaboration graph"/></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,9 +137,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af99586aecf3188f5adfc6da9cdcd009c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#af99586aecf3188f5adfc6da9cdcd009c">makeComputerMove</a> (char XorO)</td></tr>
 <tr class="memdesc:af99586aecf3188f5adfc6da9cdcd009c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a move for the computer, chosen at random from the available spaces.  <br /></td></tr>
 <tr class="separator:af99586aecf3188f5adfc6da9cdcd009c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0af122cee659a57690ad382e2adb6499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a0af122cee659a57690ad382e2adb6499">updateAvailableSpaces</a> (int row, int col)</td></tr>
-<tr class="memdesc:a0af122cee659a57690ad382e2adb6499"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes the selected space from the list of availableSpaces  <br /></td></tr>
-<tr class="separator:a0af122cee659a57690ad382e2adb6499"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_game.html" title="The Game class holds the code from playing a tic-tac-toe game.">Game</a> class holds the code from playing a tic-tac-toe game. </p>
@@ -265,38 +272,6 @@ Public Member Functions</h2></td></tr>
 
 <p>displays the board in the terminal </p>
 <p>Displays the game board in the terminal. Each column is separated by a vertical bar and the rows are separated by dashes </p>
-
-</div>
-</div>
-<a id="a0af122cee659a57690ad382e2adb6499" name="a0af122cee659a57690ad382e2adb6499"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0af122cee659a57690ad382e2adb6499">&#9670;&#160;</a></span>updateAvailableSpaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Game::updateAvailableSpaces </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>row</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>col</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>removes the selected space from the list of availableSpaces </p>
-<p>removes a square from the availableSpaces vector based on the selected move (row, col) integers in the availableSpaces vector coorespond to the grid below this allows us to track available spaces and precludes the need to scan the board before each computer move 0 1 2 3 4 5 6 7 8 <br  />
- </p>
 
 </div>
 </div>

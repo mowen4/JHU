@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['takegenerator_0',['TakeGenerator',['../class_catch_1_1_generators_1_1_take_generator.html',1,'Catch::Generators']]],
-  ['testcase_1',['TestCase',['../class_catch_1_1_test_case.html',1,'Catch']]],
-  ['testcaseinfo_2',['TestCaseInfo',['../struct_catch_1_1_test_case_info.html',1,'Catch']]],
-  ['testfailureexception_3',['TestFailureException',['../struct_catch_1_1_test_failure_exception.html',1,'Catch']]],
-  ['testinvokerasmethod_4',['TestInvokerAsMethod',['../class_catch_1_1_test_invoker_as_method.html',1,'Catch']]],
-  ['timer_5',['Timer',['../class_catch_1_1_timer.html',1,'Catch']]],
-  ['totals_6',['Totals',['../struct_catch_1_1_totals.html',1,'Catch']]],
-  ['triangle_7',['Triangle',['../class_triangle.html',1,'']]],
-  ['true_5fgiven_8',['true_given',['../struct_catch_1_1true__given.html',1,'Catch']]]
+  ['randomfloatinggenerator_0',['RandomFloatingGenerator',['../class_catch_1_1_generators_1_1_random_floating_generator.html',1,'Catch::Generators']]],
+  ['randomintegergenerator_1',['RandomIntegerGenerator',['../class_catch_1_1_generators_1_1_random_integer_generator.html',1,'Catch::Generators']]],
+  ['rangegenerator_2',['RangeGenerator',['../class_catch_1_1_generators_1_1_range_generator.html',1,'Catch::Generators']]],
+  ['reader_3',['Reader',['../class_json_1_1_reader.html',1,'Json']]],
+  ['rebind_4',['rebind',['../struct_json_1_1_secure_allocator_1_1rebind.html',1,'Json::SecureAllocator']]],
+  ['regexmatcher_5',['RegexMatcher',['../struct_catch_1_1_matchers_1_1_std_string_1_1_regex_matcher.html',1,'Catch::Matchers::StdString']]],
+  ['registrarfortagaliases_6',['RegistrarForTagAliases',['../struct_catch_1_1_registrar_for_tag_aliases.html',1,'Catch']]],
+  ['repeatgenerator_7',['RepeatGenerator',['../class_catch_1_1_generators_1_1_repeat_generator.html',1,'Catch::Generators']]],
+  ['resultdisposition_8',['ResultDisposition',['../struct_catch_1_1_result_disposition.html',1,'Catch']]],
+  ['resultwas_9',['ResultWas',['../struct_catch_1_1_result_was.html',1,'Catch']]],
+  ['reusablestringstream_10',['ReusableStringStream',['../class_catch_1_1_reusable_string_stream.html',1,'Catch']]],
+  ['runtests_11',['RunTests',['../struct_catch_1_1_run_tests.html',1,'Catch']]],
+  ['runtimeerror_12',['RuntimeError',['../class_json_1_1_runtime_error.html',1,'Json']]]
 ];

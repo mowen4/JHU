@@ -98,5 +98,7 @@ var searchData=
   ['internal_5fcatch_5funique_5fname_5fline2_95',['INTERNAL_CATCH_UNIQUE_NAME_LINE2',['../catch_8hpp.html#a7c21e89d8b7727757ce9ca2b848f1cda',1,'catch.hpp']]],
   ['internal_5fcatch_5funscoped_5finfo_96',['INTERNAL_CATCH_UNSCOPED_INFO',['../catch_8hpp.html#ab268c09b68167db4b163234f9934463f',1,'catch.hpp']]],
   ['internal_5fcatch_5fva_5fnargs_5fimpl_97',['INTERNAL_CATCH_VA_NARGS_IMPL',['../catch_8hpp.html#a053a90e2d222ba1c12095556aa8db44a',1,'catch.hpp']]],
-  ['internal_5fcheck_5fthat_98',['INTERNAL_CHECK_THAT',['../catch_8hpp.html#a877690adc04f1fbfe944df6bebe6f8b5',1,'catch.hpp']]]
+  ['internal_5fcheck_5fthat_98',['INTERNAL_CHECK_THAT',['../catch_8hpp.html#a877690adc04f1fbfe944df6bebe6f8b5',1,'catch.hpp']]],
+  ['isfinite_99',['isfinite',['../jsoncpp_8cpp.html#aab49fbe39624f083e45ef2d85e7e0705',1,'jsoncpp.cpp']]],
+  ['isnan_100',['isnan',['../jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e',1,'jsoncpp.cpp']]]
 ];

@@ -1,0 +1,8 @@
+digraph "Catch::ITransientExpression"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Catch::ITransientExpression\n|+ m_isBinaryExpression\l+ m_result\l|+ isBinaryExpression()\l+ getResult()\l+ streamReconstructedExpression()\l+ ITransientExpression()\l+ ~ITransientExpression()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

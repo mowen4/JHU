@@ -1,0 +1,13 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [label="std::true_type",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
+  Node1 [label="Catch::detail::is_range\l_impl\< T, typename void\l_type\< decltype(begin(std\l::declval\< T \>()))\>::type \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_catch_1_1detail_1_1is__range__impl_3_01_t_00_01typename_01void__type_3_01decltype_07begin8604ecb9de16ea7789f2f694ac896ffd.html",tooltip=" "];
+  Node0 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="Catch::true_given\<\l typename \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_catch_1_1true__given.html",tooltip=" "];
+}

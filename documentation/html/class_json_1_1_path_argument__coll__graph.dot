@@ -1,0 +1,8 @@
+digraph "Json::PathArgument"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Json::PathArgument\n||+ PathArgument()\l+ PathArgument()\l+ PathArgument()\l+ PathArgument()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Experimental and untested: represents an element of the \"path\" to access a node."];
+}

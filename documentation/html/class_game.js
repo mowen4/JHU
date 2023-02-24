@@ -5,6 +5,5 @@ var class_game =
     [ "isGameOver", "class_game.html#a102ce6e5a222e403aa7a0465ff6281dc", null ],
     [ "makeComputerMove", "class_game.html#af99586aecf3188f5adfc6da9cdcd009c", null ],
     [ "promptUserforMove", "class_game.html#a06f336a537a87a7f87191ddfb949a110", null ],
-    [ "showBoard", "class_game.html#a40398fe00688643590cd9d688ef262df", null ],
-    [ "updateAvailableSpaces", "class_game.html#a0af122cee659a57690ad382e2adb6499", null ]
+    [ "showBoard", "class_game.html#a40398fe00688643590cd9d688ef262df", null ]
 ];

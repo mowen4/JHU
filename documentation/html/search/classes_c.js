@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pluralise_0',['pluralise',['../struct_catch_1_1pluralise.html',1,'Catch']]],
-  ['predicatematcher_1',['PredicateMatcher',['../class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher.html',1,'Catch::Matchers::Generic']]]
+  ['nameandtags_0',['NameAndTags',['../struct_catch_1_1_name_and_tags.html',1,'Catch']]],
+  ['noncopyable_1',['NonCopyable',['../class_catch_1_1_non_copyable.html',1,'Catch']]]
 ];

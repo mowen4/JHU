@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['sectioninfo_0',['sectionInfo',['../struct_catch_1_1_section_end_info.html#a2d44793392cb83735d086d726822abe9',1,'Catch::SectionEndInfo']]],
-  ['sequence_1',['sequence',['../struct_catch_1_1_message_info.html#a7f4f57ea21e50160adefce7b68a781d6',1,'Catch::MessageInfo']]],
-  ['shoulddebugbreak_2',['shouldDebugBreak',['../struct_catch_1_1_assertion_reaction.html#adcf30fb90ff20d9789df78d424652497',1,'Catch::AssertionReaction']]],
-  ['shouldthrow_3',['shouldThrow',['../struct_catch_1_1_assertion_reaction.html#a82c8d95a2c1b6a331bde66982a8e090f',1,'Catch::AssertionReaction']]]
+  ['passed_0',['passed',['../struct_catch_1_1_counts.html#ad28daaf3de28006400208b6dd0c631e6',1,'Catch::Counts']]],
+  ['playerhands_1',['playerHands',['../class_poker_game.html#a51ffd486c8199c2321296eaf244bd6ce',1,'PokerGame']]],
+  ['precision_2',['precision',['../struct_catch_1_1_string_maker_3_01float_01_4.html#a54ebebe76a755dbe2dd8ad409c329378',1,'Catch::StringMaker&lt; float &gt;::precision()'],['../struct_catch_1_1_string_maker_3_01double_01_4.html#a15fa2b093c532ece7f1d0c713ebaee67',1,'Catch::StringMaker&lt; double &gt;::precision()']]],
+  ['prevassertions_3',['prevAssertions',['../struct_catch_1_1_section_end_info.html#ae70b154cbc05b5dd2901d97f89303d8c',1,'Catch::SectionEndInfo']]],
+  ['properties_4',['properties',['../struct_catch_1_1_test_case_info.html#afc1e84bd7a2e180895a06d9131302af0',1,'Catch::TestCaseInfo']]]
 ];

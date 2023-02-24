@@ -1,0 +1,8 @@
+digraph "Json::ValueIteratorBase"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Json::ValueIteratorBase\n||+ operator==()\l+ operator!=()\l+ operator-()\l+ key()\l+ index()\l+ name()\l+ memberName()\l+ memberName()\l+ ValueIteratorBase()\l+ ValueIteratorBase()\l# deref()\l# deref()\l# increment()\l# decrement()\l# computeDistance()\l# isEqual()\l# copy()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="base class for Value iterators."];
+}

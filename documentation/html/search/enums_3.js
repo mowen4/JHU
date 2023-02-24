@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['oftype_0',['OfType',['../struct_catch_1_1_result_was.html#a624e1ee3661fcf6094ceef1f654601ef',1,'Catch::ResultWas']]],
-  ['ornot_1',['OrNot',['../struct_catch_1_1_show_durations.html#a82fa0174554187220c1eda175f122ee1',1,'Catch::ShowDurations']]]
+  ['handranking_0',['HandRanking',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4',1,'HandRanking():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4',1,'HandRanking():&#160;PokerHandsV2.cpp']]]
 ];

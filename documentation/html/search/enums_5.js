@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['triangletype_0',['TriangleType',['../class_triangle.html#a0a73a2cc4f6d278530139923cc7f7e7d',1,'Triangle']]]
+  ['oftype_0',['OfType',['../struct_catch_1_1_result_was.html#a624e1ee3661fcf6094ceef1f654601ef',1,'Catch::ResultWas']]],
+  ['ornot_1',['OrNot',['../struct_catch_1_1_show_durations.html#a82fa0174554187220c1eda175f122ee1',1,'Catch::ShowDurations']]]
 ];

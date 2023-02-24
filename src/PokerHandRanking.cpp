@@ -215,7 +215,11 @@ void Hand::sortHand() { sort(cards.begin(), cards.end()); }
 
 /// @brief Add a card to the cards vector
 /// @param c The card to be added
-void Hand::addCard(Card c) { cards.push_back(c); }
+void Hand::addCard(Card c) { 
+    if(!isHandFull()){
+        cards.push_back(c); 
+    }
+}
 
 /// @brief Displays the hand in the terminal
 /// Display format example: Three of Hearts is represented as 3H
@@ -226,7 +230,7 @@ void Hand::showHand() const {
   std::cout << std::endl;
 }
 
-/// @brief Returns true if the card
+/// @brief Returns true if the cards vector has reached the maximum hand size
 /// @return
 bool Hand::isHandFull() {
   if (cards.size() >= maximumHandSize) {

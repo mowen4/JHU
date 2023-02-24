@@ -1,0 +1,10 @@
+digraph "Catch::Totals"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Catch::Totals\n|+ error\l|+ operator-()\l+ operator+=()\l+ delta()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +assertions\n+testCases" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{Catch::Counts\n|+ passed\l+ failed\l+ failedButOk\l|+ operator-()\l+ operator+=()\l+ total()\l+ allPassed()\l+ allOk()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_catch_1_1_counts.html",tooltip=" "];
+}
