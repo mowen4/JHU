@@ -711,27 +711,27 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
 /// Runs the code for comparing poker hands.
 /// @return
 int main() {
-  Deck deck;
-  Hand hand;
+  // Deck deck;
+  // Hand hand;
 
-  hand.addCard(deck.dealTopCard());
-  hand.addCard(deck.dealTopCard());
-  hand.addCard(deck.dealTopCard());
-  hand.addCard(deck.dealTopCard());
-  hand.addCard(deck.dealTopCard());
+  // hand.addCard(deck.dealTopCard());
+  // hand.addCard(deck.dealTopCard());
+  // hand.addCard(deck.dealTopCard());
+  // hand.addCard(deck.dealTopCard());
+  // hand.addCard(deck.dealTopCard());
 
-  hand.setRank();
+  // hand.setRank();
 
-  PokerGame game;
-  game.addPlayerHand();
-  game.addPlayerHand();
-  game.showPlayerHands();
-  game.determineHandWinner();
+  // PokerGame game;
+  // game.addPlayerHand();
+  // game.addPlayerHand();
+  // game.showPlayerHands();
+  // game.determineHandWinner();
 
   JsonPokerTests jsonTester("PokerHandTests.json");
   jsonTester.ProcessTestsInJsonFile();
 
-  // cout << jsonData;   //print the whole file, this worked woo
+  //cout << jsonData;   //print the whole file, this worked woo
 
   return 0;
 }

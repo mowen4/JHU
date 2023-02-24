@@ -297,7 +297,7 @@
             ]
         }
     ],
-    "threeOfAKindTests" : [
+    "threeOfAKindTests": [
         {
             "p1": [
                 "6H",
@@ -363,7 +363,7 @@
             ]
         }
     ],
-    "twoPairTests" : [
+    "twoPairTests": [
         {
             "p1": [
                 "TD",
@@ -429,7 +429,7 @@
             ]
         }
     ],
-    "onePairTests" : [
+    "onePairTests": [
         {
             "p1": [
                 "9C",
@@ -511,7 +511,7 @@
             ]
         }
     ],
-    "highCardTests" : [
+    "highCardTests": [
         {
             "p1": [
                 "KS",
@@ -609,5 +609,4 @@
             ]
         }
     ]
-
 }
