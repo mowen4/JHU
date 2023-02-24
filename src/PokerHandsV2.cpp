@@ -21,20 +21,20 @@ const char Suits[4] = {'S', 'H', 'D', 'C'};
 const char Values[13] = {'2', '3', '4', '5', '6', '7', '8',
                          '9', 'T', 'J', 'Q', 'K', 'A'};
 
-struct card {
+struct Card {
     char value;
     char suit;
     int rank;
 
     // overriding < operator to allow for sort() function calls
-    bool operator<(const card &card) const { return (rank < card.rank); }
+    bool operator<(const Card &card) const { return (rank < card.rank); }
     // overridng comparison to ints for easier comparisons in tie breakers
     bool operator<(int compareValue) const { return (rank < compareValue); }
     // overriding > as well for easier comparison in tie breakers
-    bool operator>(const card &card) const { return (rank > card.rank); }
+    bool operator>(const Card &card) const { return (rank > card.rank); }
     bool operator>(int compareValue) const { return (rank > compareValue); }
     // for simplifying comparing if cards have equal value
-    bool operator==(const card &card) const { return (rank == card.rank); }
+    bool operator==(const Card &card) const { return (rank == card.rank); }
     bool operator==(int compareValue) const { return (rank == compareValue); }
 };
 
@@ -42,17 +42,17 @@ class Deck {
    public:
     Deck();
     ~Deck();
-    card dealTopCard();
+    Card dealTopCard();
 
    private:
-    deque<card> deck;
+    deque<Card> deck;
 };
 
 Deck::Deck() {
-    vector<card> temp;
+    vector<Card> temp;
     for (char s : Suits) {
         for (char v : Values) {
-            card c;
+            Card c;
             c.suit = s;
             c.value = v;
             c.rank = cardValues[c.value];
@@ -66,8 +66,8 @@ Deck::Deck() {
 
 Deck::~Deck() {}
 
-card Deck::dealTopCard() {
-    card c = deck.front();
+Card Deck::dealTopCard() {
+    Card c = deck.front();
     deck.pop_front();
     return c;
 }
@@ -129,17 +129,17 @@ std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
 
 class Hand {
    public:
-    void addCard(card c);
+    void addCard(Card c);
     void showHand();
     bool isHandFull();
     void discardHand();
     void sortHand();
     HandRanking getRank();
     void setRank();
-    vector<card> getCards();
+    vector<Card> getCards();
 
    private:
-    vector<card> cards;
+    vector<Card> cards;
     HandRanking rank;
     // boolean flags for hand type determination
     bool pair, twoPair, threeAKind, fourAKind = false;
@@ -162,10 +162,10 @@ void Hand::discardHand() {
 
 void Hand::sortHand() { sort(cards.begin(), cards.end()); }
 
-void Hand::addCard(card c) { cards.push_back(c); }
+void Hand::addCard(Card c) { cards.push_back(c); }
 
 void Hand::showHand() {
-    for (card c : cards) {
+    for (Card c : cards) {
         std::cout << c.value << c.suit << " ";
     }
     std::cout << std::endl;
@@ -182,7 +182,7 @@ bool Hand::isHandFull() {
 HandRanking Hand::getRank() { return rank; }
 
 void Hand::setRank() {
-    for (card c : cards) {
+    for (Card c : cards) {
         handCounts[c.rank - 2]++;
         switch (c.suit) {
             case 'C':
@@ -252,7 +252,7 @@ void Hand::setRank() {
     }
 }
 
-vector<card> Hand::getCards() { return cards; }
+vector<Card> Hand::getCards() { return cards; }
 
 int main() {
     Deck deck;
