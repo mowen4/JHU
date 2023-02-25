@@ -288,12 +288,36 @@ void Hand::setRank() {
   if (count(suitCounts, suitCounts + 4, 5) == 1) {
     flush = true;
   }
+
+  bool allCardsUnique = true;
+  for(int i = 0; i < 13; i++){
+    if(handCounts[i] > 1){
+        allCardsUnique = false;
+        break;
+    }
+  }
+  if(allCardsUnique){
+    //if cards are unique and difference between biggest and lowest is 4
+    // or the wrap around case for A,2,3,4,5
+    if((cards[4].rank - cards[0].rank) == 4 
+      || (cards[4].rank == 14
+      && cards[0].rank == 2
+      && cards[1].rank == 3
+      && cards[2].rank == 4
+      && cards[3].rank == 5)){
+        straight = true;
+      }
+    
+  } else{
+    straight = false;
+  }
   for (int i; i < 8; i++) {
-    if (handCounts[i] == 1 
+    if ((handCounts[i] == 1 
        && handCounts[i + 1] == 1 
        && handCounts[i + 2] == 1 
        && handCounts[i + 3] == 1 
-       && handCounts[i + 4] == 1) {
+       && handCounts[i + 4] == 1)
+       ) {
       straight = true;
     }
   }
@@ -312,6 +336,8 @@ void Hand::setRank() {
     rank = HandRanking::FourOfAKind;
   } else if (pair && threeAKind) {
     rank = HandRanking::FullHouse;
+  } else if (flush){
+    rank = HandRanking::Flush;
   } else if (straight) {
     rank = HandRanking::Straight;
   } else if (threeAKind) {
@@ -680,14 +706,14 @@ private:
 JsonPokerTests::JsonPokerTests(string fileName) {
   fileLocation = fileName;
   std::ifstream file(fileLocation);
-  file >> jsonData;
+  file >> jsonData;  
 }
 
-void JsonPokerTests::ProcessTestsInJsonFile() {
-
+void JsonPokerTests::ProcessTestsInJsonFile() {  
   for (Json::ValueIterator itr = jsonData.begin(); itr != jsonData.end();
        itr++) {
     std::string propertyName = itr.name();
+    
     cout << "\nInitiating tests of the following type: " << propertyName
          << "\n";
     Json::Value currentCategory = jsonData[propertyName];
@@ -739,7 +765,7 @@ int main() {
   // game.showPlayerHands();
   // game.determineHandWinner();
 
-  JsonPokerTests jsonTester("PokerHandTests.json");
+  JsonPokerTests jsonTester("PokerHandTests.json");  
   jsonTester.ProcessTestsInJsonFile();
 
   // cout << jsonData;   //print the whole file, this worked woo
