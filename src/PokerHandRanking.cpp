@@ -152,6 +152,7 @@ std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
   }
   return os;
 }
+
 /// @brief Class to hold a poker hand
 ///
 /// The Hand class holds a collection of Card objects in the vector 'cards.' The
@@ -696,9 +697,8 @@ int PokerGame::fourOfAKindTieBreaker(Hand player1, Hand player2) {
   if (index2 > index1) {
     return 2;
   }
-
-  // this default shouldn't happen, can't have equal 4 of a kinds with 1 deck.
-  return -1;
+  
+  return highCardTieBreaker(player1, player2);
 }
 
 /// @brief Breaks ties for two hands of rank 'stright flush'
@@ -709,6 +709,10 @@ int PokerGame::straightFlushTieBreaker(Hand player1, Hand player2) {
   return highCardTieBreaker(player1, player2);
 }
 
+/// @brief Runs tests on a collection of hands stored in json format
+///
+/// Hands are stored in a file in json format. This class will read
+/// in each pair of hands anddetermine the winner and print it to the screen
 class JsonPokerTests {
 public:
   JsonPokerTests(string jsonFile);
@@ -764,27 +768,9 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
 /// Runs the code for comparing poker hands.
 /// @return
 int main() {
-  // Deck deck;
-  // Hand hand;
-
-  // hand.addCard(deck.dealTopCard());
-  // hand.addCard(deck.dealTopCard());
-  // hand.addCard(deck.dealTopCard());
-  // hand.addCard(deck.dealTopCard());
-  // hand.addCard(deck.dealTopCard());
-
-  // hand.setRank();
-
-  // PokerGame game;
-  // game.addPlayerHand();
-  // game.addPlayerHand();
-  // game.showPlayerHands();
-  // game.determineHandWinner();
 
   JsonPokerTests jsonTester("PokerHandTests.json");  
-  jsonTester.ProcessTestsInJsonFile();
-
-  // cout << jsonData;   //print the whole file, this worked woo
+  jsonTester.ProcessTestsInJsonFile();  
 
   return 0;
 }
