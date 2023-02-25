@@ -307,20 +307,9 @@ void Hand::setRank() {
       && cards[2].rank == 4
       && cards[3].rank == 5)){
         straight = true;
-      }
-    
+      }    
   } else{
     straight = false;
-  }
-  for (int i; i < 8; i++) {
-    if ((handCounts[i] == 1 
-       && handCounts[i + 1] == 1 
-       && handCounts[i + 2] == 1 
-       && handCounts[i + 3] == 1 
-       && handCounts[i + 4] == 1)
-       ) {
-      straight = true;
-    }
   }
   if (straight && flush) {
     straightFlush = true;
