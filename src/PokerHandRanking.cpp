@@ -12,18 +12,14 @@
 using namespace std;
 using namespace Json;
 
-map<char, int> cardValues = {
-    {'2', 2}, {'3', 3},  {'4', 4},  {'5', 5},  {'6', 6},  {'7', 7}, {'8', 8},
-    {'9', 9}, {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}};
-
-const char Suits[4] = {'S', 'H', 'D', 'C'};
-const char Values[13] = {'2', '3', '4', '5', '6', '7', '8',
-                         '9', 'T', 'J', 'Q', 'K', 'A'};
-
 struct Card {
   char value;
   char suit;
   int rank;
+  static map<char, int> cardValues;
+  static const char Suits[];
+  static const char Values[];
+
   Card();
   Card(string cardCode);
 
@@ -40,16 +36,22 @@ struct Card {
 };
 
 /// @brief parameterless constructor
-Card::Card(){}
+Card::Card() {}
 
 /// @brief constructs a card from a two character code
-/// @param code 
-Card::Card(string code){
-    value = code.at(0);
-    suit = code.at(1);
-    rank = cardValues[value];
+/// @param code
+Card::Card(string code) {
+  value = code.at(0);
+  suit = code.at(1);
+  rank = cardValues[value];
 }
 
+map<char, int> Card::cardValues = {
+    {'2', 2}, {'3', 3},  {'4', 4},  {'5', 5},  {'6', 6},  {'7', 7}, {'8', 8},
+    {'9', 9}, {'T', 10}, {'J', 11}, {'Q', 12}, {'K', 13}, {'A', 14}};
+const char Card::Suits[] = {'S', 'H', 'D', 'C'};
+const char Card::Values[] = {'2', '3', '4', '5', '6', '7', '8',
+                         '9', 'T', 'J', 'Q', 'K', 'A'};
 
 /// @brief Class representing a deck of cards
 ///
@@ -68,12 +70,12 @@ private:
 // Deck constructor. Adds all of the cards to the deck and then shuffles them.
 Deck::Deck() {
   vector<Card> temp;
-  for (char s : Suits) {
-    for (char v : Values) {
+  for (char s : Card::Suits) {
+    for (char v : Card::Values) {
       Card c;
       c.suit = s;
       c.value = v;
-      c.rank = cardValues[c.value];
+      c.rank = Card::cardValues[c.value];
       deck.push_back(c);
     }
   }
@@ -215,10 +217,10 @@ void Hand::sortHand() { sort(cards.begin(), cards.end()); }
 
 /// @brief Add a card to the cards vector
 /// @param c The card to be added
-void Hand::addCard(Card c) { 
-    if(!isHandFull()){
-        cards.push_back(c); 
-    }
+void Hand::addCard(Card c) {
+  if (!isHandFull()) {
+    cards.push_back(c);
+  }
 }
 
 /// @brief Displays the hand in the terminal
@@ -368,7 +370,7 @@ void PokerGame::addPlayerHand() {
 }
 
 /// @brief Adds a specified hand to the playerHands array
-void PokerGame::addPlayerHand(vector<Card> cards) {  
+void PokerGame::addPlayerHand(vector<Card> cards) {
   Hand hand;
   for (int i = 0; i < handSize; i++) {
     hand.addCard(cards[i]);
@@ -683,23 +685,25 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
   for (Json::ValueIterator itr = jsonData.begin(); itr != jsonData.end();
        itr++) {
     std::string propertyName = itr.name();
-    cout << "\nInitiating tests of the following type: " << propertyName << "\n";
+    cout << "\nInitiating tests of the following type: " << propertyName
+         << "\n";
     Json::Value currentCategory = jsonData[propertyName];
 
-    //iterate through all the hands in the current category (e.g. all the straight flush tests)
-    for (const auto &handPair : currentCategory) {      
+    // iterate through all the hands in the current category (e.g. all the
+    // straight flush tests)
+    for (const auto &handPair : currentCategory) {
       vector<Card> cardsP1;
       vector<Card> cardsP2;
       for (const auto &val : handPair["p1"]) {
-        std::string cardCode = val.asString();        
+        std::string cardCode = val.asString();
         Card c(cardCode);
         cardsP1.push_back(c);
-      }      
+      }
       for (const auto &val : handPair["p2"]) {
-        std::string cardCode = val.asString();        
+        std::string cardCode = val.asString();
         Card c(cardCode);
         cardsP2.push_back(c);
-      }      
+      }
       PokerGame game;
       game.addPlayerHand(cardsP1);
       game.addPlayerHand(cardsP2);
@@ -735,7 +739,7 @@ int main() {
   JsonPokerTests jsonTester("PokerHandTests.json");
   jsonTester.ProcessTestsInJsonFile();
 
-  //cout << jsonData;   //print the whole file, this worked woo
+  // cout << jsonData;   //print the whole file, this worked woo
 
   return 0;
 }
