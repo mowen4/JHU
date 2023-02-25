@@ -621,10 +621,9 @@ int PokerGame::threeOfAKindTieBreaker(Hand player1, Hand player2) {
   }
   if (index2 > index1) {
     return 2;
-  }
-
-  // this default shouldn't happen, can't have equal 3 of a kinds with 1 deck.
-  return -1;
+  } 
+  //if the three of a kinds are equal, high card determines the winner. 
+  return highCardTieBreaker(player1, player2);
 }
 
 /// @brief Breaks ties for two hands of rank 'straight'
@@ -660,7 +659,24 @@ int PokerGame::flushTieBreaker(Hand player1, Hand player2) {
 /// @param player2
 /// @return
 int PokerGame::fullHouseTieBreaker(Hand player1, Hand player2) {
-  return threeOfAKindTieBreaker(player1, player2);
+  int tieBreaker = threeOfAKindTieBreaker(player1, player2);
+  if(tieBreaker != -1){
+    return tieBreaker; //tie broken by 3 of a kind
+  }
+  // Find the entry in the handCounts array with a value of 2 (the pair)
+  int *address1 = find(begin(player1.handCounts), end(player1.handCounts), 2);
+  int *address2 = find(begin(player2.handCounts), end(player2.handCounts), 2);
+  // subtract beginning-of-array address to get the index
+  int index1 = address1 - begin(player1.handCounts);
+  int index2 = address2 - begin(player2.handCounts);
+  if (index1 > index2) {
+    return 1;
+  }
+  if (index2 > index1) {
+    return 2;
+  }
+  //both the three of a kind and the pair are a tie so the hands are tied.  
+  return -1;
 }
 
 /// @brief Breaks ties for two hands of rank 'four of a kind'
