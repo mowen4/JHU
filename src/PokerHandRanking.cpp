@@ -23,13 +23,14 @@ struct Card {
   Card();
   Card(string cardCode);
 
-  // overriding < operator to allow for sort() function calls
+  //override < > operators to allow for sort function calls to know how to sort
   bool operator<(const Card &card) const { return (rank < card.rank); }
+  bool operator>(const Card &card) const { return (rank > card.rank); }  
+  
   // overridng comparison to ints for easier comparisons in tie breakers
   bool operator<(int compareValue) const { return (rank < compareValue); }
-  // overriding > as well for easier comparison in tie breakers
-  bool operator>(const Card &card) const { return (rank > card.rank); }
   bool operator>(int compareValue) const { return (rank > compareValue); }
+
   // for simplifying comparing if cards have equal value
   bool operator==(const Card &card) const { return (rank == card.rank); }
   bool operator==(int compareValue) const { return (rank == compareValue); }
@@ -159,7 +160,6 @@ std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
 class Hand {
 public:
   Hand(int maxHandSize);
-
   void addCard(Card c);
   void showHand() const;
   bool isHandFull();
@@ -173,7 +173,6 @@ public:
   int handCounts[13] = {0}; // 2 3 4 5 6 7 8 9 T J Q K A
   // array to store counts of suits within the hand
   int suitCounts[4] = {0}; // Club Diamond Heart Spade
-
 private:
   vector<Card> cards;
   HandRanking rank;
@@ -188,8 +187,6 @@ private:
   bool fourAKind = false;
   bool straightFlush = false;
   bool royalFlush = false;
-
-protected:
 };
 
 Hand::Hand(int maxSize = 5) { maximumHandSize = maxSize; }
@@ -292,9 +289,11 @@ void Hand::setRank() {
     flush = true;
   }
   for (int i; i < 8; i++) {
-    if (handCounts[i] == 1 && handCounts[i + 1] == 1 &&
-        handCounts[i + 2] == 1 && handCounts[i + 3] == 1 &&
-        handCounts[i + 4] == 1) {
+    if (handCounts[i] == 1 
+       && handCounts[i + 1] == 1 
+       && handCounts[i + 2] == 1 
+       && handCounts[i + 3] == 1 
+       && handCounts[i + 4] == 1) {
       straight = true;
     }
   }
@@ -536,16 +535,20 @@ int PokerGame::twoPairsTieBreaker(Hand player1, Hand player2) {
   int player2Pair1 = -1;
   int player2Pair2 = -1;
   for (int i = 0; i < handSize - 1; i++) {
-    if (cards1[i] == cards1[i + 1] && cards1[i] > player1Pair1) {
+    if (cards1[i] == cards1[i + 1] 
+      && cards1[i] > player1Pair1) {
       player1Pair2 = player1Pair1;
       player1Pair1 = cards1[i].rank;
-    } else if (cards1[i] == cards1[i + 1] && cards1[i] > player1Pair2) {
+    } else if (cards1[i] == cards1[i + 1] 
+      && cards1[i] > player1Pair2) {
       player1Pair2 = cards1[i].rank;
     }
-    if (cards2[i] == cards2[i + 1] && cards2[i] > player2Pair1) {
+    if (cards2[i] == cards2[i + 1] 
+      && cards2[i] > player2Pair1) {
       player2Pair2 = player2Pair1;
       player2Pair1 = cards2[i].rank;
-    } else if (cards2[i] == cards2[i + 1] && cards2[i] > player2Pair2) {
+    } else if (cards2[i] == cards2[i + 1] 
+      && cards2[i] > player2Pair2) {
       player2Pair2 = cards2[i].rank;
     }
   }
@@ -696,13 +699,13 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
       vector<Card> cardsP2;
       for (const auto &val : handPair["p1"]) {
         std::string cardCode = val.asString();
-        Card c(cardCode);
-        cardsP1.push_back(c);
+        Card card(cardCode);
+        cardsP1.push_back(card);
       }
       for (const auto &val : handPair["p2"]) {
         std::string cardCode = val.asString();
-        Card c(cardCode);
-        cardsP2.push_back(c);
+        Card card(cardCode);
+        cardsP2.push_back(card);
       }
       PokerGame game;
       game.addPlayerHand(cardsP1);
