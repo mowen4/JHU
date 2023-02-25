@@ -632,7 +632,21 @@ int PokerGame::threeOfAKindTieBreaker(Hand player1, Hand player2) {
 /// @param player2
 /// @return
 int PokerGame::straightTieBreaker(Hand player1, Hand player2) {
-  return highCardTieBreaker(player1, player2);
+  auto cards1 = player1.getCards();
+  auto cards2 = player2.getCards();
+  //begin checking the 2nd highest ranked card in the hand
+  //to handle the issue of "low ace straights"
+  for (int i = handSize - 2; i >= 0; i--) {
+    if (cards1[i] > cards2[i]) {
+      return 1;
+    } else if (cards1[i] < cards2[i]) {
+      return 2;
+    }
+    if (i == 0) {
+      return -1;
+    }
+  }
+  return -1;
 }
 
 /// @brief Breaks ties for two hands of rank 'flush'
