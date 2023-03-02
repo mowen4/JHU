@@ -1,0 +1,38 @@
+\hypertarget{class_poker_game}{}\doxysection{Poker\+Game Class Reference}
+\label{class_poker_game}\index{PokerGame@{PokerGame}}
+
+
+Class for facilitating the running of a poker game.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poker_game_a070564ca3da24bf5e2be76c62a53b30f}\label{class_poker_game_a070564ca3da24bf5e2be76c62a53b30f}} 
+void {\bfseries add\+Player\+Hand} ()
+\begin{DoxyCompactList}\small\item\em Adds a new hand from the deck to the player\+Hands array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poker_game_ac4e992969c2f13c5b61ae3b2daaa798b}\label{class_poker_game_ac4e992969c2f13c5b61ae3b2daaa798b}} 
+void {\bfseries add\+Player\+Hand} (vector$<$ \mbox{\hyperlink{struct_card}{Card}} $>$ cards)
+\begin{DoxyCompactList}\small\item\em Adds a specified hand to the player\+Hands array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poker_game_ad8632c8c67f5a1294f31ddc972212667}\label{class_poker_game_ad8632c8c67f5a1294f31ddc972212667}} 
+void {\bfseries show\+Player\+Hands} ()
+\begin{DoxyCompactList}\small\item\em Displays all cards in all player hands. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poker_game_a7679f0a018a7d08142b39437587152c5}\label{class_poker_game_a7679f0a018a7d08142b39437587152c5}} 
+void {\bfseries determine\+Hand\+Winner} ()
+\begin{DoxyCompactList}\small\item\em Determines which player has the best hand. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poker_game_a51ffd486c8199c2321296eaf244bd6ce}\label{class_poker_game_a51ffd486c8199c2321296eaf244bd6ce}} 
+vector$<$ \mbox{\hyperlink{class_hand}{Hand}} $>$ {\bfseries player\+Hands}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for facilitating the running of a poker game. 
+
+Holds a set of cards (player hands) for each player in the game. Has functions for determining the winner and display the hands. Can break a tie if two hands have the same rank 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Poker\+Hand\+Ranking.\+cpp\end{DoxyCompactItemize}

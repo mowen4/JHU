@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verbosity_0',['Verbosity',['../namespace_catch.html#af85c0d46dfe687d923a157362fd07737',1,'Catch']]]
+  ['precisiontype_0',['PrecisionType',['../namespace_json.html#af6e1447a3c43e3a62e11050dd0a11ce8',1,'Json']]]
 ];

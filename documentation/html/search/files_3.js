@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['statistic_2ecpp_0',['Statistic.cpp',['../_statistic_8cpp.html',1,'']]],
-  ['statisticmain_2ecpp_1',['StatisticMain.cpp',['../_statistic_main_8cpp.html',1,'']]]
+  ['pokerhandranking_2ecpp_0',['PokerHandRanking.cpp',['../_poker_hand_ranking_8cpp.html',1,'']]],
+  ['pokerhandsv2_2ecpp_1',['PokerHandsV2.cpp',['../_poker_hands_v2_8cpp.html',1,'']]]
 ];

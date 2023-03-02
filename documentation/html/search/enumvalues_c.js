@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['scalene_0',['scalene',['../class_triangle.html#a0a73a2cc4f6d278530139923cc7f7e7da21a9415d859c577714d78db62faa41fd',1,'Triangle']]],
-  ['shouldfail_1',['ShouldFail',['../struct_catch_1_1_test_case_info.html#a39b232f74b4a7a6f2183b96759027eacaf9002285bccfc343935958f3953f4c01',1,'Catch::TestCaseInfo']]],
-  ['suppressfail_2',['SuppressFail',['../struct_catch_1_1_result_disposition.html#a3396cad6e2259af326b3aae93e23e9d8a1a88eb6004bddee4ccae4b421991bf54',1,'Catch::ResultDisposition']]]
+  ['realvalue_0',['realValue',['../namespace_json.html#a7d654b75c16a57007925868e38212b4eab837c7b869c14d8be712deb45c9e490e',1,'Json']]],
+  ['royalflush_1',['RoyalFlush',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb',1,'RoyalFlush():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb',1,'RoyalFlush():&#160;PokerHandsV2.cpp']]]
 ];

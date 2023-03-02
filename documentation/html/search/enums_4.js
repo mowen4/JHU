@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['specialproperties_0',['SpecialProperties',['../struct_catch_1_1_test_case_info.html#a39b232f74b4a7a6f2183b96759027eac',1,'Catch::TestCaseInfo']]]
+  ['inwhatorder_0',['InWhatOrder',['../struct_catch_1_1_run_tests.html#ab56bd851b1dd085869992d1a9d73dc5d',1,'Catch::RunTests']]]
 ];

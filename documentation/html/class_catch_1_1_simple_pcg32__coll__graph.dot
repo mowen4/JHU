@@ -1,0 +1,8 @@
+digraph "Catch::SimplePcg32"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Catch::SimplePcg32\n||+ SimplePcg32()\l+ SimplePcg32()\l+ seed()\l+ discard()\l+ operator()()\l+ min()\l+ max()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

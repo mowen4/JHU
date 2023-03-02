@@ -1,0 +1,17 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [label="Catch::NonCopyable",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_catch_1_1_non_copyable.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
+  Node1 [label="Catch::AutoReg",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_catch_1_1_auto_reg.html",tooltip=" "];
+  Node0 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="Catch::IConfig",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_catch_1_1_i_config.html",tooltip=" "];
+  Node0 -> Node3 [dir="back",color="firebrick4",style="solid"];
+  Node3 [label="Catch::ReusableStringStream",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_catch_1_1_reusable_string_stream.html",tooltip=" "];
+  Node0 -> Node4 [dir="back",color="firebrick4",style="solid"];
+  Node4 [label="Catch::Section",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_catch_1_1_section.html",tooltip=" "];
+}

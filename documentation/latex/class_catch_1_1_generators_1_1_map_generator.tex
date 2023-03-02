@@ -1,9 +1,5 @@
 \hypertarget{class_catch_1_1_generators_1_1_map_generator}{}\doxysection{Catch\+::Generators\+::Map\+Generator\texorpdfstring{$<$}{<} T, U, Func \texorpdfstring{$>$}{>} Class Template Reference}
 \label{class_catch_1_1_generators_1_1_map_generator}\index{Catch::Generators::MapGenerator$<$ T, U, Func $>$@{Catch::Generators::MapGenerator$<$ T, U, Func $>$}}
-
-
-{\ttfamily \#include $<$catch.\+hpp$>$}
-
 Inheritance diagram for Catch\+::Generators\+::Map\+Generator\texorpdfstring{$<$}{<} T, U, Func \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,45 +9,30 @@ Inheritance diagram for Catch\+::Generators\+::Map\+Generator\texorpdfstring{$<$
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename F2  = Func$>$ }\\\mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator_a525c7eaf53ad220ee7add534aff2522c}{Map\+Generator}} (F2 \&\&function, \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_wrapper}{Generator\+Wrapper}}$<$ U $>$ \&\&generator)
+\mbox{\Hypertarget{class_catch_1_1_generators_1_1_map_generator_a525c7eaf53ad220ee7add534aff2522c}\label{class_catch_1_1_generators_1_1_map_generator_a525c7eaf53ad220ee7add534aff2522c}} 
+{\footnotesize template$<$typename F2  = Func$>$ }\\{\bfseries Map\+Generator} (F2 \&\&function, \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_wrapper}{Generator\+Wrapper}}$<$ U $>$ \&\&generator)
 \item 
 T const \& \mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator_abd7ffdef7f7c8575331146c4a95141ad}{get}} () const override
 \item 
 bool \mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator_aa07e2f12d38ae060c30cc30d9dc236c5}{next}} () override
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator}{Catch\+::\+Generators\+::\+IGenerator$<$ T $>$}}}
 \begin{DoxyCompactItemize}
 \item 
-virtual \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator_afe5b6eecbbd735e69748d68574611747}{$\sim$\+IGenerator}} ()=default
-\item 
-virtual T const \& \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator_a0fb6da789cda5b4e90f036737db82485}{get}} () const =0
+\mbox{\Hypertarget{struct_catch_1_1_generators_1_1_i_generator_a0fb6da789cda5b4e90f036737db82485}\label{struct_catch_1_1_generators_1_1_i_generator_a0fb6da789cda5b4e90f036737db82485}} 
+virtual T const \& {\bfseries get} () const =0
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base}{Catch\+::\+Generators\+::\+Generator\+Untyped\+Base}}}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base_a00ff0179d739c3016756b6cf56fabbad}{Generator\+Untyped\+Base}} ()=default
-\item 
-virtual \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base_a6f05f8099fdc5744a7aff68aa8c09c7f}{$\sim$\+Generator\+Untyped\+Base}} ()
-\item 
-virtual bool \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base_aeed3c0cd6233c5f553549e453b8d6638}{next}} ()=0
+\mbox{\Hypertarget{class_catch_1_1_generators_1_1_generator_untyped_base_aeed3c0cd6233c5f553549e453b8d6638}\label{class_catch_1_1_generators_1_1_generator_untyped_base_aeed3c0cd6233c5f553549e453b8d6638}} 
+virtual bool {\bfseries next} ()=0
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 \doxysubsubsection*{Public Types inherited from \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator}{Catch\+::\+Generators\+::\+IGenerator$<$ T $>$}}}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator_a1f8677875fe0ff31f39c60d45504b9a5}{type}} = T
+\mbox{\Hypertarget{struct_catch_1_1_generators_1_1_i_generator_a1f8677875fe0ff31f39c60d45504b9a5}\label{struct_catch_1_1_generators_1_1_i_generator_a1f8677875fe0ff31f39c60d45504b9a5}} 
+using {\bfseries type} = T
 \end{DoxyCompactItemize}
-
-
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_catch_1_1_generators_1_1_map_generator_a525c7eaf53ad220ee7add534aff2522c}\label{class_catch_1_1_generators_1_1_map_generator_a525c7eaf53ad220ee7add534aff2522c}} 
-\index{Catch::Generators::MapGenerator$<$ T, U, Func $>$@{Catch::Generators::MapGenerator$<$ T, U, Func $>$}!MapGenerator@{MapGenerator}}
-\index{MapGenerator@{MapGenerator}!Catch::Generators::MapGenerator$<$ T, U, Func $>$@{Catch::Generators::MapGenerator$<$ T, U, Func $>$}}
-\doxysubsubsection{\texorpdfstring{MapGenerator()}{MapGenerator()}}
-{\footnotesize\ttfamily template$<$typename T , typename U , typename Func $>$ \\
-template$<$typename F2  = Func$>$ \\
-\mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator}{Catch\+::\+Generators\+::\+Map\+Generator}}$<$ T, U, Func $>$\+::\+Map\+Generator (\begin{DoxyParamCaption}\item[{F2 \&\&}]{function,  }\item[{\mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_wrapper}{Generator\+Wrapper}}$<$ U $>$ \&\&}]{generator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
 
 
 \doxysubsection{Member Function Documentation}
@@ -64,7 +45,7 @@ T const  \& \mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator}{Catch
 
 
 
-Implements \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator_a0fb6da789cda5b4e90f036737db82485}{Catch\+::\+Generators\+::\+IGenerator$<$ T $>$}}.
+Implements \mbox{\hyperlink{struct_catch_1_1_generators_1_1_i_generator}{Catch\+::\+Generators\+::\+IGenerator$<$ T $>$}}.
 
 \mbox{\Hypertarget{class_catch_1_1_generators_1_1_map_generator_aa07e2f12d38ae060c30cc30d9dc236c5}\label{class_catch_1_1_generators_1_1_map_generator_aa07e2f12d38ae060c30cc30d9dc236c5}} 
 \index{Catch::Generators::MapGenerator$<$ T, U, Func $>$@{Catch::Generators::MapGenerator$<$ T, U, Func $>$}!next@{next}}
@@ -75,5 +56,10 @@ bool \mbox{\hyperlink{class_catch_1_1_generators_1_1_map_generator}{Catch\+::\+G
 
 
 
-Implements \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base_aeed3c0cd6233c5f553549e453b8d6638}{Catch\+::\+Generators\+::\+Generator\+Untyped\+Base}}.
+Implements \mbox{\hyperlink{class_catch_1_1_generators_1_1_generator_untyped_base}{Catch\+::\+Generators\+::\+Generator\+Untyped\+Base}}.
 
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/catch.\+hpp\end{DoxyCompactItemize}

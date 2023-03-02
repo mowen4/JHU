@@ -1,0 +1,9 @@
+digraph "Json::Value"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Json::Value\n|+ value_type_\l+ allocated_\l+ minLargestInt\l+ maxLargestInt\l+ maxLargestUInt\l+ minInt\l+ maxInt\l+ maxUInt\l+ minInt64\l+ maxInt64\l+ maxUInt64\l+ defaultRealPrecision\l+ maxUInt64AsDouble\l|+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\l+ Value()\land 107 more...\l+ operator[]()\l+ operator[]()\l+ operator[]()\l+ operator[]()\l+ nullSingleton()\l* operator[]()\l* operator[]()\l* operator[]()\l* operator[]()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Represents a JSON value."];
+  Node1 -> Node1 [color="grey25",style="solid",label=" +null\n+nullRef" ,arrowhead="odiamond"];
+}

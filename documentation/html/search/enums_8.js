@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yesorno_0',['YesOrNo',['../struct_catch_1_1_use_colour.html#a6aa78da0c2de7539bb9e3757e204a3f1',1,'Catch::UseColour']]]
+  ['triangletype_0',['TriangleType',['../class_triangle.html#a0a73a2cc4f6d278530139923cc7f7e7d',1,'Triangle']]]
 ];

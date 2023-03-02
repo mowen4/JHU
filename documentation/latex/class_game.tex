@@ -5,6 +5,12 @@
 The \mbox{\hyperlink{class_game}{Game}} class holds the code from playing a tic-\/tac-\/toe game.  
 
 
+Inheritance diagram for Game\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,9 +25,7 @@ bool \mbox{\hyperlink{class_game_a102ce6e5a222e403aa7a0465ff6281dc}{is\+Game\+Ov
 void \mbox{\hyperlink{class_game_a06f336a537a87a7f87191ddfb949a110}{prompt\+Userfor\+Move}} (char XorO)
 \begin{DoxyCompactList}\small\item\em Gets user input and plays the user\textquotesingle{}s move. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_game_af99586aecf3188f5adfc6da9cdcd009c}{make\+Computer\+Move}} (char XorO)
-\begin{DoxyCompactList}\small\item\em Makes a move for the computer, chosen at random from the available spaces. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_game_a0af122cee659a57690ad382e2adb6499}{update\+Available\+Spaces}} (int row, int col)
-\begin{DoxyCompactList}\small\item\em removes the selected space from the list of available\+Spaces \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Makes a move for the computer, chosen at random from the available spaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -106,15 +110,8 @@ This function will prompt the user for their next game move. The move should be 
 
 displays the board in the terminal 
 
-Displays the game board in the terminal. Each column is separated by a vertical bar and the rows are separated by dashes \mbox{\Hypertarget{class_game_a0af122cee659a57690ad382e2adb6499}\label{class_game_a0af122cee659a57690ad382e2adb6499}} 
-\index{Game@{Game}!updateAvailableSpaces@{updateAvailableSpaces}}
-\index{updateAvailableSpaces@{updateAvailableSpaces}!Game@{Game}}
-\doxysubsubsection{\texorpdfstring{updateAvailableSpaces()}{updateAvailableSpaces()}}
-{\footnotesize\ttfamily void Game\+::update\+Available\+Spaces (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})}
+Displays the game board in the terminal. Each column is separated by a vertical bar and the rows are separated by dashes 
 
-
-
-removes the selected space from the list of available\+Spaces 
-
-removes a square from the available\+Spaces vector based on the selected move (row, col) integers in the available\+Spaces vector coorespond to the grid below this allows us to track available spaces and precludes the need to scan the board before each computer move 0 1 2 3 4 5 6 7 8 ~\newline
- 
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Tic\+Tac\+Toe.\+cpp\end{DoxyCompactItemize}

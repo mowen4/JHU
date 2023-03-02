@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JHU: src/catch.hpp Source File</title>
+<title>My Project: src/catch.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,9 +31,9 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="ISO_C++_Logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">JHU<span id="projectnumber">&#160;1.1</span>
+   <div id="projectname">My Project
    </div>
-   <div id="projectbrief">Class Projects for Object Oriented C++</div>
+   <div id="projectbrief">JHU C++</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -5327,7 +5327,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l05268" name="l05268"></a><span class="lineno"> 5268</span> </div>
 <div class="line"><a id="l05269" name="l05269"></a><span class="lineno"> 5269</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_catch.html">Catch</a> {</div>
 <div class="line"><a id="l05270" name="l05270"></a><span class="lineno"> 5270</span> </div>
-<div class="line"><a id="l05271" name="l05271"></a><span class="lineno"> 5271</span>    <span class="keyword">struct </span>IStream;</div>
+<div class="line"><a id="l05271" name="l05271"></a><span class="lineno"> 5271</span>    <span class="keyword">struct </span><a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a>;</div>
 <div class="line"><a id="l05272" name="l05272"></a><span class="lineno"> 5272</span> </div>
 <div class="line"><a id="l05273" name="l05273"></a><span class="lineno"> 5273</span>    <span class="keyword">struct </span>ConfigData {</div>
 <div class="line"><a id="l05274" name="l05274"></a><span class="lineno"> 5274</span>        <span class="keywordtype">bool</span> listTests = <span class="keyword">false</span>;</div>
@@ -5422,7 +5422,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l05363" name="l05363"></a><span class="lineno"> 5363</span> </div>
 <div class="line"><a id="l05364" name="l05364"></a><span class="lineno"> 5364</span>    <span class="keyword">private</span>:</div>
 <div class="line"><a id="l05365" name="l05365"></a><span class="lineno"> 5365</span> </div>
-<div class="line"><a id="l05366" name="l05366"></a><span class="lineno"> 5366</span>        IStream <span class="keyword">const</span>* openStream();</div>
+<div class="line"><a id="l05366" name="l05366"></a><span class="lineno"> 5366</span>        <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> <span class="keyword">const</span>* openStream();</div>
 <div class="line"><a id="l05367" name="l05367"></a><span class="lineno"> 5367</span>        ConfigData m_data;</div>
 <div class="line"><a id="l05368" name="l05368"></a><span class="lineno"> 5368</span> </div>
 <div class="line"><a id="l05369" name="l05369"></a><span class="lineno"> 5369</span>        std::unique_ptr&lt;IStream const&gt; m_stream;</div>
@@ -5881,7 +5881,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l05823" name="l05823"></a><span class="lineno"> 5823</span>                <span class="keywordflow">return</span> stats.sectionInfo.lineInfo == other.stats.sectionInfo.lineInfo;</div>
 <div class="line"><a id="l05824" name="l05824"></a><span class="lineno"> 5824</span>            }</div>
 <div class="line"><a id="l05825" name="l05825"></a><span class="lineno"> 5825</span>            <span class="keywordtype">bool</span> operator == (std::shared_ptr&lt;SectionNode&gt; <span class="keyword">const</span>&amp; other)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l05826" name="l05826"></a><span class="lineno"> 5826</span>                <span class="keywordflow">return</span> operator==(*other);</div>
+<div class="line"><a id="l05826" name="l05826"></a><span class="lineno"> 5826</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_json.html#a85a761cd8643a538387c0fe37bb937e8">operator==</a>(*other);</div>
 <div class="line"><a id="l05827" name="l05827"></a><span class="lineno"> 5827</span>            }</div>
 <div class="line"><a id="l05828" name="l05828"></a><span class="lineno"> 5828</span> </div>
 <div class="line"><a id="l05829" name="l05829"></a><span class="lineno"> 5829</span>            SectionStats stats;</div>
@@ -7529,7 +7529,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l07478" name="l07478"></a><span class="lineno"> 7478</span>        SourceLineInfo location;</div>
 <div class="line"><a id="l07479" name="l07479"></a><span class="lineno"> 7479</span> </div>
 <div class="line"><a id="l07480" name="l07480"></a><span class="lineno"> 7480</span>        NameAndLocation( std::string <span class="keyword">const</span>&amp; _name, SourceLineInfo <span class="keyword">const</span>&amp; _location );</div>
-<div class="line"><a id="l07481" name="l07481"></a><span class="lineno"> 7481</span>        <span class="keyword">friend</span> <span class="keywordtype">bool</span> operator==(NameAndLocation <span class="keyword">const</span>&amp; lhs, NameAndLocation <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l07481" name="l07481"></a><span class="lineno"> 7481</span>        <span class="keyword">friend</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_json.html#a85a761cd8643a538387c0fe37bb937e8">operator==</a>(NameAndLocation <span class="keyword">const</span>&amp; lhs, NameAndLocation <span class="keyword">const</span>&amp; rhs) {</div>
 <div class="line"><a id="l07482" name="l07482"></a><span class="lineno"> 7482</span>            <span class="keywordflow">return</span> lhs.name == rhs.name</div>
 <div class="line"><a id="l07483" name="l07483"></a><span class="lineno"> 7483</span>                &amp;&amp; lhs.location == rhs.location;</div>
 <div class="line"><a id="l07484" name="l07484"></a><span class="lineno"> 7484</span>        }</div>
@@ -8658,7 +8658,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l08611" name="l08611"></a><span class="lineno"> 8611</span>                &amp;m_column == &amp;other.m_column;</div>
 <div class="line"><a id="l08612" name="l08612"></a><span class="lineno"> 8612</span>        }</div>
 <div class="line"><a id="l08613" name="l08613"></a><span class="lineno"> 8613</span>        <span class="keyword">auto</span> operator !=(iterator <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> -&gt; <span class="keywordtype">bool</span> {</div>
-<div class="line"><a id="l08614" name="l08614"></a><span class="lineno"> 8614</span>            <span class="keywordflow">return</span> !operator==(other);</div>
+<div class="line"><a id="l08614" name="l08614"></a><span class="lineno"> 8614</span>            <span class="keywordflow">return</span> !<a class="code hl_function" href="namespace_json.html#a85a761cd8643a538387c0fe37bb937e8">operator==</a>(other);</div>
 <div class="line"><a id="l08615" name="l08615"></a><span class="lineno"> 8615</span>        }</div>
 <div class="line"><a id="l08616" name="l08616"></a><span class="lineno"> 8616</span>    };</div>
 <div class="line"><a id="l08617" name="l08617"></a><span class="lineno"> 8617</span>    <span class="keyword">using </span>const_iterator = iterator;</div>
@@ -10063,7 +10063,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l10016" name="l10016"></a><span class="lineno">10016</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> Config::benchmarkResamples()<span class="keyword"> const               </span>{ <span class="keywordflow">return</span> m_data.benchmarkResamples; }</div>
 <div class="line"><a id="l10017" name="l10017"></a><span class="lineno">10017</span>    std::chrono::milliseconds Config::benchmarkWarmupTime()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::chrono::milliseconds(m_data.benchmarkWarmupTime); }</div>
 <div class="line"><a id="l10018" name="l10018"></a><span class="lineno">10018</span> </div>
-<div class="line"><a id="l10019" name="l10019"></a><span class="lineno">10019</span>    IStream <span class="keyword">const</span>* Config::openStream() {</div>
+<div class="line"><a id="l10019" name="l10019"></a><span class="lineno">10019</span>    <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> <span class="keyword">const</span>* Config::openStream() {</div>
 <div class="line"><a id="l10020" name="l10020"></a><span class="lineno">10020</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_catch.html#af6d27462573d60c30c51acf1c980e3ff">Catch::makeStream</a>(m_data.outputFilename);</div>
 <div class="line"><a id="l10021" name="l10021"></a><span class="lineno">10021</span>    }</div>
 <div class="line"><a id="l10022" name="l10022"></a><span class="lineno">10022</span> </div>
@@ -11490,8 +11490,8 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l11447" name="l11447"></a><span class="lineno">11447</span><span class="comment">// start catch_polyfills.hpp</span></div>
 <div class="line"><a id="l11448" name="l11448"></a><span class="lineno">11448</span> </div>
 <div class="line"><a id="l11449" name="l11449"></a><span class="lineno">11449</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_catch.html">Catch</a> {</div>
-<div class="line"><a id="l11450" name="l11450"></a><span class="lineno">11450</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">float</span> f);</div>
-<div class="line"><a id="l11451" name="l11451"></a><span class="lineno">11451</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">double</span> d);</div>
+<div class="line"><a id="l11450" name="l11450"></a><span class="lineno">11450</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">float</span> f);</div>
+<div class="line"><a id="l11451" name="l11451"></a><span class="lineno">11451</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">double</span> d);</div>
 <div class="line"><a id="l11452" name="l11452"></a><span class="lineno">11452</span>}</div>
 <div class="line"><a id="l11453" name="l11453"></a><span class="lineno">11453</span> </div>
 <div class="line"><a id="l11454" name="l11454"></a><span class="lineno">11454</span><span class="comment">// end catch_polyfills.hpp</span></div>
@@ -12230,18 +12230,18 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l12189" name="l12189"></a><span class="lineno">12189</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_catch.html">Catch</a> {</div>
 <div class="line"><a id="l12190" name="l12190"></a><span class="lineno">12190</span> </div>
 <div class="line"><a id="l12191" name="l12191"></a><span class="lineno">12191</span><span class="preprocessor">#if !defined(CATCH_CONFIG_POLYFILL_ISNAN)</span></div>
-<div class="line"><a id="l12192" name="l12192"></a><span class="lineno">12192</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">float</span> f) {</div>
+<div class="line"><a id="l12192" name="l12192"></a><span class="lineno">12192</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">float</span> f) {</div>
 <div class="line"><a id="l12193" name="l12193"></a><span class="lineno">12193</span>        <span class="keywordflow">return</span> std::isnan(f);</div>
 <div class="line"><a id="l12194" name="l12194"></a><span class="lineno">12194</span>    }</div>
-<div class="line"><a id="l12195" name="l12195"></a><span class="lineno">12195</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">double</span> d) {</div>
+<div class="line"><a id="l12195" name="l12195"></a><span class="lineno">12195</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">double</span> d) {</div>
 <div class="line"><a id="l12196" name="l12196"></a><span class="lineno">12196</span>        <span class="keywordflow">return</span> std::isnan(d);</div>
 <div class="line"><a id="l12197" name="l12197"></a><span class="lineno">12197</span>    }</div>
 <div class="line"><a id="l12198" name="l12198"></a><span class="lineno">12198</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l12199" name="l12199"></a><span class="lineno">12199</span>    <span class="comment">// For now we only use this for embarcadero</span></div>
-<div class="line"><a id="l12200" name="l12200"></a><span class="lineno">12200</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">float</span> f) {</div>
+<div class="line"><a id="l12200" name="l12200"></a><span class="lineno">12200</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">float</span> f) {</div>
 <div class="line"><a id="l12201" name="l12201"></a><span class="lineno">12201</span>        <span class="keywordflow">return</span> std::_isnan(f);</div>
 <div class="line"><a id="l12202" name="l12202"></a><span class="lineno">12202</span>    }</div>
-<div class="line"><a id="l12203" name="l12203"></a><span class="lineno">12203</span>    <span class="keywordtype">bool</span> isnan(<span class="keywordtype">double</span> d) {</div>
+<div class="line"><a id="l12203" name="l12203"></a><span class="lineno">12203</span>    <span class="keywordtype">bool</span> <a class="code hl_define" href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a>(<span class="keywordtype">double</span> d) {</div>
 <div class="line"><a id="l12204" name="l12204"></a><span class="lineno">12204</span>        <span class="keywordflow">return</span> std::_isnan(d);</div>
 <div class="line"><a id="l12205" name="l12205"></a><span class="lineno">12205</span>    }</div>
 <div class="line"><a id="l12206" name="l12206"></a><span class="lineno">12206</span><span class="preprocessor">#endif</span></div>
@@ -12301,11 +12301,11 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l12260" name="l12260"></a><span class="lineno">12260</span>        <span class="keywordflow">return</span> output;</div>
 <div class="line"><a id="l12261" name="l12261"></a><span class="lineno">12261</span>    }</div>
 <div class="line"><a id="l12262" name="l12262"></a><span class="lineno">12262</span> </div>
-<div class="line"><a id="l12263" name="l12263"></a><span class="lineno">12263</span>    <span class="keywordtype">bool</span> operator==(SimplePcg32 <span class="keyword">const</span>&amp; lhs, SimplePcg32 <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l12263" name="l12263"></a><span class="lineno">12263</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_json.html#a85a761cd8643a538387c0fe37bb937e8">operator==</a>(SimplePcg32 <span class="keyword">const</span>&amp; lhs, SimplePcg32 <span class="keyword">const</span>&amp; rhs) {</div>
 <div class="line"><a id="l12264" name="l12264"></a><span class="lineno">12264</span>        <span class="keywordflow">return</span> lhs.m_state == rhs.m_state;</div>
 <div class="line"><a id="l12265" name="l12265"></a><span class="lineno">12265</span>    }</div>
 <div class="line"><a id="l12266" name="l12266"></a><span class="lineno">12266</span> </div>
-<div class="line"><a id="l12267" name="l12267"></a><span class="lineno">12267</span>    <span class="keywordtype">bool</span> operator!=(SimplePcg32 <span class="keyword">const</span>&amp; lhs, SimplePcg32 <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l12267" name="l12267"></a><span class="lineno">12267</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_json.html#a86063654ac54c5e00f2f559f2c363b4e">operator!=</a>(SimplePcg32 <span class="keyword">const</span>&amp; lhs, SimplePcg32 <span class="keyword">const</span>&amp; rhs) {</div>
 <div class="line"><a id="l12268" name="l12268"></a><span class="lineno">12268</span>        <span class="keywordflow">return</span> lhs.m_state != rhs.m_state;</div>
 <div class="line"><a id="l12269" name="l12269"></a><span class="lineno">12269</span>    }</div>
 <div class="line"><a id="l12270" name="l12270"></a><span class="lineno">12270</span>}</div>
@@ -13727,7 +13727,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l13689" name="l13689"></a><span class="lineno">13689</span>        };</div>
 <div class="line"><a id="l13690" name="l13690"></a><span class="lineno">13690</span> </div>
 <div class="line"><a id="l13692" name="l13692"></a><span class="lineno">13692</span> </div>
-<div class="line"><a id="l13693" name="l13693"></a><span class="lineno">13693</span>        <span class="keyword">class </span>FileStream : <span class="keyword">public</span> IStream {</div>
+<div class="line"><a id="l13693" name="l13693"></a><span class="lineno">13693</span>        <span class="keyword">class </span>FileStream : <span class="keyword">public</span> <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> {</div>
 <div class="line"><a id="l13694" name="l13694"></a><span class="lineno">13694</span>            <span class="keyword">mutable</span> std::ofstream m_ofs;</div>
 <div class="line"><a id="l13695" name="l13695"></a><span class="lineno">13695</span>        <span class="keyword">public</span>:</div>
 <div class="line"><a id="l13696" name="l13696"></a><span class="lineno">13696</span>            FileStream( StringRef filename ) {</div>
@@ -13742,7 +13742,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l13705" name="l13705"></a><span class="lineno">13705</span>        };</div>
 <div class="line"><a id="l13706" name="l13706"></a><span class="lineno">13706</span> </div>
 <div class="line"><a id="l13708" name="l13708"></a><span class="lineno">13708</span> </div>
-<div class="line"><a id="l13709" name="l13709"></a><span class="lineno">13709</span>        <span class="keyword">class </span>CoutStream : <span class="keyword">public</span> IStream {</div>
+<div class="line"><a id="l13709" name="l13709"></a><span class="lineno">13709</span>        <span class="keyword">class </span>CoutStream : <span class="keyword">public</span> <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> {</div>
 <div class="line"><a id="l13710" name="l13710"></a><span class="lineno">13710</span>            <span class="keyword">mutable</span> std::ostream m_os;</div>
 <div class="line"><a id="l13711" name="l13711"></a><span class="lineno">13711</span>        <span class="keyword">public</span>:</div>
 <div class="line"><a id="l13712" name="l13712"></a><span class="lineno">13712</span>            <span class="comment">// Store the streambuf from cout up-front because</span></div>
@@ -13755,7 +13755,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l13719" name="l13719"></a><span class="lineno">13719</span>        };</div>
 <div class="line"><a id="l13720" name="l13720"></a><span class="lineno">13720</span> </div>
 <div class="line"><a id="l13722" name="l13722"></a><span class="lineno">13722</span> </div>
-<div class="line"><a id="l13723" name="l13723"></a><span class="lineno">13723</span>        <span class="keyword">class </span>DebugOutStream : <span class="keyword">public</span> IStream {</div>
+<div class="line"><a id="l13723" name="l13723"></a><span class="lineno">13723</span>        <span class="keyword">class </span>DebugOutStream : <span class="keyword">public</span> <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> {</div>
 <div class="line"><a id="l13724" name="l13724"></a><span class="lineno">13724</span>            std::unique_ptr&lt;StreamBufImpl&lt;OutputDebugWriter&gt;&gt; m_streamBuf;</div>
 <div class="line"><a id="l13725" name="l13725"></a><span class="lineno">13725</span>            <span class="keyword">mutable</span> std::ostream m_os;</div>
 <div class="line"><a id="l13726" name="l13726"></a><span class="lineno">13726</span>        <span class="keyword">public</span>:</div>
@@ -13773,7 +13773,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l13738" name="l13738"></a><span class="lineno">13738</span>    }} <span class="comment">// namespace anon::detail</span></div>
 <div class="line"><a id="l13739" name="l13739"></a><span class="lineno">13739</span> </div>
 <div class="line"><a id="l13741" name="l13741"></a><span class="lineno">13741</span> </div>
-<div class="line"><a id="l13742" name="l13742"></a><span class="lineno">13742</span>    <span class="keyword">auto</span> <a class="code hl_function" href="namespace_catch.html#af6d27462573d60c30c51acf1c980e3ff">makeStream</a>( StringRef <span class="keyword">const</span> &amp;filename ) -&gt; IStream <span class="keyword">const</span>* {</div>
+<div class="line"><a id="l13742" name="l13742"></a><span class="lineno">13742</span>    <span class="keyword">auto</span> <a class="code hl_function" href="namespace_catch.html#af6d27462573d60c30c51acf1c980e3ff">makeStream</a>( StringRef <span class="keyword">const</span> &amp;filename ) -&gt; <a class="code hl_typedef" href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">IStream</a> <span class="keyword">const</span>* {</div>
 <div class="line"><a id="l13743" name="l13743"></a><span class="lineno">13743</span>        <span class="keywordflow">if</span>( filename.empty() )</div>
 <div class="line"><a id="l13744" name="l13744"></a><span class="lineno">13744</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> Detail::CoutStream();</div>
 <div class="line"><a id="l13745" name="l13745"></a><span class="lineno">13745</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span>( filename[0] == <span class="charliteral">&#39;%&#39;</span> ) {</div>
@@ -17567,7 +17567,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l17537" name="l17537"></a><span class="lineno">17537</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <span class="keywordtype">int</span> CATCH_INTERNAL_CDECL wmain (<span class="keywordtype">int</span> argc, <span class="keywordtype">wchar_t</span> * argv[], <span class="keywordtype">wchar_t</span> * []) {</div>
 <div class="line"><a id="l17538" name="l17538"></a><span class="lineno">17538</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l17539" name="l17539"></a><span class="lineno">17539</span><span class="comment">// Standard C/C++ main entry point</span></div>
-<div class="line"><a id="l17540" name="l17540"></a><span class="lineno">17540</span><span class="keywordtype">int</span> CATCH_INTERNAL_CDECL <a class="code hl_function" href="_statistic_main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]) {</div>
+<div class="line"><a id="l17540" name="l17540"></a><span class="lineno">17540</span><span class="keywordtype">int</span> CATCH_INTERNAL_CDECL <a class="code hl_function" href="_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]) {</div>
 <div class="line"><a id="l17541" name="l17541"></a><span class="lineno">17541</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l17542" name="l17542"></a><span class="lineno">17542</span> </div>
 <div class="line"><a id="l17543" name="l17543"></a><span class="lineno">17543</span>    <span class="keywordflow">return</span> Catch::Session().run( argc, argv );</div>
@@ -17576,7 +17576,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l17546" name="l17546"></a><span class="lineno">17546</span><span class="preprocessor">#else </span><span class="comment">// __OBJC__</span></div>
 <div class="line"><a id="l17547" name="l17547"></a><span class="lineno">17547</span> </div>
 <div class="line"><a id="l17548" name="l17548"></a><span class="lineno">17548</span><span class="comment">// Objective-C entry point</span></div>
-<div class="line"><a id="l17549" name="l17549"></a><span class="lineno">17549</span><span class="keywordtype">int</span> <a class="code hl_function" href="_statistic_main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * <span class="keyword">const</span> argv[]) {</div>
+<div class="line"><a id="l17549" name="l17549"></a><span class="lineno">17549</span><span class="keywordtype">int</span> <a class="code hl_function" href="_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * <span class="keyword">const</span> argv[]) {</div>
 <div class="line"><a id="l17550" name="l17550"></a><span class="lineno">17550</span><span class="preprocessor">#if !CATCH_ARC_ENABLED</span></div>
 <div class="line"><a id="l17551" name="l17551"></a><span class="lineno">17551</span>    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];</div>
 <div class="line"><a id="l17552" name="l17552"></a><span class="lineno">17552</span><span class="preprocessor">#endif</span></div>
@@ -18002,7 +18002,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="line"><a id="l17974" name="l17974"></a><span class="lineno">17974</span><span class="comment">// end catch.hpp</span></div>
 <div class="line"><a id="l17975" name="l17975"></a><span class="lineno">17975</span><span class="preprocessor">#endif </span><span class="comment">// TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED</span></div>
 <div class="line"><a id="l17976" name="l17976"></a><span class="lineno">17976</span> </div>
-<div class="ttc" id="a_statistic_main_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="_statistic_main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> StatisticMain.cpp:9</div></div>
+<div class="ttc" id="a_poker_hand_ranking_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">int main is the program entry point</div><div class="ttdef"><b>Definition:</b> PokerHandRanking.cpp:713</div></div>
 <div class="ttc" id="acatch_8hpp_html_a1500dca9a578a0bd2f85771cfa3fd35d"><div class="ttname"><a href="catch_8hpp.html#a1500dca9a578a0bd2f85771cfa3fd35d">CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</a></div><div class="ttdeci">#define CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</div><div class="ttdef"><b>Definition:</b> catch.hpp:419</div></div>
 <div class="ttc" id="acatch_8hpp_html_a3caecf3cbc55848423d744df50d84d5b"><div class="ttname"><a href="catch_8hpp.html#a3caecf3cbc55848423d744df50d84d5b">CATCH_CATCH_ANON</a></div><div class="ttdeci">#define CATCH_CATCH_ANON(type)</div><div class="ttdef"><b>Definition:</b> catch.hpp:456</div></div>
 <div class="ttc" id="acatch_8hpp_html_a834a24a39cf448d5a0f812e716be1c76"><div class="ttname"><a href="catch_8hpp.html#a834a24a39cf448d5a0f812e716be1c76">CATCH_RUNTIME_ERROR</a></div><div class="ttdeci">#define CATCH_RUNTIME_ERROR(...)</div><div class="ttdef"><b>Definition:</b> catch.hpp:3903</div></div>
@@ -18198,7 +18198,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="ttc" id="aclass_catch_1_1_simple_pcg32_html_a877e7a9c14d378af729ad19a0e959178"><div class="ttname"><a href="class_catch_1_1_simple_pcg32.html#a877e7a9c14d378af729ad19a0e959178">Catch::SimplePcg32::discard</a></div><div class="ttdeci">void discard(uint64_t skip)</div></div>
 <div class="ttc" id="aclass_catch_1_1_simple_pcg32_html_a901fc48d250c3d92b1ec067bcc6155c1"><div class="ttname"><a href="class_catch_1_1_simple_pcg32.html#a901fc48d250c3d92b1ec067bcc6155c1">Catch::SimplePcg32::SimplePcg32</a></div><div class="ttdeci">SimplePcg32(result_type seed_)</div></div>
 <div class="ttc" id="aclass_catch_1_1_simple_pcg32_html_acda21743a5ac46fdff9a0b4a6d45a91f"><div class="ttname"><a href="class_catch_1_1_simple_pcg32.html#acda21743a5ac46fdff9a0b4a6d45a91f">Catch::SimplePcg32::operator()</a></div><div class="ttdeci">result_type operator()()</div></div>
-<div class="ttc" id="aclass_catch_1_1_string_ref_html"><div class="ttname"><a href="class_catch_1_1_string_ref.html">Catch::StringRef</a></div><div class="ttdef"><b>Definition:</b> catch.hpp:606</div></div>
+<div class="ttc" id="aclass_catch_1_1_string_ref_html"><div class="ttname"><a href="class_catch_1_1_string_ref.html">Catch::StringRef</a></div><div class="ttdoc">A non-owning string class (similar to the forthcoming std::string_view) Note that,...</div><div class="ttdef"><b>Definition:</b> catch.hpp:606</div></div>
 <div class="ttc" id="aclass_catch_1_1_string_ref_html_a06b4db8fc82b197004291cf370b2ba7c"><div class="ttname"><a href="class_catch_1_1_string_ref.html#a06b4db8fc82b197004291cf370b2ba7c">Catch::StringRef::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdef"><b>Definition:</b> catch.hpp:608</div></div>
 <div class="ttc" id="aclass_catch_1_1_string_ref_html_a0b4841c28cbb14ba07296964a0187023"><div class="ttname"><a href="class_catch_1_1_string_ref.html#a0b4841c28cbb14ba07296964a0187023">Catch::StringRef::empty</a></div><div class="ttdeci">constexpr auto empty() const noexcept -&gt; bool</div><div class="ttdef"><b>Definition:</b> catch.hpp:648</div></div>
 <div class="ttc" id="aclass_catch_1_1_string_ref_html_a1669cb2765e820ca258159676cbd82a5"><div class="ttname"><a href="class_catch_1_1_string_ref.html#a1669cb2765e820ca258159676cbd82a5">Catch::StringRef::c_str</a></div><div class="ttdeci">auto c_str() const -&gt; char const *</div></div>
@@ -18230,6 +18230,7 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="ttc" id="aclass_catch_1_1_timer_html_a57be5d17ca868a2d6fb1eea84de665cf"><div class="ttname"><a href="class_catch_1_1_timer.html#a57be5d17ca868a2d6fb1eea84de665cf">Catch::Timer::getElapsedNanoseconds</a></div><div class="ttdeci">auto getElapsedNanoseconds() const -&gt; uint64_t</div></div>
 <div class="ttc" id="aclass_catch_1_1_unary_expr_html"><div class="ttname"><a href="class_catch_1_1_unary_expr.html">Catch::UnaryExpr</a></div><div class="ttdef"><b>Definition:</b> catch.hpp:2300</div></div>
 <div class="ttc" id="aclass_catch_1_1_unary_expr_html_ae02f666a1e64da728628aa2033e1d6e7"><div class="ttname"><a href="class_catch_1_1_unary_expr.html#ae02f666a1e64da728628aa2033e1d6e7">Catch::UnaryExpr::UnaryExpr</a></div><div class="ttdeci">UnaryExpr(LhsT lhs)</div><div class="ttdef"><b>Definition:</b> catch.hpp:2308</div></div>
+<div class="ttc" id="ajsoncpp_8cpp_html_a2e1baae9134e580910322362dc23290e"><div class="ttname"><a href="jsoncpp_8cpp.html#a2e1baae9134e580910322362dc23290e">isnan</a></div><div class="ttdeci">#define isnan(x)</div><div class="ttdef"><b>Definition:</b> jsoncpp.cpp:4145</div></div>
 <div class="ttc" id="anamespace_catch_1_1_detail_html_a242396de537c5176710d680cc9ca6b93"><div class="ttname"><a href="namespace_catch_1_1_detail.html#a242396de537c5176710d680cc9ca6b93">Catch::Detail::convertUnknownEnumToString</a></div><div class="ttdeci">std::string convertUnknownEnumToString(E e)</div><div class="ttdef"><b>Definition:</b> catch.hpp:1649</div></div>
 <div class="ttc" id="anamespace_catch_1_1_detail_html_a466775f4eec29ffef29ab334cd885136"><div class="ttname"><a href="namespace_catch_1_1_detail.html#a466775f4eec29ffef29ab334cd885136">Catch::Detail::unprintableString</a></div><div class="ttdeci">const std::string unprintableString</div></div>
 <div class="ttc" id="anamespace_catch_1_1_detail_html_aa4fbd846029625d08378606ffe9ebc3b"><div class="ttname"><a href="namespace_catch_1_1_detail.html#aa4fbd846029625d08378606ffe9ebc3b">Catch::Detail::convertUnstreamable</a></div><div class="ttdeci">std::enable_if&lt;!std::is_enum&lt; T &gt;::value &amp;&amp;!std::is_base_of&lt; std::exception, T &gt;::value, std::string &gt;::type convertUnstreamable(T const &amp;)</div><div class="ttdef"><b>Definition:</b> catch.hpp:1582</div></div>
@@ -18326,6 +18327,9 @@ $(document).ready(function(){initNavTree('catch_8hpp_source.html',''); initResiz
 <div class="ttc" id="anamespace_catch_html_af89b8df30cfaf09abd048c6ff67359ee"><div class="ttname"><a href="namespace_catch.html#af89b8df30cfaf09abd048c6ff67359ee">Catch::compareEqual</a></div><div class="ttdeci">auto compareEqual(LhsT const &amp;lhs, RhsT const &amp;rhs) -&gt; bool</div><div class="ttdef"><b>Definition:</b> catch.hpp:2316</div></div>
 <div class="ttc" id="anamespace_catch_html_afd20a5d4f9d2f4d525db81a7765367b0"><div class="ttname"><a href="namespace_catch.html#afd20a5d4f9d2f4d525db81a7765367b0">Catch::IConfigPtr</a></div><div class="ttdeci">std::shared_ptr&lt; IConfig const  &gt; IConfigPtr</div><div class="ttdef"><b>Definition:</b> catch.hpp:4356</div></div>
 <div class="ttc" id="anamespace_catch_html_afe4e6770da547e43e9e4eeaa05f946ea"><div class="ttname"><a href="namespace_catch.html#afe4e6770da547e43e9e4eeaa05f946ea">Catch::replaceInPlace</a></div><div class="ttdeci">bool replaceInPlace(std::string &amp;str, std::string const &amp;replaceThis, std::string const &amp;withThis)</div></div>
+<div class="ttc" id="anamespace_json_html_a5784bb697fc4004307b1e17e929bb7c7"><div class="ttname"><a href="namespace_json.html#a5784bb697fc4004307b1e17e929bb7c7">Json::IStream</a></div><div class="ttdeci">std::istream IStream</div><div class="ttdef"><b>Definition:</b> json-forwards.h:369</div></div>
+<div class="ttc" id="anamespace_json_html_a85a761cd8643a538387c0fe37bb937e8"><div class="ttname"><a href="namespace_json.html#a85a761cd8643a538387c0fe37bb937e8">Json::operator==</a></div><div class="ttdeci">bool operator==(const SecureAllocator&lt; T &gt; &amp;, const SecureAllocator&lt; U &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> json-forwards.h:203</div></div>
+<div class="ttc" id="anamespace_json_html_a86063654ac54c5e00f2f559f2c363b4e"><div class="ttname"><a href="namespace_json.html#a86063654ac54c5e00f2f559f2c363b4e">Json::operator!=</a></div><div class="ttdeci">bool operator!=(const SecureAllocator&lt; T &gt; &amp;, const SecureAllocator&lt; U &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> json-forwards.h:208</div></div>
 <div class="ttc" id="anamespacempl___html"><div class="ttname"><a href="namespacempl__.html">mpl_</a></div><div class="ttdef"><b>Definition:</b> catch.hpp:954</div></div>
 <div class="ttc" id="astruct_catch_1_1_assertion_info_html"><div class="ttname"><a href="struct_catch_1_1_assertion_info.html">Catch::AssertionInfo</a></div><div class="ttdef"><b>Definition:</b> catch.hpp:1397</div></div>
 <div class="ttc" id="astruct_catch_1_1_assertion_info_html_a17bdbb404ba12658034f833be2f4c3e7"><div class="ttname"><a href="struct_catch_1_1_assertion_info.html#a17bdbb404ba12658034f833be2f4c3e7">Catch::AssertionInfo::lineInfo</a></div><div class="ttdeci">SourceLineInfo lineInfo</div><div class="ttdef"><b>Definition:</b> catch.hpp:1399</div></div>

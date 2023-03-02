@@ -1,0 +1,16 @@
+digraph "Catch::NonCopyable"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{Catch::NonCopyable\n||# NonCopyable()\l# ~NonCopyable()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid",arrowtail="onormal"];
+  Node2 [shape=record,label="{Catch::AutoReg\n||+ AutoReg()\l+ ~AutoReg()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_catch_1_1_auto_reg.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid",arrowtail="onormal"];
+  Node3 [shape=record,label="{Catch::IConfig\n||+ ~IConfig()\l+ allowThrows()\l+ stream()\l+ name()\l+ includeSuccessfulResults()\l+ shouldDebugBreak()\l+ warnAboutMissingAssertions()\l+ warnAboutNoTests()\l+ abortAfter()\l+ showInvisibles()\land 15 more...\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_catch_1_1_i_config.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="firebrick4",style="solid",arrowtail="onormal"];
+  Node4 [shape=record,label="{Catch::ReusableStringStream\n||+ ReusableStringStream()\l+ ~ReusableStringStream()\l+ str()\l+ operator\<\<()\l+ get()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$class_catch_1_1_reusable_string_stream.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="firebrick4",style="solid",arrowtail="onormal"];
+  Node5 [shape=record,label="{Catch::Section\n||+ Section()\l+ ~Section()\l+ operator bool()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$class_catch_1_1_section.html",tooltip=" "];
+}

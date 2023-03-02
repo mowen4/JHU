@@ -1,0 +1,152 @@
+\hypertarget{class_hand}{}\doxysection{Hand Class Reference}
+\label{class_hand}\index{Hand@{Hand}}
+
+
+Class to hold a poker hand.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_hand_a1e62ba3714321036dc93be53b127269b}\label{class_hand_a1e62ba3714321036dc93be53b127269b}} 
+{\bfseries Hand} (int max\+Hand\+Size)
+\item 
+void \mbox{\hyperlink{class_hand_a457483311a55a82a852187626048d572}{add\+Card}} (\mbox{\hyperlink{struct_card}{Card}} c)
+\begin{DoxyCompactList}\small\item\em Add a card to the cards vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_hand_abab2953082c617ae327936225f28107f}\label{class_hand_abab2953082c617ae327936225f28107f}} 
+void {\bfseries show\+Hand} () const
+\begin{DoxyCompactList}\small\item\em Displays the hand in the terminal Display format example\+: Three of Hearts is represented as 3H. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_hand_ad9d7e4857c3d1cb0ae700c7b0e2bcfdd}{is\+Hand\+Full}} ()
+\begin{DoxyCompactList}\small\item\em Returns true if the card. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_hand_a725acb1c7ac766998a117b6742c62e42}{discard\+Hand}} ()
+\begin{DoxyCompactList}\small\item\em Discard the hand. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_hand_ac626c465c18c72795d3b719c413942f4}\label{class_hand_ac626c465c18c72795d3b719c413942f4}} 
+void {\bfseries sort\+Hand} ()
+\begin{DoxyCompactList}\small\item\em Sort the hand ascending. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_hand_ab40ee4ba2567f7e64dca1cb7dbb83b59}{set\+Rank}} ()
+\begin{DoxyCompactList}\small\item\em function to set the rank for the hand \end{DoxyCompactList}\item 
+Hand\+Ranking \mbox{\hyperlink{class_hand_a74d8837ac8202decff7a54a9b2036371}{get\+Rank}} () const
+\begin{DoxyCompactList}\small\item\em Returns the rank property. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{struct_card}{Card}} $>$ \mbox{\hyperlink{class_hand_a8bdfcec217b2f9f23b58b45ddcd00094}{get\+Cards}} () const
+\begin{DoxyCompactList}\small\item\em Returns the cards vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_hand_a457483311a55a82a852187626048d572}\label{class_hand_a457483311a55a82a852187626048d572}} 
+void {\bfseries add\+Card} (\mbox{\hyperlink{struct_card}{Card}} c)
+\item 
+\mbox{\Hypertarget{class_hand_aac2703a3438e38f8344caab1ca2c2c07}\label{class_hand_aac2703a3438e38f8344caab1ca2c2c07}} 
+void {\bfseries show\+Hand} ()
+\item 
+\mbox{\Hypertarget{class_hand_ad9d7e4857c3d1cb0ae700c7b0e2bcfdd}\label{class_hand_ad9d7e4857c3d1cb0ae700c7b0e2bcfdd}} 
+bool {\bfseries is\+Hand\+Full} ()
+\item 
+\mbox{\Hypertarget{class_hand_a725acb1c7ac766998a117b6742c62e42}\label{class_hand_a725acb1c7ac766998a117b6742c62e42}} 
+void {\bfseries discard\+Hand} ()
+\item 
+\mbox{\Hypertarget{class_hand_ac626c465c18c72795d3b719c413942f4}\label{class_hand_ac626c465c18c72795d3b719c413942f4}} 
+void {\bfseries sort\+Hand} ()
+\item 
+\mbox{\Hypertarget{class_hand_a8ce5bee9118873b1fd755857ed72340d}\label{class_hand_a8ce5bee9118873b1fd755857ed72340d}} 
+Hand\+Ranking {\bfseries get\+Rank} ()
+\item 
+\mbox{\Hypertarget{class_hand_ab40ee4ba2567f7e64dca1cb7dbb83b59}\label{class_hand_ab40ee4ba2567f7e64dca1cb7dbb83b59}} 
+void {\bfseries set\+Rank} ()
+\item 
+\mbox{\Hypertarget{class_hand_ad92c271efbc09efb2e956bcba8036f2f}\label{class_hand_ad92c271efbc09efb2e956bcba8036f2f}} 
+vector$<$ \mbox{\hyperlink{struct_card}{Card}} $>$ {\bfseries get\+Cards} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_hand_a02319a7b6172b4615cdf3a9099f4f1b3}\label{class_hand_a02319a7b6172b4615cdf3a9099f4f1b3}} 
+int {\bfseries hand\+Counts} \mbox{[}13\mbox{]} = \{0\}
+\item 
+\mbox{\Hypertarget{class_hand_aa1b228e781945d564c3dc41bc29fabdb}\label{class_hand_aa1b228e781945d564c3dc41bc29fabdb}} 
+int {\bfseries suit\+Counts} \mbox{[}4\mbox{]} = \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to hold a poker hand. 
+
+The \mbox{\hyperlink{class_hand}{Hand}} class holds a collection of \mbox{\hyperlink{struct_card}{Card}} objects in the vector \textquotesingle{}cards.\textquotesingle{} The functions support functionality for putting cards into the hand, sorting the hand, and displaying the hand. There are also properties for ma 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_hand_a457483311a55a82a852187626048d572}\label{class_hand_a457483311a55a82a852187626048d572}} 
+\index{Hand@{Hand}!addCard@{addCard}}
+\index{addCard@{addCard}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{addCard()}{addCard()}}
+{\footnotesize\ttfamily void Hand\+::add\+Card (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_card}{Card}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Add a card to the cards vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The card to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_hand_a725acb1c7ac766998a117b6742c62e42}\label{class_hand_a725acb1c7ac766998a117b6742c62e42}} 
+\index{Hand@{Hand}!discardHand@{discardHand}}
+\index{discardHand@{discardHand}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{discardHand()}{discardHand()}}
+{\footnotesize\ttfamily void Hand\+::discard\+Hand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Discard the hand. 
+
+Sets the hand and its properties back to the default, empty state \mbox{\Hypertarget{class_hand_a8bdfcec217b2f9f23b58b45ddcd00094}\label{class_hand_a8bdfcec217b2f9f23b58b45ddcd00094}} 
+\index{Hand@{Hand}!getCards@{getCards}}
+\index{getCards@{getCards}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{getCards()}{getCards()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_card}{Card}} $>$ Hand\+::get\+Cards (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the cards vector. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_hand_a74d8837ac8202decff7a54a9b2036371}\label{class_hand_a74d8837ac8202decff7a54a9b2036371}} 
+\index{Hand@{Hand}!getRank@{getRank}}
+\index{getRank@{getRank}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{getRank()}{getRank()}}
+{\footnotesize\ttfamily Hand\+Ranking Hand\+::get\+Rank (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the rank property. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_hand_ad9d7e4857c3d1cb0ae700c7b0e2bcfdd}\label{class_hand_ad9d7e4857c3d1cb0ae700c7b0e2bcfdd}} 
+\index{Hand@{Hand}!isHandFull@{isHandFull}}
+\index{isHandFull@{isHandFull}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{isHandFull()}{isHandFull()}}
+{\footnotesize\ttfamily bool Hand\+::is\+Hand\+Full (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns true if the card. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_hand_ab40ee4ba2567f7e64dca1cb7dbb83b59}\label{class_hand_ab40ee4ba2567f7e64dca1cb7dbb83b59}} 
+\index{Hand@{Hand}!setRank@{setRank}}
+\index{setRank@{setRank}!Hand@{Hand}}
+\doxysubsubsection{\texorpdfstring{setRank()}{setRank()}}
+{\footnotesize\ttfamily void Hand\+::set\+Rank (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function to set the rank for the hand 
+
+Sets the rank (e.\+g. flush, two pair). Performs a single pass through the cards vector to set the values in the hand\+Counts and suit\+Counts arrays then uses the values in those arrays to determine the hand rank 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Poker\+Hand\+Ranking.\+cpp\item 
+src/Poker\+Hands\+V2.\+cpp\end{DoxyCompactItemize}
