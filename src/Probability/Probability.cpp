@@ -21,6 +21,8 @@ public:
   Probability operator-(const Probability &other) const;
   Probability operator~() const;
 
+  friend std::ostream& operator<<(std::ostream& os, const Probability& prob);
+
 private:
   double p;
 };
@@ -67,8 +69,8 @@ Probability &Probability::operator=(double p) {
   return *this;
 }
 
-std::ostream &operator<<(std::ostream &os, const Probability &p) {
-  os << p.getProbability();
+std::ostream& operator<<(std::ostream &os, const Probability &probability) {
+  os << probability.p;
   return os;
 }
 
@@ -89,6 +91,11 @@ int main() {
   Probability c(1.5);
   cout << "c: " << c << endl;
   cout << "a | c: " << (a | c) << endl;
+
+  int i = 1;
+  int j = i++;
+  cout << i;
+  cout << j;
 
   return 0;
 }
