@@ -11,10 +11,10 @@ using namespace std;
 
 class Probability {
 public:
-  Probability(double p);
-  void setProbability(double p);
+  Probability(double probability);
+  void setProbability(double probability);
   double getProbability() const;
-  Probability &operator=(double p);
+  Probability &operator=(double probability);
   Probability operator&(const Probability &other) const;
   Probability operator|(const Probability &other) const;
   Probability operator^(const Probability &other) const;
@@ -24,53 +24,53 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const Probability& prob);
 
 private:
-  double p;
+  double probability;
 };
 
-Probability::Probability(double p) {
-  if (p < 0 || p > 1.0) {
-    cerr << "Invalid probability value: " << p
+Probability::Probability(double probability) {
+  if (probability < 0 || probability > 1.0) {
+    cerr << "Invalid probability value: " << probability
          << " Setting probability to default value of 0.0" << endl;
-    p = 0.0;
+    probability = 0.0;
   }
-  setProbability(p);
+  setProbability(probability);
 }
 
-void Probability::setProbability(double p) {
-  if (p < 0 || p > 1) {
-    cerr << "Invalid probability value: " << p << endl;
+void Probability::setProbability(double probability) {
+  if (probability < 0 || probability > 1) {
+    cerr << "Invalid probability value: " << probability << endl;
     exit(1);
   }
-  this->p = p;
+  this->probability = probability;
 }
 
-double Probability::getProbability() const { return p; }
+double Probability::getProbability() const { return probability; }
 
 Probability Probability::operator&(const Probability &other) const {
-  return Probability(p * other.p);
+  return Probability(probability * other.probability);
 }
 
 Probability Probability::operator|(const Probability &other) const {
-  return Probability(p + other.p - (p * other.p));
+  return Probability(probability + other.probability - (probability * other.probability));
 }
 
 Probability Probability::operator^(const Probability &other) const {
-  return Probability((p * (1 - other.p)) + ((1 - p) * other.p));
+  return Probability((probability * (1 - other.probability)) + ((1 - probability) * other.probability));
 }
 
 Probability Probability::operator-(const Probability &other) const {
-  return Probability(p * (1 - other.p));
+  return Probability(probability * (1 - other.probability));
 }
 
-Probability Probability::operator~() const { return Probability(1 - p); }
+Probability Probability::operator~() const { return Probability(1 - probability); }
 
-Probability &Probability::operator=(double p) {
-  setProbability(p);
+Probability &Probability::operator=(double probability) {
+  setProbability(probability);
   return *this;
 }
 
 std::ostream& operator<<(std::ostream &os, const Probability &probability) {
-  os << probability.p;
+  os << probability.probability;
   return os;
 }
 
