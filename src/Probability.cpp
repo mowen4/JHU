@@ -42,8 +42,9 @@ Probability::Probability(double probability) {
 
 void Probability::setProbability(double probability) {
   if (probability < 0 || probability > 1) {
-    cerr << "Invalid probability value: " << probability << endl;
-    exit(1);
+    cerr << "Invalid probability value: " << probability
+         << " Setting probability to default value of 0.0" << endl;
+    probability = 0.0;
   }
   this->probability = probability;
 }
@@ -153,14 +154,38 @@ void JsonProbabilityTests::RunTests() {
       Probability a(pValueA);
       Probability b(pValueB);
 
-      cout << "a: " << a << endl;
-      cout << "b: " << b << endl;
-      cout << "a & b: " << (a & b) << endl;
-      cout << "a | b: " << (a | b) << endl;
-      cout << "a ^ b: " << (a ^ b) << endl;
-      cout << "a - b: " << (a - b) << endl;
-      cout << "~a: " << (~a) << endl;
-      cout << "~b: " << (~b) << "\n" << endl;
+      cout <<"Initial Values" << endl;
+      cout << "a:  " << a << endl;
+      cout << "b:  " << b << endl;
+
+      cout <<"Bitwise operator tests" << endl;
+
+      cout << "a & b:  " << (a & b) << endl;
+      cout << "a | b:  " << (a | b) << endl;
+      cout << "a ^ b:  " << (a ^ b) << endl;
+      cout << "a - b:  " << (a - b) << endl;
+      cout << "~a:  " << (~a) << endl;
+      cout << "~b:  " << (~b) << "\n" << endl;
+
+      cout <<"Compound assignment operator tests" << endl;
+
+      a &= b;
+      cout << "a &= b:  " << "a: " << a << "  b: " << b << endl;
+      //reset a,b
+      a = pValueA; b = pValueB;
+      a |= b;
+      cout << "a |= b:  " << "a: " << a << "  b: " << b << endl;
+      //reset a,b
+      a = pValueA; b = pValueB;
+      a ^= b;
+      cout << "a ^= b:  " << "a: " << a << "  b: " << b << endl;
+      //reset a,b
+      a = pValueA; b = pValueB;
+      a -= b;
+      cout << "a -= b:  " << "a: " << a << "  b: " << b << endl;
+      cout << "\n" << endl;
+
+
     }
   }
 }
@@ -170,22 +195,22 @@ int main() {
   JsonProbabilityTests jsonTestHarness("probabilityTests.json");
   jsonTestHarness.RunTests();
 
-  Probability a(0.5);
-  Probability b(0.25);
+  // Probability a(0.5);
+  // Probability b(0.25);
 
-  cout << "a: " << a << endl;
-  cout << "b: " << b << endl;
-  cout << "a & b: " << (a & b) << endl;
-  cout << "a | b: " << (a | b) << endl;
-  cout << "a ^ b: " << (a ^ b) << endl;
-  cout << "a - b: " << (a - b) << endl;
-  cout << "~a: " << (~a) << endl;
-  cout << "~b: " << (~b) << endl;
+  // cout << "a: " << a << endl;
+  // cout << "b: " << b << endl;
+  // cout << "a & b: " << (a & b) << endl;
+  // cout << "a | b: " << (a | b) << endl;
+  // cout << "a ^ b: " << (a ^ b) << endl;
+  // cout << "a - b: " << (a - b) << endl;
+  // cout << "~a: " << (~a) << endl;
+  // cout << "~b: " << (~b) << endl;
 
-  cout << "Demonstrating invalid probability case: Probability c(1.5); \n";
-  Probability c(1.5);
-  cout << "c: " << c << endl;
-  cout << "a | c: " << (a | c) << endl;
+  // cout << "Demonstrating invalid probability case: Probability c(1.5); \n";
+  // Probability c(1.5);
+  // cout << "c: " << c << endl;
+  // cout << "a | c: " << (a | c) << endl;
 
   return 0;
 }
