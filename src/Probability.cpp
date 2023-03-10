@@ -16,12 +16,7 @@ public:
   Probability(double probability);
   void setProbability(double probability);
   double getProbability() const;
-  Probability &operator=(double probability);
-  // Probability operator&(const Probability &other) const;
-  // Probability operator|(const Probability &other) const;
-  // Probability operator^(const Probability &other) const;
-  // Probability operator-(const Probability &other) const;
-  // Probability operator~() const;
+  Probability &operator=(double probability);  
 
   friend std::ostream &operator<<(std::ostream &os, const Probability &prob);
 
@@ -153,11 +148,6 @@ int main() {
   Probability c(1.5);
   cout << "c: " << c << endl;
   cout << "a | c: " << (a | c) << endl;
-
-  // int i = 1;
-  // int j = i++;
-  // cout << i;
-  // cout << j;
 
   return 0;
 }
