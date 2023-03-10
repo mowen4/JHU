@@ -17,13 +17,13 @@ public:
   void setProbability(double probability);
   double getProbability() const;
   Probability &operator=(double probability);
-  Probability operator&(const Probability &other) const;
-  Probability operator|(const Probability &other) const;
-  Probability operator^(const Probability &other) const;
-  Probability operator-(const Probability &other) const;
-  Probability operator~() const;
+  // Probability operator&(const Probability &other) const;
+  // Probability operator|(const Probability &other) const;
+  // Probability operator^(const Probability &other) const;
+  // Probability operator-(const Probability &other) const;
+  // Probability operator~() const;
 
-  friend std::ostream& operator<<(std::ostream& os, const Probability& prob);
+  friend std::ostream &operator<<(std::ostream &os, const Probability &prob);
 
 private:
   double probability;
@@ -48,30 +48,34 @@ void Probability::setProbability(double probability) {
 
 double Probability::getProbability() const { return probability; }
 
-Probability Probability::operator&(const Probability &other) const {
-  return Probability(probability * other.probability);
+Probability operator&(const Probability &left, const Probability &right){
+  return Probability(left.getProbability() * right.getProbability());
 }
 
-Probability Probability::operator|(const Probability &other) const {
-  return Probability(probability + other.probability - (probability * other.probability));
+Probability operator|(const Probability &left, const Probability &right){
+  return Probability((left.getProbability() + right.getProbability())
+                    - (left & right).getProbability());
 }
 
-Probability Probability::operator^(const Probability &other) const {
-  return Probability((probability * (1 - other.probability)) + ((1 - probability) * other.probability));
+Probability operator^(const Probability &left, const Probability &right){
+  return Probability((left.getProbability() * (1 - right.getProbability())) 
+                  + (right.getProbability() * (1 - left.getProbability())));
 }
 
-Probability Probability::operator-(const Probability &other) const {
-  return Probability(probability * (1 - other.probability));
+Probability operator-(const Probability& left, const Probability& right){
+  return Probability(left.getProbability() * (1 - right.getProbability()));
 }
 
-Probability Probability::operator~() const { return Probability(1 - probability); }
+Probability operator~(const Probability& probability){
+  return Probability(1 - probability.getProbability());
+}
 
-Probability &Probability::operator=(double probability) {
+Probability& Probability::operator=(double probability) {
   setProbability(probability);
   return *this;
 }
 
-std::ostream& operator<<(std::ostream &os, const Probability &probability) {
+std::ostream &operator<<(std::ostream &os, const Probability &probability) {
   os << probability.probability;
   return os;
 }
@@ -93,14 +97,14 @@ private:
 JsonProbabilityTests::JsonProbabilityTests(string fileName) {
   fileLocation = fileName;
   std::ifstream file(fileLocation);
-  file >> jsonData;  
+  file >> jsonData;
 };
 
 void JsonProbabilityTests::RunTests() {
-    for (Json::ValueIterator itr = jsonData.begin(); itr != jsonData.end();
+  for (Json::ValueIterator itr = jsonData.begin(); itr != jsonData.end();
        itr++) {
     std::string propertyName = itr.name();
-    
+
     cout << "\nInitiating tests of the following type: " << propertyName
          << "\n";
     Json::Value currentCategory = jsonData[propertyName];
@@ -123,12 +127,10 @@ void JsonProbabilityTests::RunTests() {
       cout << "a ^ b: " << (a ^ b) << endl;
       cout << "a - b: " << (a - b) << endl;
       cout << "~a: " << (~a) << endl;
-      cout << "~b: " << (~b) << "\n" <<endl;
-
-      }
+      cout << "~b: " << (~b) << "\n" << endl;
+    }
   }
 }
-
 
 int main() {
 
