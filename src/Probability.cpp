@@ -17,6 +17,10 @@ public:
   void setProbability(double probability);
   double getProbability() const;
   Probability &operator=(double probability);  
+  Probability &operator&=(const Probability& right);  
+  Probability &operator|=(const Probability& right);  
+  Probability &operator^=(const Probability& right);  
+  Probability &operator-=(const Probability& right);  
 
   friend std::ostream &operator<<(std::ostream &os, const Probability &prob);
 
@@ -33,6 +37,9 @@ Probability::Probability(double probability) {
   setProbability(probability);
 }
 
+
+// Member functions
+
 void Probability::setProbability(double probability) {
   if (probability < 0 || probability > 1) {
     cerr << "Invalid probability value: " << probability << endl;
@@ -43,32 +50,63 @@ void Probability::setProbability(double probability) {
 
 double Probability::getProbability() const { return probability; }
 
-Probability operator&(const Probability &left, const Probability &right){
-  return Probability(left.getProbability() * right.getProbability());
+Probability& Probability::operator=(double probability) {
+  setProbability(probability);
+  return *this;
 }
 
-Probability operator|(const Probability &left, const Probability &right){
-  return Probability((left.getProbability() + right.getProbability())
-                    - (left & right).getProbability());
+Probability& Probability::operator&=(const Probability& right) {
+    setProbability(getProbability() * right.getProbability());
+    return *this;
 }
 
-Probability operator^(const Probability &left, const Probability &right){
-  return Probability((left.getProbability() * (1 - right.getProbability())) 
-                  + (right.getProbability() * (1 - left.getProbability())));
+Probability& Probability::operator|=(const Probability& right) {
+    auto left = getProbability();
+    setProbability((left + right.getProbability())
+                    - (left * right.getProbability()));
+    return *this;
 }
 
-Probability operator-(const Probability& left, const Probability& right){
-  return Probability(left.getProbability() * (1 - right.getProbability()));
+Probability& Probability::operator^=(const Probability& right) {
+    auto left = getProbability();
+    setProbability((left * (1 - right.getProbability())) 
+                  + (right.getProbability() * (1 - left)));
+    return *this;
+}
+
+Probability& Probability::operator-=(const Probability& right) {
+    auto left = getProbability();
+    setProbability(left * (1 - right.getProbability()));
+    return *this;
+}
+
+// Non-Member functions
+
+Probability operator&(Probability &left, const Probability &right){  
+  Probability temp(left);
+  return temp &= right;
+}
+
+Probability operator|(Probability &left, const Probability &right){
+  Probability temp(left);
+  return temp |= right;
+}
+
+Probability operator^(Probability &left, const Probability &right){
+  Probability temp(left);
+  return temp ^= right;
+}
+
+Probability operator-(Probability& left, const Probability& right){
+  Probability temp(left);
+  return temp -= right;
 }
 
 Probability operator~(const Probability& probability){
   return Probability(1 - probability.getProbability());
 }
 
-Probability& Probability::operator=(double probability) {
-  setProbability(probability);
-  return *this;
-}
+
 
 std::ostream &operator<<(std::ostream &os, const Probability &probability) {
   os << probability.probability;
