@@ -24,34 +24,62 @@ public:
     }
 };
 
-class Add: protected node
+class Add: public node
 {
-    Add(node lhs, node rhs) : node("+")
-    {
-        left = &lhs;
-        right = &rhs;
-    };
-    char type = '+';
+    public:
+        Add(node lhs, node rhs) : node("+")
+        {
+            left = &lhs;
+            right = &rhs;
+        };
 };
 
-class Sub: protected node
+class Sub: public node
 {
-    char type = '-';
+    public:
+        Sub(node lhs, node rhs) : node("-")
+        {
+            left = &lhs;
+            right = &rhs;
+        };
 };
 
-class Div: protected node
+class Div: public node
 {
-    char type = '/';
+    public:
+        Div(node lhs, node rhs) : node("/")
+        {
+            left = &lhs;
+            right = &rhs;
+        };
 };
 
-class Mul: protected node
+class Mul: public node
 {
-    char type = '*';
+    public:
+        Mul(node lhs, node rhs) : node("*")
+        {
+            left = &lhs;
+            right = &rhs;
+        };
 };
 
-class Constant: protected node
+class Constant: public node
 {
+    public:
+        Constant(double d) : node(d)
+        {
 
+        }
+};
+
+class Variable: public node
+{
+    public:
+        Variable(string x) : node(x)
+        {
+
+        }
 };
  
 // Utility function to return the integer value
@@ -126,15 +154,7 @@ int main()
  
     delete(root);
  
-    root = new node("+");
-    root->left = new node("*");
-    root->left->left = new node("5");
-    root->left->right = new node("4");
-    root->right = new node("-");
-    root->right->left = new node("100");
-    root->right->right = new node("/");
-    root->right->right->left = new node("20");
-    root->right->right->right = new node("2");
+    root = new Sub(Add(Add(Variable("5"), Variable("10")), Variable("5")), Variable("10"));
  
     cout << eval(root);
     return 0;
