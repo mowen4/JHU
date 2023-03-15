@@ -17,11 +17,7 @@ public:
     {
         name = x;
     }
-    node(node lhs, node rhs)
-    {
-        left = &lhs;
-        right = &rhs;
-    }
+
     node(double d)
     {
         constant = d;
@@ -30,7 +26,11 @@ public:
 
 class Add: protected node
 {
-    using node::node;
+    Add(node lhs, node rhs) : node("+")
+    {
+        left = &lhs;
+        right = &rhs;
+    };
     char type = '+';
 };
 
