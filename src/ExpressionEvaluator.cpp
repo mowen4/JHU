@@ -1,87 +1,149 @@
 #include <string>
 #include <iostream>
-
 #include "json/json.h"
 #include "jsoncpp.cpp"
 
 using namespace std;
  
 // Class to represent the nodes of syntax tree
-class node
+class Node
 {
 public:
     string name;
     double constant;
-    node *left = NULL, *right = NULL;
-    node(string x)
+    Node *left = NULL, *right = NULL;
+    Node(string x)
     {
         name = x;
     }
 
-    node(double d)
+    Node(double d)
     {
         constant = d;
     }
 };
 
-class Add: public node
+class Add: public Node
 {
     public:
-        Add(node lhs, node rhs) : node("+")
+        Add(Node lhs, Node rhs) : Node("+")
         {
             left = &lhs;
             right = &rhs;
         };
 };
 
-class Sub: public node
+class Sub: public Node
 {
     public:
-        Sub(node lhs, node rhs) : node("-")
+        Sub(Node lhs, Node rhs) : Node("-")
         {
             left = &lhs;
             right = &rhs;
         };
 };
 
-class Div: public node
+class Div: public Node
 {
     public:
-        Div(node lhs, node rhs) : node("/")
+        Div(Node lhs, Node rhs) : Node("/")
         {
             left = &lhs;
             right = &rhs;
         };
 };
 
-class Mul: public node
+class Mul: public Node
 {
     public:
-        Mul(node lhs, node rhs) : node("*")
+        Mul(Node lhs, Node rhs) : Node("*")
         {
             left = &lhs;
             right = &rhs;
         };
 };
 
-class Constant: public node
+class Constant: public Node
 {
     public:
-        Constant(double d) : node(d)
+        Constant(double d) : Node(d)
         {
 
         }
 };
 
-class Variable: public node
+class Variable: public Node
 {
     public:
-        Variable(string x) : node(x)
+        Variable(string x) : Node(x)
         {
 
         }
 };
- 
+
+class ExpressionTree
+{
+    public:
+        void printTree(Node* node){
+            printTreeRecursive(node);
+            cout << endl;
+        }        
+    private: 
+        //Attempt at making the parentheses clever. Doesn't really work. May revisit, but it isn't a requirement so prolly not... TODO.
+        // void printTreeRecursive(node* node){
+        //     if(node == NULL){
+        //         return;
+        //     }
+        //     //if there are child nodes, check the node types to determine
+        //     //whether parentheses are required
+        //     if(node->left != NULL && node->right != NULL){
+        //         bool needParentheses = false;
+        //         //if current node is + or -, need parentheses for * or / children
+        //         if(node->name == "+" || node->name == "-"){
+        //             if(node->left->name == "*" 
+        //                 || node->left->name == "/"
+        //                 || node->right->name == "*"
+        //                 || node->right->name == "/"){
+        //                 needParentheses = true;                        
+        //             }
+        //         }            
+        //         //if current node is * or /, need parentheses for + or - children
+        //         else if (node->name == "*" || node->name == "/") {            
+        //             if (node->left->name == "+" 
+        //                 || node->left->name == "-"
+        //                 || node->right->name == "+"
+        //                 || node->right->name == "-") {
+        //                 needParentheses = true;
+        //             }                
+        //         }            
+        //         if(needParentheses){
+        //             cout << "(";
+        //         }
+        //         printTreeRecursive(node->left);
+        //         cout << node->name << " ";
+        //         printTreeRecursive(node->right);
+        //         if(needParentheses){
+        //             cout << ")";
+        //         }       
+        //     }   
+        //     //otherwise just print the name
+        //     else{
+        //         cout << node->name << " ";
+        //     }              
+        // }    
+        void printTreeRecursive(Node* node){
+            if(node == NULL){
+                return;
+            }            
+            cout << "(";
+            printTreeRecursive(node->left);
+            cout << node->name;
+            printTreeRecursive(node->right);                
+            cout << ")";                                               
+        }            
+   
+};
+
 // Utility function to return the integer value
 // of a given string
 int toInt(string s)
@@ -110,7 +172,7 @@ int toInt(string s)
  
 // This function receives a node of the syntax tree
 // and recursively evaluates it
-int eval(node* root)
+int eval(Node* root)
 {
     // empty tree
     if (!root)
@@ -143,14 +205,17 @@ int eval(node* root)
 int main()
 {
     // create a syntax tree
-    node *root = new node("+");
-    root->left = new node("*");
-    root->left->left = new node("5");
-    root->left->right = new node("-4");
-    root->right = new node("-");
-    root->right->left = new node("100");
-    root->right->right = new node("20");
+    Node *root = new Node("+");
+    root->left = new Node("*");
+    root->left->left = new Node("5");
+    root->left->right = new Node("-4");
+    root->right = new Node("-");
+    root->right->left = new Node("100");
+    root->right->right = new Node("20");
     cout << eval(root) << endl;
+
+    ExpressionTree tree;
+    tree.printTree(root);    
  
     delete(root);
  
