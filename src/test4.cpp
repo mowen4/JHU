@@ -56,7 +56,7 @@ private:
 };
 
 std::map<std::string, double> Variable::variables = {
-    {"Xray", 1.5}, {"Yellow", 2.0}, {"Zebra", 3.0}
+    {"Xray", 2.0}, {"Yellow", 3.0}, {"Zebra", 5.0}
 };
 
 class Add : public Node {
@@ -141,8 +141,11 @@ int main() {
             std::make_shared<Sub>(std::make_shared<Variable>("Zebra"), std::make_shared<Variable>("Xray"))
         )
     );
+    std::cout << "Print out of the expression tree: " << std::endl;
     std::cout << *node << std::endl;
-
+    std::cout << "Expression tree evalutation: " << std::endl;
+    std::cout << node->evaluate() << std::endl;
+    std::cout << "Derivative of the tree evalutation with respect to the variable Xray: " << std::endl;
     std::shared_ptr<Node> derivative = node->derivative("Xray");
     std::cout << *derivative << std::endl;
 
