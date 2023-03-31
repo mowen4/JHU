@@ -63,53 +63,65 @@ std::map<std::string, double> Variable::variables = {
 
 class Add : public Node {
 public:
-    Add(std::shared_ptr<Node> left, std::shared_ptr<Node> right) : left_(left), right_(right) {}
-    double evaluate() const override { return left_->evaluate() + right_->evaluate(); }
-    std::shared_ptr<Node> derivative(const std::string& variable) const override {
-        return std::make_shared<Add>(left_->derivative(variable), right_->derivative(variable));
+    Add(std::shared_ptr<Node> leftNode, std::shared_ptr<Node> rightNode){
+     left = leftNode;
+     right = rightNode;
     }
-    void print(std::ostream& os) const override { os << "(" << *left_ << "+" << *right_ << ")"; }
+    double evaluate() const override { return left->evaluate() + right->evaluate(); }
+    std::shared_ptr<Node> derivative(const std::string& variable) const override {
+        return std::make_shared<Add>(left->derivative(variable), right->derivative(variable));
+    }
+    void print(std::ostream& os) const override { os << "(" << *left << "+" << *right << ")"; }
     friend std::ostream& operator<<(std::ostream& os, const Add& add) {
-        os << "(" << *add.left_ << ") + (" << *add.right_ << ")";
+        os << "(" << *add.left << ") + (" << *add.right << ")";
         return os;
     }
 private:
-    std::shared_ptr<Node> left_, right_;
+    std::shared_ptr<Node> left;
+    std::shared_ptr<Node> right;
 };
 
 class Sub : public Node {
 public:
-    Sub(std::shared_ptr<Node> left, std::shared_ptr<Node> right) : left_(left), right_(right) {}
-    double evaluate() const override { return left_->evaluate() - right_->evaluate(); }
+    Sub(std::shared_ptr<Node> leftNode, std::shared_ptr<Node> rightNode){
+        left = leftNode;
+        right = rightNode;
+    } 
+    double evaluate() const override { return left->evaluate() - right->evaluate(); }
     std::shared_ptr<Node> derivative(const std::string& variable) const override {
-        return std::make_shared<Sub>(left_->derivative(variable), right_->derivative(variable));
+        return std::make_shared<Sub>(left->derivative(variable), right->derivative(variable));
     }
-    void print(std::ostream& os) const override { os << "(" << *left_ << "-" << *right_ << ")"; }
+    void print(std::ostream& os) const override { os << "(" << *left << "-" << *right << ")"; }
     friend std::ostream& operator<<(std::ostream& os, const Sub& sub) {
-        os << "(" << *sub.left_ << ") - (" << *sub.right_ << ")";
+        os << "(" << *sub.left << ") - (" << *sub.right << ")";
         return os;
     }
 private:
-    std::shared_ptr<Node> left_, right_;
+    std::shared_ptr<Node> left;
+    std::shared_ptr<Node> right;
 };
 
 class Mul : public Node {
 public:
-    Mul(std::shared_ptr<Node> left, std::shared_ptr<Node> right) : left_(left), right_(right) {}
-    double evaluate() const override { return left_->evaluate() * right_->evaluate(); }
+    Mul(std::shared_ptr<Node> leftNode, std::shared_ptr<Node> rightNode){
+        left = leftNode;
+        right = rightNode;
+    } 
+    double evaluate() const override { return left->evaluate() * right->evaluate(); }
     std::shared_ptr<Node> derivative(const std::string& variable) const override {
         return std::make_shared<Add>(
-            std::make_shared<Mul>(left_, right_->derivative(variable)),
-            std::make_shared<Mul>(left_->derivative(variable), right_)
+            std::make_shared<Mul>(left, right->derivative(variable)),
+            std::make_shared<Mul>(left->derivative(variable), right)
         );
     }
-    void print(std::ostream& os) const override { os << "(" << *left_ << "*" << *right_ << ")"; }
+    void print(std::ostream& os) const override { os << "(" << *left << "*" << *right << ")"; }
     friend std::ostream& operator<<(std::ostream& os, const Mul& mul) {
-        os << "(" << *mul.left_ << ") * (" << *mul.right_ << ")";
+        os << "(" << *mul.left << ") * (" << *mul.right << ")";
         return os;
     }
 private:
-    std::shared_ptr<Node> left_, right_;
+    std::shared_ptr<Node> left;
+    std::shared_ptr<Node> right;
 };
 
 class Div : public Node {
