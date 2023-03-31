@@ -383,9 +383,15 @@ int main() {
     std::cout << *node << std::endl;
     std::cout << "Expression tree evalutation: " << std::endl;
     std::cout << node->evaluate() << std::endl;
-    std::cout << "Derivative of the tree evalutation with respect to the variable Xray: " << std::endl;
+    std::cout << "Derivative of the tree with respect to the variable Xray: " << std::endl;
     std::shared_ptr<Node> derivative = node->derivative("Xray");
     std::cout << *derivative << std::endl;
+
+    std::cout << "Derivative evaluation result:" << std::endl;
+    std::cout << derivative->evaluate() << std::endl;
+
+
+    
 
     return 0;
 }
