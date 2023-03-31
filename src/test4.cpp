@@ -18,41 +18,43 @@ public:
 
 class Constant : public Node {
 public:
-    Constant(double value) : value_(value) {}
-    double evaluate() const override { return value_; }
+    Constant(double val){
+         value = val;
+    } 
+    double evaluate() const override { return value; }
     std::shared_ptr<Node> derivative(const std::string& variable) const override { 
         return std::make_shared<Constant>(0.0);
     }
-    void print(std::ostream& os) const override { os << value_; }
+    void print(std::ostream& os) const override { os << value; }
     friend std::ostream& operator<<(std::ostream& os, const Constant& cons) {
-        os << cons.value_;
+        os << cons.value;
         return os;
     }
 private:
-    double value_;
+    double value;
 };
 
 class Variable : public Node {
 public:
-    Variable(const std::string& name){
-        name_ = name;
+    Variable(const std::string& varName){
+        name = varName;
     }
     static std::map<std::string, double> variables;
-    double evaluate() const override { return variables[name_]; }
+    double evaluate() const override { return variables[name]; }
     std::shared_ptr<Node> derivative(const std::string& variable) const override {
-        if (name_ == variable) {
+        if (name == variable) {
             return std::make_shared<Constant>(1.0);
         } else {
             return std::make_shared<Constant>(0.0);
         }
     }
-    void print(std::ostream& os) const override { os << name_; }
+    void print(std::ostream& os) const override { os << name; }
     friend std::ostream& operator<<(std::ostream& os, const Variable& var) {
-        os << var.name_;
+        os << var.name;
         return os;
     }
 private:    
-    std::string name_;
+    std::string name;
 };
 
 std::map<std::string, double> Variable::variables = {
