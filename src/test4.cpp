@@ -387,10 +387,5 @@ int main() {
     std::shared_ptr<Node> derivative = node->derivative("Xray");
     std::cout << *derivative << std::endl;
 
-    Node* destructionTestNode = new Add(std::make_shared<Constant>(2.0), std::make_shared<Constant>(1.5));
-    
-    delete destructionTestNode;
-    cout << endl;
-
     return 0;
 }
