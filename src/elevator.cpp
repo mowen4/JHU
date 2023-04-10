@@ -205,7 +205,7 @@ vector<Passenger> getPassengerData() {
 int main() {
     Floors f;
     // TODO: read passengers from Elevator.csv and add them to building
-    getPassengerData();
+    f.add_bulk_passenger(getPassengerData());
 
     // while (true) {
     //     f.update();
