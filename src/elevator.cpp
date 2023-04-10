@@ -120,6 +120,10 @@ public:
         passengers.push_back(passenger);
     }
 
+    void add_bulk_passenger(vector<Passenger> p) {
+        passengers = p;
+    }
+
     void update() {
         for (auto& elevator : elevators) {
             if (elevator.get_state() == STOPPED) {
@@ -158,7 +162,10 @@ private:
 
 
 
-void getdata() {
+vector<Passenger> getPassengerData() {
+
+    vector<Passenger> passengers;
+
     string fname = "Mod10_Assignment_Elevators.csv";
  
 	vector<vector<string>> content;
@@ -186,16 +193,19 @@ void getdata() {
 	{
 		for(auto & element: v )
 		{
-			cout<<element<<" ";
+            passengers.push_back(Passenger(element[0],element[1],element[2]));
+			//cout<<element<<" ";
 		}
 		cout<<"\n";
 	}
+
+    return passengers;
 }
 
 int main() {
     Floors f;
     // TODO: read passengers from Elevator.csv and add them to building
-    getdata();
+    getPassengerData();
 
     // while (true) {
     //     f.update();
