@@ -189,7 +189,7 @@ vector<Passenger> getPassengerData() {
 	else
 		cout<<"Could not open the file\n";
  
-	for(vector v : content)
+	for(vector<string> v : content)
 	{
 		for(auto & element: v )
 		{
