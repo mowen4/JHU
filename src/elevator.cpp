@@ -20,8 +20,16 @@ enum ElevatorState {
 
 class Passenger {
 public:
-    Passenger(int start_time, int start_floor, int end_floor) :
-        start_time(start_time), start_floor(start_floor), end_floor(end_floor) {}
+    enum Status
+    {   
+        NOT_SET, 
+        WAITING_ELEVATOR_UP,
+        WAITING_ELEVATOR_DOWN,
+        RIDING_ELEVATOR,
+        AT_DESTINATION
+    };
+    Passenger(int start_time, int start_floor, int end_floor, Status status) :
+        start_time(start_time), start_floor(start_floor), end_floor(end_floor), status(status) {}
 
     int get_start_time() const { return start_time; }
     int get_start_floor() const { return start_floor; }
@@ -31,6 +39,8 @@ private:
     int start_time;
     int start_floor;
     int end_floor;
+    Status status = NOT_SET;
+    // Determines passenger status  
 };
 
 class Elevator {
@@ -193,7 +203,17 @@ vector<Passenger> getPassengerData() {
 	{
 		for(auto & element: v )
 		{
-            passengers.push_back(Passenger(element[0],element[1],element[2]));
+            Passenger::Status initialStatus;
+            if(element[1] > element[2]){
+                initialStatus = Passenger::WAITING_ELEVATOR_DOWN;
+            }
+            else if(element[1] < element[2]){
+                initialStatus = Passenger::WAITING_ELEVATOR_UP;
+            }
+            else{
+                initialStatus = Passenger::AT_DESTINATION;  //End floor and start floor are the same
+            }
+            passengers.push_back(Passenger(element[0],element[1],element[2], initialStatus));
 			//cout<<element<<" ";
 		}
 		cout<<"\n";
@@ -203,14 +223,14 @@ vector<Passenger> getPassengerData() {
 }
 
 int main() {
-    Floors f;
-    // TODO: read passengers from Elevator.csv and add them to building
-    f.add_bulk_passenger(getPassengerData());
+    Floors f;    
+    vector<Passenger> passengers = getPassengerData();
+    f.add_bulk_passenger(passengers);
 
-    // while (true) {
-    //     f.update();
-    //     // TODO: check if all passengers have reached their destination and exit loop if so
-    // }
+    while (true) {
+        f.update();
+        // TODO: check if all passengers have reached their destination and exit loop if so        
+    }
 
     // TODO: calculate and print average wait time and average travel time
     return 0;
