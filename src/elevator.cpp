@@ -42,11 +42,8 @@ public:
       NOT_SET,
       MOVING_UP,
       MOVING_DOWN,
-      STOPPING_GOING_UP,
-      STOPPING_GOING_DOWN,
-      STOPPED_NO_PASSENGERS,
-      STOPPED_GOING_UP,
-      STOPPED_GOING_DOWN 
+      STOPPED,
+      STOPPING      
    };
     Elevator() : state(STOPPED), current_floor(1), num_passengers(0) {}
 
@@ -145,7 +142,7 @@ public:
 
     void update() {
         for (auto& elevator : elevators) {
-            if (elevator.get_state() == STOPPED) {
+            if (elevator.get_state() == Elevator::ElevatorState::STOPPED) {
                 int min_dist = MAX_FLOORS;
                 int closest_passenger_index = -1;
                 for (int i = 0; i < passengers.size(); i++) {
