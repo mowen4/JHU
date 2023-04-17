@@ -1,119 +1,118 @@
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
+#include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-
 class Passenger {
-public:
-    enum Status
-    {   
-        NOT_SET, 
+   public:
+    enum Status {
+        NOT_SET,
         WAITING_ELEVATOR_UP,
         WAITING_ELEVATOR_DOWN,
         RIDING_ELEVATOR,
         AT_DESTINATION
     };
-    Passenger(int start_time, int start_floor, int end_floor, Status status) :
-        start_time(start_time), start_floor(start_floor), end_floor(end_floor), status(status) {}
+    Passenger(int start_time, int start_floor, int end_floor, Status status)
+        : start_time(start_time),
+          start_floor(start_floor),
+          end_floor(end_floor),
+          status(status) {}
 
     int get_start_time() const { return start_time; }
     int get_start_floor() const { return start_floor; }
     int get_end_floor() const { return end_floor; }
+    void set_status(Passenger::Status s) { this->status = s; }
+    Status get_status() { return this->status; }
 
-private:
+   private:
     int start_time;
     int start_floor;
     int end_floor;
     Status status = NOT_SET;
-    // Determines passenger status  
+    // Determines passenger status
 };
 
-class Floor{    
-    public:
-        Floor();
-        inline void incrementFloorNumber();
-        inline void decrementFloorNumber();
-        inline int getFloorNumber() const;
-        inline bool operator<(const Floor& floor);
-        inline bool operator>(const Floor& floor);
-        inline bool operator==(const Floor& floor);
-        inline bool operator<(const int value);
-        inline bool operator>(const int value);
-        inline bool operator==(const int value);
-        static const int STARTING_FLOOR_NUMBER = 1;
-    private:
-        int floorNumber;
+class Floor {
+   public:
+    Floor();
+    inline void incrementFloorNumber();
+    inline void decrementFloorNumber();
+    inline int getFloorNumber() const;
+    inline bool operator<(const Floor& floor);
+    inline bool operator>(const Floor& floor);
+    inline bool operator==(const Floor& floor);
+    inline bool operator<(const int value);
+    inline bool operator>(const int value);
+    inline bool operator==(const int value);
+    static const int STARTING_FLOOR_NUMBER = 1;
+    bool isStopRequested();
+
+   private:
+    int floorNumber;
 };
 
-Floor::Floor(){
-    this->floorNumber = Floor::STARTING_FLOOR_NUMBER;
-}
-
-inline void Floor::incrementFloorNumber() { 
-   this->floorNumber++; 
-}
-
-inline void Floor::decrementFloorNumber() { 
-   this->floorNumber--; 
-}
-
-
-
-inline int Floor::getFloorNumber() const {
-    return this->floorNumber;
-}
-
-inline bool Floor::operator<(const Floor& floor) 
+bool Floor::isStopRequested()
 {
-   return floor.floorNumber < this->floorNumber;
+    //TODO: update this to check and see if passenger requested stop
+    return false;
 }
 
-inline bool Floor::operator>(const Floor& floor) 
-{
-   return floor.floorNumber > this->floorNumber;
+Floor::Floor() { this->floorNumber = Floor::STARTING_FLOOR_NUMBER; }
+
+inline void Floor::incrementFloorNumber() { this->floorNumber++; }
+
+inline void Floor::decrementFloorNumber() { this->floorNumber--; }
+
+inline int Floor::getFloorNumber() const { return this->floorNumber; }
+
+inline bool Floor::operator<(const Floor& floor) {
+    return floor.floorNumber < this->floorNumber;
 }
 
-inline bool Floor::operator==(const Floor& floor) 
-{
-   return floor.floorNumber == this->floorNumber;
+inline bool Floor::operator>(const Floor& floor) {
+    return floor.floorNumber > this->floorNumber;
 }
 
-inline bool Floor::operator<(const int value) 
-{
-   return value < this->floorNumber;
+inline bool Floor::operator==(const Floor& floor) {
+    return floor.floorNumber == this->floorNumber;
 }
 
-inline bool Floor::operator>(const int value) 
-{
-   return value > this->floorNumber;
+inline bool Floor::operator<(const int value) {
+    return value < this->floorNumber;
 }
 
-inline bool Floor::operator==(const int value) 
-{
-   return value == this->floorNumber;
+inline bool Floor::operator>(const int value) {
+    return value > this->floorNumber;
+}
+
+inline bool Floor::operator==(const int value) {
+    return value == this->floorNumber;
 }
 
 class Elevator {
-public:   
+   public:
     enum ElevatorState {
-      NOT_SET,
-      MOVING_UP,
-      MOVING_DOWN,
-      STOPPING_GOING_UP,
-      STOPPING_GOING_DOWN,
-      STOPPED_NO_PASSENGERS,
-      STOPPED_GOING_UP,
-      STOPPED_GOING_DOWN 
+        NOT_SET,
+        MOVING_UP,
+        MOVING_DOWN,
+        STOPPING_GOING_UP,
+        STOPPING_GOING_DOWN,
+        STOPPED_NO_PASSENGERS,
+        STOPPED_GOING_UP,
+        STOPPED_GOING_DOWN
     };
 
-    
-    Elevator(const int max_passengers, const int max_floors) : state(STOPPED_NO_PASSENGERS), current_floor(), stop_time_left(0), num_passengers(0),
-     MAX_PASSENGERS(max_passengers), MAX_FLOORS(max_floors) {}
+    Elevator(const int max_passengers, const int max_floors)
+        : state(STOPPED_NO_PASSENGERS),
+          current_floor(),
+          stop_time_left(0),
+          num_passengers(0),
+          MAX_PASSENGERS(max_passengers),
+          MAX_FLOORS(max_floors) {}
 
     void add_passenger(Passenger passenger) {
         if (num_passengers < MAX_PASSENGERS) {
@@ -122,43 +121,69 @@ public:
         }
     }
 
-    //TODO: should take some period of time to move between floors
-    // 10 seconds in the original problem statement and then 
-    // 5 seconds for the modified version. 
-    //Doesn't seem like this is currently being handled anywhere yet
+    // TODO: should take some period of time to move between floors
+    //  10 seconds in the original problem statement and then
+    //  5 seconds for the modified version.
+    // Doesn't seem like this is currently being handled anywhere yet
     void move_up() {
-        state = MOVING_UP;
         current_floor.incrementFloorNumber();
-        for (auto it = passengers.begin(); it != passengers.end(); ) {
-            if (it->get_end_floor() == current_floor.getFloorNumber()) {
-                it = passengers.erase(it);
-                num_passengers--;
-                it->AT_DESTINATION;
-            } else {
-                ++it;
+        // TODO: is someone getting off or on this floor?
+        //       if so stop()
+        //       else carry on
+        bool stopHere = false;
+        for (Passenger p : passengers)
+        {
+            if (p.get_end_floor() == current_floor.getFloorNumber())
+            {
+                stopHere = true;
             }
+        }
+
+        if (stopHere)
+        {
+            stop();
+        } else if(num_passengers < MAX_PASSENGERS && current_floor.isStopRequested()) //this needs to be to check for passengers on floor
+        //also lol smart elevator birches.... no stops if no room
+        {
+            stop();
+        } else {
+            //continue on
+            state = MOVING_UP;
         }
     }
 
     void move_down() {
-        state = MOVING_DOWN;
         current_floor.decrementFloorNumber();
-        for (auto it = passengers.begin(); it != passengers.end(); ) {
-            if (it->get_end_floor() == current_floor.getFloorNumber()) {
-                it = passengers.erase(it);
-                num_passengers--;
-                it->AT_DESTINATION;
-            } else {
-                ++it;
+        
+        // TODO: is someone getting off or on this floor?
+        //      if so stop()
+        //      else carry on
+        bool stopHere = false;
+        for (Passenger p : passengers)
+        {
+            if (p.get_end_floor() == current_floor.getFloorNumber())
+            {
+                stopHere = true;
             }
+        }
+
+        if (stopHere)
+        {
+            stop();
+        } else if(num_passengers < MAX_PASSENGERS && current_floor.isStopRequested()) //this needs to be to check for passengers on floor
+        //also lol smart elevator birches.... no stops if no room
+        {
+            stop();
+        } else {
+            //continue on
+            state = MOVING_DOWN;
         }
     }
 
     void stop() {
-        if(this->MOVING_UP){
+        if (this->MOVING_UP) {
             state = STOPPING_GOING_UP;
-        }
-        else{
+        } else {
             state = STOPPING_GOING_DOWN;
         }
         stop_time_left = 2;
@@ -170,23 +195,30 @@ public:
             if (stop_time_left == 0) {
                 state = STOPPED_GOING_UP;
             }
-        } 
-        else if(state == STOPPING_GOING_DOWN){
+        } else if (state == STOPPING_GOING_DOWN) {
             stop_time_left--;
             if (stop_time_left == 0) {
                 state = STOPPED_GOING_DOWN;
             }
-        }
-        else if (state == MOVING_UP) {
-            if(current_floor.getFloorNumber() == MAX_FLOORS) {
+        } else if (state == MOVING_UP) {
+            if (current_floor.getFloorNumber() == MAX_FLOORS) {
                 stop();
-            } else {
+            }
+
+            // added decrement counter to moving up moving time left = 10 or 5
+            // when 0 actually decrement the floor, then the floor is changed
+            moving_time_left--;
+            if (moving_time_left == 0) {
                 move_up();
             }
         } else if (state == MOVING_DOWN) {
             if (current_floor.getFloorNumber() == 1) {
                 stop();
-            } else {
+            }
+            // added decrement counter to moving down 10 or 5
+            // when 0 actually decrement the floor, then the floor is changed
+            moving_time_left--;
+            if (moving_time_left == 0) {
                 move_down();
             }
         }
@@ -196,20 +228,19 @@ public:
     Floor get_current_floor() const { return current_floor; }
     int get_num_passengers() const { return num_passengers; }
 
-private:
+   private:
     ElevatorState state;
     Floor current_floor;
     int stop_time_left;
+    int moving_time_left;
     vector<Passenger> passengers;
     int num_passengers;
     const int MAX_PASSENGERS;
     const int MAX_FLOORS;
 };
 
-
-
 class RunSimulation {
-public:
+   public:
     const int MAX_ELEVATORS = 4;
     const int MAX_PASSENGERS = 8;
     const int MAX_FLOORS = 100;
@@ -220,25 +251,26 @@ public:
         }
     }
 
-    void add_passenger(Passenger passenger) {
-        passengers.push_back(passenger);
-    }
+    void add_passenger(Passenger passenger) { passengers.push_back(passenger); }
 
-    void add_bulk_passenger(vector<Passenger> p) {
-        passengers = p;
-    }
+    void add_bulk_passenger(vector<Passenger> p) { passengers = p; }
 
     void update() {
         for (auto& elevator : elevators) {
-            if (elevator.get_state() == Elevator::ElevatorState::STOPPED_GOING_UP 
-                || elevator.get_state() == Elevator::ElevatorState::STOPPED_GOING_DOWN) {
+            if (elevator.get_state() ==
+                    Elevator::ElevatorState::STOPPED_GOING_UP ||
+                elevator.get_state() ==
+                    Elevator::ElevatorState::STOPPED_GOING_DOWN) {
                 int min_dist = MAX_FLOORS;
                 int closest_passenger_index = -1;
                 for (int i = 0; i < passengers.size(); i++) {
                     Passenger& passenger = passengers[i];
-                    if (passenger.get_start_floor() == elevator.get_current_floor().getFloorNumber()) {
+                    if (passenger.get_start_floor() ==
+                        elevator.get_current_floor().getFloorNumber()) {
                         if (passenger.get_start_time() <= current_time) {
-                            int dist = abs(elevator.get_current_floor().getFloorNumber() - passenger.get_start_floor());
+                            int dist = abs(
+                                elevator.get_current_floor().getFloorNumber() -
+                                passenger.get_start_floor());
                             if (dist < min_dist) {
                                 min_dist = dist;
                                 closest_passenger_index = i;
@@ -248,8 +280,11 @@ public:
                 }
                 if (closest_passenger_index != -1) {
                     elevator.add_passenger(passengers[closest_passenger_index]);
-                     //TODO/Reminder to revist this line. Should we be erasing passengers from this list? Isn't this kind of our master list of passengers?
-                    passengers.erase(passengers.begin() + closest_passenger_index);  
+                    // TODO/Reminder to revist this line. Should we be erasing
+                    // passengers from this list? Isn't this kind of our master
+                    // list of passengers?
+                    passengers.erase(passengers.begin() +
+                                     closest_passenger_index);
                     elevator.stop();
                 }
             }
@@ -260,72 +295,65 @@ public:
 
     int get_current_time() const { return current_time; }
 
-private:
+   private:
     vector<Elevator> elevators;
     vector<Passenger> passengers;
     int current_time = 0;
 };
 
-
-
 vector<Passenger> getPassengerData() {
-
     vector<Passenger> passengers;
 
     string fname = "Mod10_Assignment_Elevators.csv";
- 
-	vector<vector<string>> content;
-	vector<string> row;
-	string line, word;
- 
-	fstream file (fname, ios::in);
-	if(file.is_open())
-	{
-		while(getline(file, line))
-		{
-			row.clear();
- 
-			stringstream str(line);
- 
-			while(getline(str, word, ','))
-				row.push_back(word);
-			content.push_back(row);
-		}
-	}
-	else
-		cout<<"Could not open the file\n";
- 
-	for(vector<string> v : content)
-	{
-		for(auto & element: v )
-		{
+
+    vector<vector<string>> content;
+    vector<string> row;
+    string line, word;
+
+    fstream file(fname, ios::in);
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            row.clear();
+
+            stringstream str(line);
+
+            while (getline(str, word, ',')) row.push_back(word);
+            content.push_back(row);
+        }
+    } else
+        cout << "Could not open the file\n";
+
+    for (vector<string> v : content) {
+        for (auto& element : v) {
             Passenger::Status initialStatus;
-            if(element[1] > element[2]){
+            if (element[1] > element[2]) {
                 initialStatus = Passenger::WAITING_ELEVATOR_DOWN;
-            }
-            else if(element[1] < element[2]){
+            } else if (element[1] < element[2]) {
                 initialStatus = Passenger::WAITING_ELEVATOR_UP;
+            } else {
+                initialStatus =
+                    Passenger::AT_DESTINATION;  // End floor and start floor are
+                                                // the same
             }
-            else{
-                initialStatus = Passenger::AT_DESTINATION;  //End floor and start floor are the same
-            }
-            passengers.push_back(Passenger(element[0],element[1],element[2], initialStatus));
-			//cout<<element<<" ";
-		}
-		cout<<"\n";
-	}
+            passengers.push_back(
+                Passenger(element[0], element[1], element[2], initialStatus));
+            // cout<<element<<" ";
+        }
+        cout << "\n";
+    }
 
     return passengers;
 }
 
 int main() {
-    RunSimulation sim;    
+    RunSimulation sim;
     vector<Passenger> passengers = getPassengerData();
     sim.add_bulk_passenger(passengers);
 
     while (true) {
         sim.update();
-        // TODO: check if all passengers have reached their destination and exit loop if so        
+        // TODO: check if all passengers have reached their destination and exit
+        // loop if so
     }
 
     // TODO: calculate and print average wait time and average travel time
