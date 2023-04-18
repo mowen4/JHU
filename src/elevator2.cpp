@@ -44,17 +44,25 @@ class Floor {
     Floor(int floorNum) : floorNumber(floorNum) {}
     const int floorNumber;    
     vector<Passenger> passengersAwaitingPickup;
-    bool isStopRequested();    
+    bool isStopMovingUpRequested();    
+    bool isStopMovingDownRequested();    
     void queuePassenger(Passenger passenger);
 
    private:    
 };
 
-bool Floor::isStopRequested()
+bool Floor::isStopMovingUpRequested()
 {
-    //TODO: update this to check and see if passenger requested stop
+    //TODO: update this to check and see if passenger who wants to go up requested stop
     return false;
 }
+
+bool Floor::isStopMovingUpRequested()
+{
+    //TODO: update this to check and see if passenger who wants to go down requested stop
+    return false;
+}
+
 
 void Floor::queuePassenger(Passenger passenger){
     passengersAwaitingPickup.push_back(passenger);
