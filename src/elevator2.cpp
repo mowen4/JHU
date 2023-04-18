@@ -75,8 +75,7 @@ class Elevator {
     };
 
     Elevator(const int max_passengers, const int max_floors)
-        : state(STOPPED_NO_PASSENGERS),
-          currentFloorNumber(DEFAULT_START_FLOOR),
+        : state(STOPPED_NO_PASSENGERS),          
           stop_time_left(0),
           num_passengers(0),
           MAX_PASSENGERS(max_passengers),
@@ -212,18 +211,10 @@ class Elevator {
 
 
 class Building {
-public:    
+public:        
     Building();
-    Building(const int num_elevators, const int num_floors){
-        numFloors = num_floors;
-        for (int i = 0; i < num_floors; i++) {
-            floors.push_back(Floor(i + 1));            
-        }        
-        for (int i = 0; i < num_elevators; i++) {
-            elevators.push_back(Elevator(num_elevators, num_floors));
-        }
-    }
-    
+    Building(const int num_elevators, const int num_floors);
+    inline vector<Elevator> getElevators() {return elevators;}
     
 private:
     int numFloors;
@@ -231,6 +222,22 @@ private:
     vector<Elevator> elevators;
 };
 
+/// @brief Default parameterless constructor
+Building::Building(){}
+
+/// @brief Constructor for a Building. Instantiates a number of floors 
+///     and elevators for the object. 
+/// @param num_elevators 
+/// @param num_floors 
+Building::Building(const int num_elevators, const int num_floors){
+    numFloors = num_floors;
+    for (int i = 0; i < num_floors; i++) {
+        floors.push_back(Floor(i + 1));            
+    }        
+    for (int i = 0; i < num_elevators; i++) {
+        elevators.push_back(Elevator(num_elevators, num_floors));
+    }
+}
 
 class RunSimulation {
    public:
@@ -248,7 +255,7 @@ class RunSimulation {
     void add_bulk_passenger(vector<Passenger> p) { passengers = p; }
 
     void update() {
-        for (auto& elevator : elevators) {
+        for (auto& elevator : building.getElevators()) {
             if (elevator.get_state() ==
                     Elevator::ElevatorState::STOPPED_GOING_UP ||
                 elevator.get_state() ==
@@ -285,8 +292,8 @@ class RunSimulation {
 
    private:
     vector<Elevator> elevators;
-    vector<Passenger> passengers;
-    Building building;
+    vector<Passenger> passengers; 
+    Building building;   
     int current_time = 0;
 };
 
