@@ -42,7 +42,6 @@ class Passenger {
 
 class Floor {
    public:
-
     Floor(int floorNum) : floorNumber(floorNum) {}
     enum CallState { NONE, UP, DOWN, BOTH };
     const int floorNumber;    
@@ -459,8 +458,9 @@ vector<Passenger> getPassengerData() {
             passengers.push_back(Passenger(id, element[0], element[1],
                                            element[2], initialStatus));
             // cout<<element<<" ";
+            id++;
         }
-        id++;
+
         cout << "\n";
     }
 
