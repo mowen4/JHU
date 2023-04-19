@@ -137,9 +137,7 @@ class Building {
     //driver called functions
     void updateFloorCallStatus(); //loop floors and set statuses based on current time might need to pass in current time
     vector<int> getFloorsAndCallStatuses(); //return some array or vector of all the floors and status
-    void UpdateElevatorMovement(); //void here i think just trigger the elevator logic
-    //moving this logic to Elevator class //void unloadPassengers(); //movepassengers in elevator out if applicable. 
-    //moving this logic to Elevator class //void loadPassengers(); //move from floor to elevator if applicable.
+    void UpdateElevatorMovement(); //void here i think just trigger the elevator logic    
 
    protected:
     static Building& instance;
@@ -271,10 +269,10 @@ void Elevator::update() {
 
 /// @brief Load passengers if there is room on the elevator
 void Elevator::loadPassengers(){
+    //Get the Floor object from the Building singleton for the current floor the elevator is on
     auto currFloor = Building::getInstance().getFloors().at(currentFloorNumber-1);
-    //while elevator is not full and floor has passengers waiting to queue
-
     if(state == STOPPED_GOING_DOWN){
+        //while elevator is not full and Floor has passengers waiting to queue
         while(currFloor.passengerGoingDown.size() > 0 
             && this->get_num_passengers() < MAX_PASSENGERS) 
         {
@@ -356,7 +354,19 @@ class RunSimulation {
 
     void add_passenger(Passenger passenger) { passengers.push_back(passenger); }
 
-    void add_bulk_passenger(vector<Passenger> p) { passengers = p; }
+    void add_bulk_passenger(vector<Passenger> p) { 
+        passengers = p; 
+        for(int i = 0; i < passengers.size(); i++){
+            if(passengers.at(i).get_start_floor() < passengers.at(i).get_end_floor()){
+                Floor startFloor = Building::getInstance().getFloors().at(passengers.at(i).get_start_floor()-1);
+                startFloor.queuePassengerGoingUp(passengers.at(i));
+            }
+            else{
+                Floor startFloor = Building::getInstance().getFloors().at(passengers.at(i).get_start_floor()-1);
+                startFloor.queuePassengerGoingDown(passengers.at(i));
+            }
+        }
+    }
 
     void iterateOneSecond(){        
         //building.updateFloorCallStatus();
