@@ -45,6 +45,8 @@ class Passenger {
     int end_time = -1;
     int start_floor;
     int end_floor;
+    int time_picked_up;
+    int time_dropped_off;
     Status status = NOT_SET;
     // Determines passenger status
 };
