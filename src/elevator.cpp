@@ -79,9 +79,8 @@ class Elevator {
         STOPPED_GOING_DOWN
     };
 
-    Elevator(const int max_passengers, const int max_floors, Building& bld)
-        : building(bld),
-          state(STOPPED_NO_PASSENGERS),
+    Elevator(const int max_passengers, const int max_floors)
+        : state(STOPPED_NO_PASSENGERS),
           stop_time_left(0),
           num_passengers(0),
           MAX_PASSENGERS(max_passengers),
@@ -92,8 +91,7 @@ class Elevator {
     int currentFloorNumber;
     int stop_time_left;
     int moving_time_left;
-    int num_passengers;
-    Building& building;
+    int num_passengers;    
     vector<Passenger> passengers;    
 
     void add_passenger(Passenger passenger);    
@@ -101,8 +99,8 @@ class Elevator {
     void move_down();
     void stop();
     void update(Building &building);
-    void loadPassengers();
-    void unloadPassengers();
+    void loadPassengers(Building &building);
+    void unloadPassengers(Building &building);
 
     ElevatorState get_state() const;    
 
@@ -310,13 +308,13 @@ void Elevator::update(Building &building) {
         }
     }
     else if(state == STOPPED_GOING_DOWN || state == STOPPED_GOING_UP){
-        unloadPassengers();
-        loadPassengers();   
+        unloadPassengers(building);
+        loadPassengers(building);   
     }
 }
 
 /// @brief Load passengers if there is room on the elevator
-void Elevator::loadPassengers(){
+void Elevator::loadPassengers(Building &building){
     //Get the Floor object from the Building singleton for the current floor the elevator is on
     auto currFloor = building.floors.at(currentFloorNumber-1);
     if(state == STOPPED_GOING_DOWN){
@@ -344,7 +342,7 @@ void Elevator::loadPassengers(){
 
 /// @brief Remove Passengers from the elevator if their end_floor value matches 
 /// the current floor
-void Elevator::unloadPassengers(){  
+void Elevator::unloadPassengers(Building &building){  
     passengers.erase(std::remove_if(
         passengers.begin(), passengers.end(), [this](const Passenger& passenger) 
         {return passenger.get_end_floor() == currentFloorNumber;}),
@@ -362,7 +360,7 @@ Building::Building(int num_elevators, int num_floors) {
         floors.push_back(Floor(i + 1));
     }
     for (int i = 0; i < num_elevators; i++) {
-        elevators.push_back(Elevator(num_elevators, num_floors, *this));
+        elevators.push_back(Elevator(num_elevators, num_floors));
     }
 }
 
@@ -405,7 +403,7 @@ void Building::getFloorsAndCallStatuses(){
 }
     
 void Building::updateElevatorMovement(){
-    for (Elevator e : elevators){
+    for (Elevator& e : elevators){
         e.update(*this);
     }
 }
