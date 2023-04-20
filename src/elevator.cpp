@@ -85,7 +85,9 @@ class Elevator {
           stop_time_left(0),
           num_passengers(0),
           MAX_PASSENGERS(max_passengers),
-          MAX_FLOORS(max_floors) {}
+          MAX_FLOORS(max_floors),
+          currentFloorNumber(1),
+          moving_time_left(0) {}
     
     int currentFloorNumber;
     int stop_time_left;
@@ -98,7 +100,7 @@ class Elevator {
     void move_up();
     void move_down();
     void stop();
-    void update();
+    void update(Building &building);
     void loadPassengers();
     void unloadPassengers();
 
@@ -125,9 +127,7 @@ class Building {
     void setCurrentTime(int timeInSeconds);
     void updateFloorCallStatus();
     void getFloorsAndCallStatuses();
-    void UpdateElevatorMovement();
-    static void unloadPassengers(Elevator elevator);
-    static void loadPassengers(Elevator elevator);
+    void updateElevatorMovement();    
     int current_time;
 };
 
@@ -244,47 +244,76 @@ void Elevator::stop() {
 }
 
 
-void Elevator::update() {
-        if (state == STOPPING_GOING_UP) {
-            stop_time_left--;
-            if (stop_time_left == 0) {
-                state = STOPPED_GOING_UP;
-            }
-        } else if (state == STOPPING_GOING_DOWN) {
-            stop_time_left--;
-            if (stop_time_left == 0) {
-                state = STOPPED_GOING_DOWN;
-            }
-        } else if (state == MOVING_UP) {
-            if (currentFloorNumber == MAX_FLOORS) {
-                stop();
-            }
+void Elevator::update(Building &building) {
+    if (state == STOPPING_GOING_UP) {
+        stop_time_left--;
+        if (stop_time_left == 0) {
+            state = STOPPED_GOING_UP;
+        }
+    } else if (state == STOPPING_GOING_DOWN) {
+        stop_time_left--;
+        if (stop_time_left == 0) {
+            state = STOPPED_GOING_DOWN;
+        }
+    } else if (state == MOVING_UP) {
+        if (currentFloorNumber == MAX_FLOORS) {
+            stop();
+        }
 
-            // added decrement counter to moving up moving time left = 10 or 5
-            // when 0 actually decrement the floor, then the floor is changed
-            moving_time_left--;
-            if (moving_time_left == 0) {
-                move_up();
-            }
-        } else if (state == MOVING_DOWN) {
-            if (currentFloorNumber == 1) {
-                stop();
-            }
-            // added decrement counter to moving down 10 or 5
-            // when 0 actually decrement the floor, then the floor is changed
-            moving_time_left--;
-            if (moving_time_left == 0) {
-                move_down();
-            }
+        // added decrement counter to moving up moving time left = 10 or 5
+        // when 0 actually decrement the floor, then the floor is changed
+        moving_time_left--;
+        if (moving_time_left == 0) {
+            move_up();
+            //you just incremented the floor number check if you should stop here:
+              //1. You have a passenger that wants to get off here
+              //2. The current floor has a passenger waiting pickup to go up
+              //3. you're at the max floor
+            //if yes to any of the above move state to stopping_going_up.
         }
-        else if(state == STOPPED_NO_PASSENGERS){
-            //call function to figure out where the closest passenger is and go that way
+    } else if (state == MOVING_DOWN) {
+        if (currentFloorNumber == 1) {
+            stop();
         }
-        else if(state == STOPPED_GOING_DOWN || state == STOPPED_GOING_UP){
-            unloadPassengers();
-            loadPassengers();   
+        // added decrement counter to moving down 10 or 5
+        // when 0 actually decrement the floor, then the floor is changed
+        moving_time_left--;
+        if (moving_time_left == 0) {
+            move_down();
+            //you just decremented the floor number check if you should stop here:
+              //1. You have a passenger that wants to get off here
+              //2. The current floor has a passenger waiting pickup to go down
+              //3. you're at the minimum floor
+            //if yes to any of the above move state to stopping_going_down.
         }
     }
+    else if(state == STOPPED_NO_PASSENGERS){
+        //call function to figure out where the closest passenger is and go that way
+        if(building.floorsRequestingPickup.size() == 0){
+            //Do nothing, take a nap. There are no passengers to fetch. 
+        }
+        else{
+            int closestDistance = std::numeric_limits<int>::max();
+            int closestFloor = -1;
+            for(int floor : building.floorsRequestingPickup){
+                auto diff = std::abs(currentFloorNumber - floor);
+                if(diff < closestDistance){
+                    closestDistance = diff;
+                    closestFloor = floor;
+                }
+            }
+            if(closestFloor > currentFloorNumber){
+                state = MOVING_UP;                }
+            else{
+                state = MOVING_DOWN;
+            }
+        }
+    }
+    else if(state == STOPPED_GOING_DOWN || state == STOPPED_GOING_UP){
+        unloadPassengers();
+        loadPassengers();   
+    }
+}
 
 /// @brief Load passengers if there is room on the elevator
 void Elevator::loadPassengers(){
@@ -366,7 +395,6 @@ void Building::updateFloorCallStatus() {
 }
 
 void Building::getFloorsAndCallStatuses(){
-
     for (Floor f : floors){
         Floor::CallState c = f.isStopRequested();
         if (c != Floor::CallState::NONE){
@@ -374,7 +402,12 @@ void Building::getFloorsAndCallStatuses(){
             floorsCallState.push_back(c);
         }
     }
-
+}
+    
+void Building::updateElevatorMovement(){
+    for (Elevator e : elevators){
+        e.update(*this);
+    }
 }
 
 RunSimulation::RunSimulation() {}
@@ -394,6 +427,7 @@ void RunSimulation::iterateOneSecond() {
     building.setCurrentTime(current_time);
     building.updateFloorCallStatus();
     building.getFloorsAndCallStatuses();
+    building.updateElevatorMovement();
 
     current_time++;
 }
