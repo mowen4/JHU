@@ -191,27 +191,27 @@ void Elevator::move_up() {
     // TODO: is someone getting off or on this floor?
     //       if so stop()
     //       else carry on
-    bool stopHere = false;
-    for (Passenger p : passengers) {
-        if (p.get_end_floor() == currentFloorNumber) {
-            stopHere = true;
-        }
-    }
+    // bool stopHere = false;
+    // for (Passenger p : passengers) {
+    //     if (p.get_end_floor() == currentFloorNumber) {
+    //         stopHere = true;
+    //     }
+    // }
 
-    if (stopHere) {
-        stop();
-    } else if (num_passengers <
-                MAX_PASSENGERS)  // removing this for now &&
-                                // current_floor.isStopRequested()) //this
-                                // needs to be to check for passengers on
-                                // floor
-    // also lol smart elevator birches.... no stops if no room
-    {
-        stop();
-    } else {
-        // continue on
-        state = MOVING_UP;
-    }
+    // if (stopHere) {
+    //     stop();
+    // } else if (num_passengers <
+    //             MAX_PASSENGERS)  // removing this for now &&
+    //                             // current_floor.isStopRequested()) //this
+    //                             // needs to be to check for passengers on
+    //                             // floor
+    // // also lol smart elevator birches.... no stops if no room
+    // {
+    //     stop();
+    // } else {
+    //     // continue on
+    //     state = MOVING_UP;
+    // }
 }
 
 void Elevator::move_down() {
@@ -220,26 +220,26 @@ void Elevator::move_down() {
     // TODO: is someone getting off or on this floor?
     //      if so stop()
     //      else carry on
-    bool stopHere = false;
-    for (Passenger p : passengers) {
-        if (p.get_end_floor() == currentFloorNumber) {
-            stopHere = true;
-        }
-    }
+    // bool stopHere = false;
+    // for (Passenger p : passengers) {
+    //     if (p.get_end_floor() == currentFloorNumber) {
+    //         stopHere = true;
+    //     }
+    // }
 
-    if (stopHere) {
-        stop();
-    } else if (num_passengers <
-                MAX_PASSENGERS)  // && current_floor.isStopRequested())
-                                // //this needs to be to check for
-                                // passengers on floor
-    // also lol smart elevator birches.... no stops if no room
-    {
-        stop();
-    } else {
-        // continue on
-        state = MOVING_DOWN;
-    }
+    // if (stopHere) {
+    //     stop();
+    // } else if (num_passengers <
+    //             MAX_PASSENGERS)  // && current_floor.isStopRequested())
+    //                             // //this needs to be to check for
+    //                             // passengers on floor
+    // // also lol smart elevator birches.... no stops if no room
+    // {
+    //     stop();
+    // } else {
+    //     // continue on
+    //     state = MOVING_DOWN;
+    // }
 }
 
 void Elevator::stop() {
