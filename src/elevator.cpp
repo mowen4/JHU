@@ -28,11 +28,16 @@ class Passenger {
           end_floor(end_floor),
           status(status) {}
 
-    int get_start_time() const { return start_time; }
-    int get_start_floor() const { return start_floor; }
-    int get_end_floor() const { return end_floor; }
-    void set_status(Passenger::Status s) { this->status = s; }
-    Status get_status() { return this->status; }
+    inline int get_start_time() const { return start_time; }
+    inline int get_start_floor() const { return start_floor; }
+    inline int get_end_floor() const { return end_floor; }
+    inline void set_status(Passenger::Status s) { this->status = s; }
+    inline Status get_status() { return this->status; }
+    
+    // Define a comparison function to compare passengers by start_time
+    static bool comparePassengersByStartTime(Passenger p1, Passenger p2){
+        return p1.start_time < p2.start_time;
+    }
 
    private:
     int passenger_ID;
@@ -140,7 +145,7 @@ class RunSimulation {
     void iterateOneSecond();
     void addPassengersToBuilding(vector<Passenger>);
 
-    Building b;
+    Building building;
 };
 
 
@@ -335,17 +340,29 @@ Building::Building(int num_elevators, int num_floors) {
 void Building::setCurrentTime(int t) { current_time = t; }
 
 void Building::updateFloorCallStatus() {
-    for (Passenger p : passengersNotOnFloorsYet) {
-        if (p.get_start_time() <= current_time) {
-            if (p.get_start_floor() < p.get_end_floor()) {
+    auto it = passengersNotOnFloorsYet.begin();
+    while (it != passengersNotOnFloorsYet.end()) {
+        if (it->get_start_time() <= current_time) {
+            if (it->get_start_floor() < it->get_end_floor()) {
                 // going up
-                floors.at(p.get_start_floor()-1).queuePassengerGoingUp(p);
-            } else if (p.get_start_floor() > p.get_end_floor()){
+                floors.at(it->get_start_floor()-1).queuePassengerGoingUp(*it);
+                it = passengersNotOnFloorsYet.erase(it);
+            } else if (it->get_start_floor() > it->get_end_floor()) {
                 // going down
-                floors.at(p.get_start_floor()-1).queuePassengerGoingDown(p);
+                floors.at(it->get_start_floor()-1).queuePassengerGoingDown(*it);
+                it = passengersNotOnFloorsYet.erase(it);
+            } else {
+                // passenger is already on the destination floor
+                it = passengersNotOnFloorsYet.erase(it);
             }
+        } else {
+            // passengersNotOnFloorsYet is sorted by start_time.
+            // When you reach a passenger whose start_time is in the future,
+            // you know all those that follow will also be in the future and
+            // you can stop looking
+            break;
         }
-    }
+    }    
 }
 
 void Building::getFloorsAndCallStatuses(){
@@ -363,17 +380,20 @@ void Building::getFloorsAndCallStatuses(){
 RunSimulation::RunSimulation() {}
 
 void RunSimulation::generateBuilding() {
-    b = Building(MAX_ELEVATORS, MAX_FLOORS);
+    building = Building(MAX_ELEVATORS, MAX_FLOORS);
 }
 
-void RunSimulation::addPassengersToBuilding(vector<Passenger> p) {
-    b.passengersNotOnFloorsYet = p;
+void RunSimulation::addPassengersToBuilding(vector<Passenger> p) {    
+    building.passengersNotOnFloorsYet = p;
+    std::sort(building.passengersNotOnFloorsYet.begin(),
+        building.passengersNotOnFloorsYet.end(),
+        Passenger::comparePassengersByStartTime);
 }
 
 void RunSimulation::iterateOneSecond() {
-    b.setCurrentTime(current_time);
-    b.updateFloorCallStatus();
-    b.getFloorsAndCallStatuses();
+    building.setCurrentTime(current_time);
+    building.updateFloorCallStatus();
+    building.getFloorsAndCallStatuses();
 
     current_time++;
 }
