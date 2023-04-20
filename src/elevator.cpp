@@ -54,8 +54,8 @@ class Floor {
     Floor(int floorNum) : floorNumber(floorNum) {}
     enum CallState { NONE, UP, DOWN, BOTH };
     const int floorNumber;
-    vector<Passenger> passengerGoingUp;
-    vector<Passenger> passengerGoingDown;
+    vector<Passenger> passengersGoingUp;
+    vector<Passenger> passengersGoingDown;
     void queuePassengerGoingUp(Passenger passenger);
     void queuePassengerGoingDown(Passenger passenger);
     CallState isStopRequested();
@@ -79,14 +79,15 @@ class Elevator {
         STOPPED_GOING_DOWN
     };
 
-    Elevator(const int max_passengers, const int max_floors)
+    Elevator(const int max_passengers, const int max_floors, const int time_between_floors)
         : state(STOPPED_NO_PASSENGERS),
           stop_time_left(0),
           num_passengers(0),
           MAX_PASSENGERS(max_passengers),
           MAX_FLOORS(max_floors),
           currentFloorNumber(1),
-          moving_time_left(0) {}
+          moving_time_left(time_between_floors),
+          TIME_BETWEEN_FLOORS(time_between_floors) {}
     
     int currentFloorNumber;
     int stop_time_left;
@@ -101,6 +102,7 @@ class Elevator {
     void update(Building &building);
     void loadPassengers(Building &building);
     void unloadPassengers(Building &building);
+    bool hasPassengerOnCurrentFloor();
 
     ElevatorState get_state() const;    
 
@@ -109,13 +111,14 @@ class Elevator {
     const int MAX_PASSENGERS;
     const int MAX_FLOORS;
     const int DEFAULT_START_FLOOR = 1;
+    const int TIME_BETWEEN_FLOORS;
 };
 
 
 class Building {
    public:
     Building();
-    Building(int num_elevators, int num_floors);
+    Building(int num_elevators, int num_floors, int time_between_floors);
     vector<Floor> floors;
     vector<int> floorsRequestingPickup;
     vector<Floor::CallState> floorsCallState;
@@ -125,7 +128,10 @@ class Building {
     void setCurrentTime(int timeInSeconds);
     void updateFloorCallStatus();
     void getFloorsAndCallStatuses();
-    void updateElevatorMovement();    
+    void updateElevatorMovement();   
+    bool doesFloorHavePassengersGoingUp(int floorNum);
+    bool doesFloorHavePassengersGoingDown(int floorNum);
+
     int current_time;
 };
 
@@ -148,7 +154,7 @@ class RunSimulation {
 
 
 void Floor::queuePassengerGoingUp(Passenger passenger) {
-    passengerGoingUp.push_back(passenger);
+    passengersGoingUp.push_back(passenger);
     if (c == NONE) {
         c = UP;
     } else if (c == DOWN) {
@@ -157,7 +163,7 @@ void Floor::queuePassengerGoingUp(Passenger passenger) {
 }
 
 void Floor::queuePassengerGoingDown(Passenger passenger) {
-    passengerGoingDown.push_back(passenger);
+    passengersGoingDown.push_back(passenger);
     if (c == NONE) {
         c = DOWN;
     } else if (c == UP) {
@@ -233,12 +239,14 @@ void Elevator::move_down() {
 }
 
 void Elevator::stop() {
+    //TODO: Handling for if they are at the max or min floor? Move to STOPPED_NO_PASSENGERS? 
     if (this->state == MOVING_UP) {
         state = STOPPING_GOING_UP;
     } else {
         state = STOPPING_GOING_DOWN;
     }
     stop_time_left = 2;
+    moving_time_left = TIME_BETWEEN_FLOORS; //reset moving_time_left for the next move
 }
 
 
@@ -254,10 +262,6 @@ void Elevator::update(Building &building) {
             state = STOPPED_GOING_DOWN;
         }
     } else if (state == MOVING_UP) {
-        if (currentFloorNumber == MAX_FLOORS) {
-            stop();
-        }
-
         // added decrement counter to moving up moving time left = 10 or 5
         // when 0 actually decrement the floor, then the floor is changed
         moving_time_left--;
@@ -268,7 +272,13 @@ void Elevator::update(Building &building) {
               //2. The current floor has a passenger waiting pickup to go up
               //3. you're at the max floor
             //if yes to any of the above move state to stopping_going_up.
-        }
+            if(hasPassengerOnCurrentFloor() 
+                || building.doesFloorHavePassengersGoingUp(currentFloorNumber)
+                || currentFloorNumber == MAX_FLOORS){
+                    stop();
+                }
+            }
+            
     } else if (state == MOVING_DOWN) {
         if (currentFloorNumber == 1) {
             stop();
@@ -283,9 +293,13 @@ void Elevator::update(Building &building) {
               //2. The current floor has a passenger waiting pickup to go down
               //3. you're at the minimum floor
             //if yes to any of the above move state to stopping_going_down.
+            if(hasPassengerOnCurrentFloor() 
+                || building.doesFloorHavePassengersGoingDown(currentFloorNumber)
+                || currentFloorNumber == MAX_FLOORS){
+                    stop();
+                }
         }
-    }
-    else if(state == STOPPED_NO_PASSENGERS){
+    } else if(state == STOPPED_NO_PASSENGERS){
         //call function to figure out where the closest passenger is and go that way
         if(building.floorsRequestingPickup.size() == 0){
             //Do nothing, take a nap. There are no passengers to fetch. 
@@ -307,9 +321,29 @@ void Elevator::update(Building &building) {
             }
         }
     }
-    else if(state == STOPPED_GOING_DOWN || state == STOPPED_GOING_UP){
+    else if(state == STOPPED_GOING_DOWN){
         unloadPassengers(building);
-        loadPassengers(building);   
+        loadPassengers(building);  
+        //resume moving down if you still have passengers        
+        if(passengers.size() > 0){
+            state = MOVING_DOWN;
+        }
+        //otherwise move to STOPPED_NO_PASSENGERS state
+        else{
+            state = STOPPED_NO_PASSENGERS;
+        }
+    }
+    else if(state == STOPPED_GOING_UP){
+        unloadPassengers(building);
+        loadPassengers(building); 
+        //resume moving up if you still have passengers
+        if(passengers.size() > 0){
+            state = MOVING_UP;
+        }
+        //otherwise move to STOPPED_NO_PASSENGERS state
+        else{
+            state = STOPPED_NO_PASSENGERS;
+        }
     }
 }
 
@@ -319,21 +353,21 @@ void Elevator::loadPassengers(Building &building){
     auto currFloor = building.floors.at(currentFloorNumber-1);
     if(state == STOPPED_GOING_DOWN){
         //while elevator is not full and Floor has passengers waiting to queue
-        while(currFloor.passengerGoingDown.size() > 0 
+        while(currFloor.passengersGoingDown.size() > 0 
             && this->num_passengers < MAX_PASSENGERS) 
         {
-            Passenger passengerToAdd = currFloor.passengerGoingDown.front();
-            currFloor.passengerGoingDown.erase(currFloor.passengerGoingDown.begin());
+            Passenger passengerToAdd = currFloor.passengersGoingDown.front();
+            currFloor.passengersGoingDown.erase(currFloor.passengersGoingDown.begin());
             passengers.push_back(passengerToAdd);
             num_passengers++;
         }        
     }
     else{ //else, elevator is going up, get the passengers going up
-        while(currFloor.passengerGoingUp.size() > 0 
+        while(currFloor.passengersGoingUp.size() > 0 
             && this->num_passengers < MAX_PASSENGERS) 
         {
-            Passenger passengerToAdd = currFloor.passengerGoingUp.front();
-            currFloor.passengerGoingUp.erase(currFloor.passengerGoingUp.begin());
+            Passenger passengerToAdd = currFloor.passengersGoingUp.front();
+            currFloor.passengersGoingUp.erase(currFloor.passengersGoingUp.begin());
             passengers.push_back(passengerToAdd);
             num_passengers++;
         }
@@ -347,7 +381,19 @@ void Elevator::unloadPassengers(Building &building){
         passengers.begin(), passengers.end(), [this](const Passenger& passenger) 
         {return passenger.get_end_floor() == currentFloorNumber;}),
          passengers.end());   
+    //This isn't right but don't have time to fix it right this second and need to check in. 
+    //Should only be decremening num_passengers if someone was actually removed. And if more than 1
+    // person was removed, we should decrement multiple times... this whole function needs a re-look.
     num_passengers--; 
+}
+
+bool Elevator::hasPassengerOnCurrentFloor() {
+    for (const auto& passenger : passengers) {
+        if (passenger.get_end_floor() == currentFloorNumber) {
+            return true;
+        }
+    }
+    return false;
 }
 
 Elevator::ElevatorState Elevator::get_state() const { return state; }
@@ -355,12 +401,12 @@ Elevator::ElevatorState Elevator::get_state() const { return state; }
 
 Building::Building() {}
 
-Building::Building(int num_elevators, int num_floors) {
+Building::Building(int num_elevators, int num_floors, int time_between_floors) {
     for (int i = 0; i < num_floors; i++) {
         floors.push_back(Floor(i + 1));
     }
     for (int i = 0; i < num_elevators; i++) {
-        elevators.push_back(Elevator(num_elevators, num_floors));
+        elevators.push_back(Elevator(num_elevators, num_floors, time_between_floors));
     }
 }
 
@@ -408,10 +454,27 @@ void Building::updateElevatorMovement(){
     }
 }
 
+bool Building::doesFloorHavePassengersGoingUp(int floorNum){
+    Floor relevantFloor = floors.at(floorNum-1);
+    if(relevantFloor.passengersGoingUp.size() > 0){
+        return true;
+    }
+    return false;
+}
+
+bool Building::doesFloorHavePassengersGoingDown(int floorNum){
+    for(int floor : floorsRequestingPickup){
+        if(floor == floorNum){
+            return true;
+        }
+    }
+    return false;
+}
+
 RunSimulation::RunSimulation() {}
 
 void RunSimulation::generateBuilding() {
-    building = Building(MAX_ELEVATORS, MAX_FLOORS);
+    building = Building(MAX_ELEVATORS, MAX_FLOORS, TIME_BETWEEN_FLOORS);
 }
 
 void RunSimulation::addPassengersToBuilding(vector<Passenger> p) {    

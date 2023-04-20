@@ -45,8 +45,8 @@ class Floor {
     Floor(int floorNum) : floorNumber(floorNum) {}
     enum CallState { NONE, UP, DOWN, BOTH };
     const int floorNumber;    
-    vector<Passenger> passengerGoingUp;
-    vector<Passenger> passengerGoingDown;
+    vector<Passenger> passengersGoingUp;
+    vector<Passenger> passengersGoingDown;
     void queuePassengerGoingUp(Passenger passenger);
     void queuePassengerGoingDown(Passenger passenger);
     bool isStopRequested();
@@ -64,11 +64,11 @@ bool Floor::isStopRequested() {
 }
 
 void Floor::queuePassengerGoingUp(Passenger passenger) {
-    passengerGoingUp.push_back(passenger);
+    passengersGoingUp.push_back(passenger);
 }
 
 void Floor::queuePassengerGoingDown(Passenger passenger) {
-    passengerGoingDown.push_back(passenger);
+    passengersGoingDown.push_back(passenger);
 }
 
 class Elevator {
@@ -272,21 +272,21 @@ void Elevator::loadPassengers(){
     auto currFloor = Building::getInstance().getFloors().at(currentFloorNumber-1);
     if(state == STOPPED_GOING_DOWN){
         //while elevator is not full and Floor has passengers waiting to queue
-        while(currFloor.passengerGoingDown.size() > 0 
+        while(currFloor.passengersGoingDown.size() > 0 
             && this->get_num_passengers() < MAX_PASSENGERS) 
         {
-            Passenger passengerToAdd = currFloor.passengerGoingDown.front();
-            currFloor.passengerGoingDown.erase(currFloor.passengerGoingDown.begin());
+            Passenger passengerToAdd = currFloor.passengersGoingDown.front();
+            currFloor.passengersGoingDown.erase(currFloor.passengersGoingDown.begin());
             passengers.push_back(passengerToAdd);
             num_passengers++;
         }        
     }
     else{ //else, elevator is going up, get the passengers going up
-        while(currFloor.passengerGoingUp.size() > 0 
+        while(currFloor.passengersGoingUp.size() > 0 
             && this->get_num_passengers() < MAX_PASSENGERS) 
         {
-            Passenger passengerToAdd = currFloor.passengerGoingUp.front();
-            currFloor.passengerGoingUp.erase(currFloor.passengerGoingUp.begin());
+            Passenger passengerToAdd = currFloor.passengersGoingUp.front();
+            currFloor.passengersGoingUp.erase(currFloor.passengersGoingUp.begin());
             passengers.push_back(passengerToAdd);
             num_passengers++;
         }
