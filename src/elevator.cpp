@@ -277,7 +277,7 @@ void Elevator::update(Building &building) {
               //3. you're at the max floor
             //if yes to any of the above move state to stopping_going_up.
             if(hasPassengerOnCurrentFloor() 
-                || building.doesFloorHavePassengersGoingUp(currentFloorNumber)
+                || (building.doesFloorHavePassengersGoingUp(currentFloorNumber) && passengers.size() < MAX_PASSENGERS)
                 || currentFloorNumber == MAX_FLOORS){
                     stop();
                 }
@@ -298,7 +298,7 @@ void Elevator::update(Building &building) {
               //3. you're at the minimum floor
             //if yes to any of the above move state to stopping_going_down.
             if(hasPassengerOnCurrentFloor() 
-                || building.doesFloorHavePassengersGoingDown(currentFloorNumber)
+                || (building.doesFloorHavePassengersGoingDown(currentFloorNumber) && passengers.size() < MAX_PASSENGERS)
                 || currentFloorNumber == MAX_FLOORS){
                     stop();
                 }
@@ -354,7 +354,7 @@ void Elevator::update(Building &building) {
 /// @brief Load passengers if there is room on the elevator
 void Elevator::loadPassengers(Building &building){
     //Get the Floor object from the Building singleton for the current floor the elevator is on
-    auto currFloor = building.floors.at(currentFloorNumber-1);
+    auto& currFloor = building.floors.at(currentFloorNumber-1);
     if(state == STOPPED_GOING_DOWN){
         //while elevator is not full and Floor has passengers waiting to queue
         while(currFloor.passengersGoingDown.size() > 0 
@@ -378,17 +378,18 @@ void Elevator::loadPassengers(Building &building){
     }
 }
 
-/// @brief Remove Passengers from the elevator if their end_floor value matches 
-/// the current floor
-void Elevator::unloadPassengers(Building &building){  
-    passengers.erase(std::remove_if(
-        passengers.begin(), passengers.end(), [this](const Passenger& passenger) 
-        {return passenger.get_end_floor() == currentFloorNumber;}),
-         passengers.end());   
-    //This isn't right but don't have time to fix it right this second and need to check in. 
-    //Should only be decremening num_passengers if someone was actually removed. And if more than 1
-    // person was removed, we should decrement multiple times... this whole function needs a re-look.
-    num_passengers--; 
+void Elevator::unloadPassengers(Building &building) {
+    passengers.erase(std::remove_if(passengers.begin(), passengers.end(),
+        [this](const Passenger& passenger) {
+            if (passenger.get_end_floor() == currentFloorNumber) {                
+                return true;
+            }
+            return false;
+        }), passengers.end());
+
+    num_passengers = passengers.size();
+    //TODO update some master list that says which passengers made it to their destination
+    //TODO update the passenger time when they got off the elevator for metrics
 }
 
 bool Elevator::hasPassengerOnCurrentFloor() {
