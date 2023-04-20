@@ -309,7 +309,7 @@ void Elevator::update(Building &building) {
             //Do nothing, take a nap. There are no passengers to fetch. 
         }
         else{
-            int closestDistance = std::numeric_limits<int>::max();
+            int closestDistance = 999; //arbitrarily large
             int closestFloor = -1;
             for(int floor : building.floorsRequestingPickup){
                 auto diff = std::abs(currentFloorNumber - floor);
