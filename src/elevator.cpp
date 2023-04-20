@@ -44,58 +44,6 @@ class Passenger {
     // Determines passenger status
 };
 
-class Elevator {
-   public:
-    enum ElevatorState {
-        NOT_SET,
-        MOVING_UP,
-        MOVING_DOWN,
-        STOPPING_GOING_UP,
-        STOPPING_GOING_DOWN,
-        STOPPED_NO_PASSENGERS,
-        STOPPED_GOING_UP,
-        STOPPED_GOING_DOWN
-    };
-
-    Elevator(const int max_passengers, const int max_floors)
-        : state(STOPPED_NO_PASSENGERS),
-          stop_time_left(0),
-          num_passengers(0),
-          MAX_PASSENGERS(max_passengers),
-          MAX_FLOORS(max_floors) {}
-
-    void add_passenger(Passenger passenger);
-    int getCurrentFloor();
-
-    // TODO: should take some period of time to move between floors
-    //  10 seconds in the original problem statement and then
-    //  5 seconds for the modified version.
-    // Doesn't seem like this is currently being handled anywhere yet
-    void move_up();
-    void move_down();
-
-    void stop();
-
-    void update();
-
-    void loadPassengers();
-    void unloadPassengers();
-
-    ElevatorState get_state() const;
-    int get_num_passengers() const;
-
-   private:
-    ElevatorState state;
-    int currentFloorNumber;
-    int stop_time_left;
-    int moving_time_left;
-    vector<Passenger> passengers;
-    int num_passengers;
-    const int MAX_PASSENGERS;
-    const int MAX_FLOORS;
-    const int DEFAULT_START_FLOOR = 1;
-};
-
 class Floor {
    public:
     Floor(int floorNum) : floorNumber(floorNum) {}
@@ -110,6 +58,92 @@ class Floor {
    private:
     CallState c = NONE;
 };
+
+class Building;
+
+class Elevator {
+   public:
+    enum ElevatorState {
+        NOT_SET,
+        MOVING_UP,
+        MOVING_DOWN,
+        STOPPING_GOING_UP,
+        STOPPING_GOING_DOWN,
+        STOPPED_NO_PASSENGERS,
+        STOPPED_GOING_UP,
+        STOPPED_GOING_DOWN
+    };
+
+    Elevator(const int max_passengers, const int max_floors, Building& bld)
+        : building(bld),
+          state(STOPPED_NO_PASSENGERS),
+          stop_time_left(0),
+          num_passengers(0),
+          MAX_PASSENGERS(max_passengers),
+          MAX_FLOORS(max_floors) {}
+    
+    int currentFloorNumber;
+    int stop_time_left;
+    int moving_time_left;
+    int num_passengers;
+    Building& building;
+    vector<Passenger> passengers;    
+
+    void add_passenger(Passenger passenger);    
+    void move_up();
+    void move_down();
+    void stop();
+    void update();
+    void loadPassengers();
+    void unloadPassengers();
+
+    ElevatorState get_state() const;    
+
+   private:
+    ElevatorState state;    
+    const int MAX_PASSENGERS;
+    const int MAX_FLOORS;
+    const int DEFAULT_START_FLOOR = 1;
+};
+
+
+class Building {
+   public:
+    Building();
+    Building(int num_elevators, int num_floors);
+    vector<Floor> floors;
+    vector<int> floorsRequestingPickup;
+    vector<Floor::CallState> floorsCallState;
+    vector<Elevator> elevators;
+    vector<Passenger> passengersNotOnFloorsYet;
+
+    void setCurrentTime(int timeInSeconds);
+    void updateFloorCallStatus();
+    void getFloorsAndCallStatuses();
+    void UpdateElevatorMovement();
+    static void unloadPassengers(Elevator elevator);
+    static void loadPassengers(Elevator elevator);
+    int current_time;
+};
+
+
+
+class RunSimulation {
+   public:
+    int MAX_ELEVATORS = 4;
+    int MAX_PASSENGERS = 8;
+    int MAX_FLOORS = 100;
+    int TIME_BETWEEN_FLOORS = 10;
+    int current_time = 0;
+    RunSimulation();
+    void generateBuilding();
+    void iterateOneSecond();
+    void addPassengersToBuilding(vector<Passenger>);
+
+    Building b;
+};
+
+
 void Floor::queuePassengerGoingUp(Passenger passenger) {
     passengerGoingUp.push_back(passenger);
     if (c == NONE) {
@@ -132,39 +166,160 @@ Floor::CallState Floor::isStopRequested(){
     return c;
 };
 
-class Building {
-   public:
-    Building();
-    Building(int num_elevators, int num_floors);
-    vector<Floor> floors;
-    vector<int> floorsRequestingPickup;
-    vector<Floor::CallState> floorsCallState;
-    vector<Elevator> elevators;
-    vector<Passenger> passengersNotOnFloorsYet;
 
-    void setCurrentTime(int timeInSeconds);
-    void updateFloorCallStatus();
-    void getFloorsAndCallStatuses();
-    void UpdateElevatorMovement();
-    void unloadPassengers();
-    void loadPassengers();
-    int current_time;
-};
+void Elevator::add_passenger(Passenger passenger) {
+        if (num_passengers < MAX_PASSENGERS) {
+            passengers.push_back(passenger);
+            num_passengers++;
+        }
+    }
 
-class RunSimulation {
-   public:
-    int MAX_ELEVATORS = 4;
-    int MAX_PASSENGERS = 8;
-    int MAX_FLOORS = 100;
-    int TIME_BETWEEN_FLOORS = 10;
-    int current_time = 0;
-    RunSimulation();
-    void generateBuilding();
-    void iterateOneSecond();
-    void addPassengersToBuilding(vector<Passenger>);
+void Elevator::move_up() {
+        currentFloorNumber++;
+        // TODO: is someone getting off or on this floor?
+        //       if so stop()
+        //       else carry on
+        bool stopHere = false;
+        for (Passenger p : passengers) {
+            if (p.get_end_floor() == currentFloorNumber) {
+                stopHere = true;
+            }
+        }
 
-    Building b;
-};
+        if (stopHere) {
+            stop();
+        } else if (num_passengers <
+                   MAX_PASSENGERS)  // removing this for now &&
+                                    // current_floor.isStopRequested()) //this
+                                    // needs to be to check for passengers on
+                                    // floor
+        // also lol smart elevator birches.... no stops if no room
+        {
+            stop();
+        } else {
+            // continue on
+            state = MOVING_UP;
+        }
+    }
+
+void Elevator::move_down() {
+    currentFloorNumber--;
+    // TODO: is someone getting off or on this floor?
+    //      if so stop()
+    //      else carry on
+    bool stopHere = false;
+    for (Passenger p : passengers) {
+        if (p.get_end_floor() == currentFloorNumber) {
+            stopHere = true;
+        }
+    }
+
+    if (stopHere) {
+        stop();
+    } else if (num_passengers <
+                MAX_PASSENGERS)  // && current_floor.isStopRequested())
+                                // //this needs to be to check for
+                                // passengers on floor
+    // also lol smart elevator birches.... no stops if no room
+    {
+        stop();
+    } else {
+        // continue on
+        state = MOVING_DOWN;
+    }
+}
+
+void Elevator::stop() {
+    if (this->state == MOVING_UP) {
+        state = STOPPING_GOING_UP;
+    } else {
+        state = STOPPING_GOING_DOWN;
+    }
+    stop_time_left = 2;
+}
+
+
+void Elevator::update() {
+        if (state == STOPPING_GOING_UP) {
+            stop_time_left--;
+            if (stop_time_left == 0) {
+                state = STOPPED_GOING_UP;
+            }
+        } else if (state == STOPPING_GOING_DOWN) {
+            stop_time_left--;
+            if (stop_time_left == 0) {
+                state = STOPPED_GOING_DOWN;
+            }
+        } else if (state == MOVING_UP) {
+            if (currentFloorNumber == MAX_FLOORS) {
+                stop();
+            }
+
+            // added decrement counter to moving up moving time left = 10 or 5
+            // when 0 actually decrement the floor, then the floor is changed
+            moving_time_left--;
+            if (moving_time_left == 0) {
+                move_up();
+            }
+        } else if (state == MOVING_DOWN) {
+            if (currentFloorNumber == 1) {
+                stop();
+            }
+            // added decrement counter to moving down 10 or 5
+            // when 0 actually decrement the floor, then the floor is changed
+            moving_time_left--;
+            if (moving_time_left == 0) {
+                move_down();
+            }
+        }
+        else if(state == STOPPED_NO_PASSENGERS){
+            //call function to figure out where the closest passenger is and go that way
+        }
+        else if(state == STOPPED_GOING_DOWN || state == STOPPED_GOING_UP){
+            unloadPassengers();
+            loadPassengers();   
+        }
+    }
+
+/// @brief Load passengers if there is room on the elevator
+void Elevator::loadPassengers(){
+    //Get the Floor object from the Building singleton for the current floor the elevator is on
+    auto currFloor = building.floors.at(currentFloorNumber-1);
+    if(state == STOPPED_GOING_DOWN){
+        //while elevator is not full and Floor has passengers waiting to queue
+        while(currFloor.passengerGoingDown.size() > 0 
+            && this->num_passengers < MAX_PASSENGERS) 
+        {
+            Passenger passengerToAdd = currFloor.passengerGoingDown.front();
+            currFloor.passengerGoingDown.erase(currFloor.passengerGoingDown.begin());
+            passengers.push_back(passengerToAdd);
+            num_passengers++;
+        }        
+    }
+    else{ //else, elevator is going up, get the passengers going up
+        while(currFloor.passengerGoingUp.size() > 0 
+            && this->num_passengers < MAX_PASSENGERS) 
+        {
+            Passenger passengerToAdd = currFloor.passengerGoingUp.front();
+            currFloor.passengerGoingUp.erase(currFloor.passengerGoingUp.begin());
+            passengers.push_back(passengerToAdd);
+            num_passengers++;
+        }
+    }
+}
+
+/// @brief Remove Passengers from the elevator if their end_floor value matches 
+/// the current floor
+void Elevator::unloadPassengers(){  
+    passengers.erase(std::remove_if(
+        passengers.begin(), passengers.end(), [this](const Passenger& passenger) 
+        {return passenger.get_end_floor() == currentFloorNumber;}),
+         passengers.end());   
+    num_passengers--; 
+}
+
+Elevator::ElevatorState Elevator::get_state() const { return state; }
+
 
 Building::Building() {}
 
@@ -173,7 +328,7 @@ Building::Building(int num_elevators, int num_floors) {
         floors.push_back(Floor(i + 1));
     }
     for (int i = 0; i < num_elevators; i++) {
-        elevators.push_back(Elevator(num_elevators, num_floors));
+        elevators.push_back(Elevator(num_elevators, num_floors, *this));
     }
 }
 
