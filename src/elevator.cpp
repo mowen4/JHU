@@ -34,6 +34,9 @@ class Passenger {
     inline int get_end_floor() const { return end_floor; }
     inline void set_status(Passenger::Status s) { this->status = s; }
     inline Status get_status() { return this->status; }
+    inline int get_passenger_ID() { return this->passenger_ID; }
+    inline int get_time_picked_up() {return this->time_picked_up;}
+    inline int get_time_dropped_off() {return this->time_dropped_off;}
     inline void set_time_picked_up(int currentTime) {this->time_picked_up = currentTime;}
     inline void set_time_dropped_off(int currentTime) {this->time_dropped_off = currentTime;}
     
@@ -63,10 +66,11 @@ class Floor {
     vector<Passenger> passengersGoingDown;
     void queuePassengerGoingUp(Passenger passenger);
     void queuePassengerGoingDown(Passenger passenger);
+    void SetCallStateForFloor();
     CallState isStopRequested();
 
    private:
-    CallState c = NONE;
+    CallState callState = NONE;
 };
 
 class Building;
@@ -133,6 +137,8 @@ class Building {
     int totalPassengers;
     int passengersAtDestination;
     int current_time;
+    int totalTimeTravelled;
+    int totalWaitTime; 
 
     void setCurrentTime(int timeInSeconds);
     void updateFloorCallStatus();
@@ -140,7 +146,12 @@ class Building {
     void updateElevatorMovement();   
     bool doesFloorHavePassengersGoingUp(int floorNum);
     bool doesFloorHavePassengersGoingDown(int floorNum);
-    void markPassengersAtDestination(int numPassengers);    
+    void markPassengersAtDestination(Passenger passenger);    
+    void addTimeTravelled(Passenger passenger);
+    void addWaitTime(Passenger passenger);
+
+    //this function is called for debugging purposes and can be deleted
+    void debugGetNumberOfFloorsWithQueuedPassengers();
 };
 
 
@@ -163,26 +174,40 @@ class RunSimulation {
 
 void Floor::queuePassengerGoingUp(Passenger passenger) {
     passengersGoingUp.push_back(passenger);
-    if (c == NONE) {
-        c = UP;
-    } else if (c == DOWN) {
-        c = BOTH;
+    if (callState == NONE) {
+        callState = UP;
+    } else if (callState == DOWN) {
+        callState = BOTH;
     }
 }
 
 void Floor::queuePassengerGoingDown(Passenger passenger) {
     passengersGoingDown.push_back(passenger);
-    if (c == NONE) {
-        c = DOWN;
-    } else if (c == UP) {
-        c = BOTH;
+    if (callState == NONE) {
+        callState = DOWN;
+    } else if (callState == UP) {
+        callState = BOTH;
     }
 }
 
 Floor::CallState Floor::isStopRequested(){
-    return c;
+    return callState;
 };
 
+void Floor::SetCallStateForFloor(){
+    if(passengersGoingUp.size() == 0 && passengersGoingDown.size() == 0){
+        callState = NONE;
+    }
+    else if(passengersGoingUp.size() > 0 && passengersGoingDown.size() == 0){
+        callState = UP;
+    }
+    else if(passengersGoingUp.size() == 0 && passengersGoingDown.size() > 0){
+        callState = DOWN;
+    }
+    else{
+        callState = BOTH;
+    }
+}
 
 void Elevator::add_passenger(Passenger passenger) {
         if (num_passengers < MAX_PASSENGERS) {
@@ -277,18 +302,17 @@ void Elevator::update(Building &building) {
                     closestFloor = floor;
                 }
             }
-            // //You're already there somehow, pick them up immediately
-            // if(closestFloor == currentFloorNumber){
-            //     loadPassengers(building);
-            //     //this is a weird case, figure out which direction to go now:
-            //     if(passengers.size() > 0 && passengers.at(0).get_start_floor() < passengers.at(0).get_end_floor()) {
-            //         state = MOVING_DOWN;
-            //     } 
-            //     else{
-            //         state = MOVING_UP;
-            //     }                                
-            // }
-            
+            //You're already there somehow, pick them up immediately
+            if(closestFloor == currentFloorNumber){
+                loadPassengers(building);
+                //this is a weird case, figure out which direction to go now:
+                if(passengers.size() > 0 && passengers.at(0).get_start_floor() < passengers.at(0).get_end_floor()) {
+                    state = MOVING_DOWN;
+                } 
+                else{
+                    state = MOVING_UP;
+                }                                
+            }            
             if(closestFloor > currentFloorNumber){
                 state = MOVING_UP;                }
             else{
@@ -347,6 +371,7 @@ void Elevator::loadPassengers(Building &building){
             currFloor.passengersGoingUp.erase(currFloor.passengersGoingUp.begin());
             passengers.push_back(passengerToAdd);
             num_passengers++;
+            passengerToAdd.set_time_picked_up(building.current_time);
         }
     }
     
@@ -354,20 +379,23 @@ void Elevator::loadPassengers(Building &building){
         //if no passengers are awaiting pickup on this floor, remove floor number from floorsRequestingPickup
         building.floorsRequestingPickup.erase(currentFloorNumber);
     }
+    currFloor.SetCallStateForFloor();
+    
 }
 
 void Elevator::unloadPassengers(Building &building) {
+    int passengersBeforeUnloading = passengers.size();
     passengers.erase(std::remove_if(passengers.begin(), passengers.end(),
-        [this, &building](const Passenger& passenger) {
-            if (passenger.get_end_floor() == currentFloorNumber) {  
-                //TODO set value of 'time picked up' and 'time dropped off' in master list before erasing?
-                building.markPassengersAtDestination(1);                             
+        [this, &building](Passenger& passenger) {
+            if (passenger.get_end_floor() == currentFloorNumber) {                  
+                building.markPassengersAtDestination(passenger);
+                
                 return true;
             }
             return false;
-        }), passengers.end());
-
-    num_passengers = passengers.size();
+        }), passengers.end());       
+    
+    num_passengers = passengers.size();                             
     //TODO update some master list that says which passengers made it to their destination
     //TODO update the passenger time when they got off the elevator for metrics
 }
@@ -456,24 +484,65 @@ bool Building::doesFloorHavePassengersGoingDown(int floorNum){
     return false;
 }
 
-void Building::markPassengersAtDestination(int numPassengers){
-    passengersAtDestination += numPassengers;
+void Building::markPassengersAtDestination(Passenger passenger){
+    passengersAtDestination += 1;
+    passenger.set_time_dropped_off(current_time);
+    addTimeTravelled(passenger);
+    addWaitTime(passenger);
+
+    ///DEBUG STUFF///
+    int id = passenger.get_passenger_ID();
+    fullPassengerList.erase(std::remove_if(fullPassengerList.begin(),
+        fullPassengerList.end(),
+        [id](Passenger p){
+            return p.get_passenger_ID() == id;
+        }), fullPassengerList.end());
+        
+    ///DEBUG STUFF///
+
     cout << "Passengers at destination: " << passengersAtDestination << endl;
 
     if(passengersAtDestination % 5 == 0){
         cout << "Floors awaiting pickup " << this->floorsRequestingPickup.size() << endl;
     }
 
-    if(passengersAtDestination == 55 || passengersAtDestination == 77 || passengersAtDestination == 358)
+    if(passengersAtDestination == 497)
     {
         for(int i = 0; i < this->elevators.size(); i++){
             cout << "state number " << this->elevators.at(i).get_state() << endl;
             cout << "number of passengers " << this->elevators.at(i).num_passengers << endl;
             cout << "current floor " << this->elevators.at(i).currentFloorNumber << endl;
-
+        }
+        cout << this->passengersNotOnFloorsYet.size();
+        for(int i = 0; i < passengersNotOnFloorsYet.size(); i++){
+            cout << "ID: " << passengersNotOnFloorsYet.at(i).get_passenger_ID() << endl;
+        }
+        cout << this->fullPassengerList.size();
+        for(int i = 0; i < fullPassengerList.size(); i++){
+            cout << "ID: " << fullPassengerList.at(i).get_passenger_ID() << "start_time" << fullPassengerList.at(i).get_start_time() << endl;
         }
     }
 }
+
+void Building::addTimeTravelled(Passenger passenger){
+    int time = passenger.get_time_dropped_off() - passenger.get_time_picked_up();
+    totalTimeTravelled += time;
+}
+void Building::addWaitTime(Passenger passenger){
+    int time = passenger.get_time_picked_up() - passenger.get_start_time();    
+    totalWaitTime += time;
+}
+
+void Building::debugGetNumberOfFloorsWithQueuedPassengers(){
+    int count = 0;
+    for(Floor floor : floors){
+        if(floor.passengersGoingDown.size() > 0 || floor.passengersGoingUp.size() > 0){
+            count++;
+        }
+    }
+    cout << "Actual number of floors with passengers waiting: " << count << endl;
+}
+
 
 RunSimulation::RunSimulation() {}
 

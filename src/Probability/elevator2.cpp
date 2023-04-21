@@ -52,11 +52,11 @@ class Floor {
     bool isStopRequested();
 
     private:
-    CallState c = NONE;
+    CallState callState = NONE;
 };
 
 bool Floor::isStopRequested() {
-    if (c != NONE) {
+    if (callState != NONE) {
         return true;
     } else {
         return false;
