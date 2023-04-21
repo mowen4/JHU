@@ -8,9 +8,6 @@
 
 using namespace std;
 
-const int MAX_ELEVATORS = 4;
-const int MAX_PASSENGERS = 8;
-const int MAX_FLOORS = 100;
 
 class Passenger {
    public:
@@ -161,11 +158,11 @@ class RunSimulation {
     int MAX_ELEVATORS = 4;
     int MAX_PASSENGERS = 8;
     int MAX_FLOORS = 100;
-    int TIME_BETWEEN_FLOORS = 10;
+    int TIME_BETWEEN_FLOORS;
     int current_time = 0;
     Building building;
     
-    RunSimulation();
+    RunSimulation(int timeBetweenFloors);
     void generateBuilding();
     void iterateOneSecond();
     void addPassengersToBuilding(vector<Passenger>);        
@@ -487,56 +484,21 @@ bool Building::doesFloorHavePassengersGoingDown(int floorNum){
     return false;
 }
 
-void Building::markPassengersAtDestination(Passenger passenger){
-    cout << "Total Wait Time" << totalWaitTime << endl;
+void Building::markPassengersAtDestination(Passenger passenger){    
     passengersAtDestination += 1;
     passenger.set_time_dropped_off(current_time);
     addTimeTravelled(passenger);
     addWaitTime(passenger);
-
-    ///DEBUG STUFF///
-    // int id = passenger.get_passenger_ID();
-    // fullPassengerList.erase(std::remove_if(fullPassengerList.begin(),
-    //     fullPassengerList.end(),
-    //     [id](Passenger p){
-    //         return p.get_passenger_ID() == id;
-    //     }), fullPassengerList.end());
-        
-    
-
-    // cout << "Passengers at destination: " << passengersAtDestination << endl;
-
-    // if(passengersAtDestination % 5 == 0){
-    //     cout << "Floors awaiting pickup " << this->floorsRequestingPickup.size() << endl;
-    // }
-
-    // if(passengersAtDestination == 497)
-    // {
-    //     for(int i = 0; i < this->elevators.size(); i++){
-    //         cout << "state number " << this->elevators.at(i).get_state() << endl;
-    //         cout << "number of passengers " << this->elevators.at(i).num_passengers << endl;
-    //         cout << "current floor " << this->elevators.at(i).currentFloorNumber << endl;
-    //     }
-    //     cout << this->passengersNotOnFloorsYet.size();
-    //     for(int i = 0; i < passengersNotOnFloorsYet.size(); i++){
-    //         cout << "ID: " << passengersNotOnFloorsYet.at(i).get_passenger_ID() << endl;
-    //     }
-    //     cout << this->fullPassengerList.size();
-    //     for(int i = 0; i < fullPassengerList.size(); i++){
-    //         cout << "ID: " << fullPassengerList.at(i).get_passenger_ID() << "start_time" << fullPassengerList.at(i).get_start_time() << endl;
-    //     }
-    // }
-    ///DEBUG STUFF///
 }
 
 void Building::addTimeTravelled(Passenger passenger){
     int time = passenger.get_time_dropped_off() - passenger.get_time_picked_up();
     totalTimeTravelled += time;
 }
+
 void Building::addWaitTime(Passenger passenger){
     int time = passenger.get_time_picked_up() - passenger.get_start_time();        
-    totalWaitTime += time;
-    cout << totalWaitTime << endl;
+    totalWaitTime += time;    
 }
 
 void Building::debugGetNumberOfFloorsWithQueuedPassengers(){
@@ -550,9 +512,11 @@ void Building::debugGetNumberOfFloorsWithQueuedPassengers(){
 }
 
 
-RunSimulation::RunSimulation() {}
+RunSimulation::RunSimulation(int timeBetweenFloors) {
+    TIME_BETWEEN_FLOORS = timeBetweenFloors;
+}
 
-void RunSimulation::generateBuilding(int TIME_BETWEEN_FLOORS) {
+void RunSimulation::generateBuilding() {
     building = Building(MAX_ELEVATORS, MAX_FLOORS, TIME_BETWEEN_FLOORS);    
 }
 
@@ -636,21 +600,13 @@ vector<Passenger> getPassengerData() {
 }
 
 int main() {
-    RunSimulation s;
+    //FIRST simulation ----- 10 seconds between each floor
+
+    RunSimulation s(10);
     s.generateBuilding();
     vector<Passenger> passengers = getPassengerData();
     s.addPassengersToBuilding(passengers);
-    cout << "Total number of passengers: " << s.building.totalPassengers << endl;
-    int countAlreadyAtDestination = std::count_if(s.building.fullPassengerList.begin(),
-        s.building.fullPassengerList.end(),
-        [](Passenger& passenger){
-            return passenger.get_status() == Passenger::AT_DESTINATION;
-        });
-    
-    // cout << "Passengers whose destinations are the same as their starting location: " << countAlreadyAtDestination;
-    // cout << "Number of passengers needing an elevator ride: " << s.building.totalPassengers - countAlreadyAtDestination << endl;
-    // int numberOfPassengerThatNeedARide = s.building.totalPassengers - countAlreadyAtDestination;
-
+    cout << "Total number of passengers: " << s.building.totalPassengers << endl;   
     cout << "Beginning simulation with 10 second travel times." << endl;
     while (s.building.passengersAtDestination < s.building.totalPassengers) {
         s.iterateOneSecond();        
@@ -661,6 +617,25 @@ int main() {
     cout << "Total time spent travelling on an elevator for all passengers combined: " << s.building.totalTimeTravelled << endl;
     cout << "Average wait time for all passengers: " << s.building.totalWaitTime/s.building.totalPassengers << endl;
     cout << "Average time spent travelling on an elevator for all passengers combined: " << s.building.totalTimeTravelled/s.building.totalPassengers << endl;
+
+
+    //SECOND simulation ----- 10 seconds between each floor
+
+    RunSimulation s2(5);
+    s2.generateBuilding();    
+    s2.addPassengersToBuilding(passengers);
+    cout << "\n\n\n";
+    cout << "Total number of passengers: " << s2.building.totalPassengers << endl;
+    cout << "Beginning simulation with 5 second travel times." << endl;
+    while (s2.building.passengersAtDestination < s2.building.totalPassengers) {
+        s2.iterateOneSecond();        
+    }    
+    cout << "Number of passengers that reached their destination floor: " << s2.building.passengersAtDestination << endl;
+    cout << "Total number of seconds elapsed: " << s2.building.current_time << endl;
+    cout << "Total wait time for all passengers combined: " << s2.building.totalWaitTime << endl;
+    cout << "Total time spent travelling on an elevator for all passengers combined: " << s2.building.totalTimeTravelled << endl;
+    cout << "Average wait time for all passengers: " << s2.building.totalWaitTime/s.building.totalPassengers << endl;
+    cout << "Average time spent travelling on an elevator for all passengers combined: " << s2.building.totalTimeTravelled/s.building.totalPassengers << endl;
     
     return 0;
 }
