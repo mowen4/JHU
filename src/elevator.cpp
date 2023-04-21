@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <set>
 
 using namespace std;
 
@@ -124,7 +125,7 @@ class Building {
     Building();
     Building(int num_elevators, int num_floors, int time_between_floors);
     vector<Floor> floors;
-    vector<int> floorsRequestingPickup;
+    set<int> floorsRequestingPickup;
     vector<Floor::CallState> floorsCallState;
     vector<Elevator> elevators;
     vector<Passenger> passengersNotOnFloorsYet;
@@ -202,7 +203,7 @@ void Elevator::move_down() {
 
 void Elevator::stop() {
     //TODO: Handling for if they are at the max or min floor? Move to STOPPED_NO_PASSENGERS?     
-    if (this->state == MOVING_UP) {
+    if ((state == MOVING_UP && currentFloorNumber != MAX_FLOORS) || currentFloorNumber == 1) {
         state = STOPPING_GOING_UP;
     } else {
         state = STOPPING_GOING_DOWN;
@@ -276,6 +277,18 @@ void Elevator::update(Building &building) {
                     closestFloor = floor;
                 }
             }
+            // //You're already there somehow, pick them up immediately
+            // if(closestFloor == currentFloorNumber){
+            //     loadPassengers(building);
+            //     //this is a weird case, figure out which direction to go now:
+            //     if(passengers.size() > 0 && passengers.at(0).get_start_floor() < passengers.at(0).get_end_floor()) {
+            //         state = MOVING_DOWN;
+            //     } 
+            //     else{
+            //         state = MOVING_UP;
+            //     }                                
+            // }
+            
             if(closestFloor > currentFloorNumber){
                 state = MOVING_UP;                }
             else{
@@ -313,7 +326,8 @@ void Elevator::update(Building &building) {
 void Elevator::loadPassengers(Building &building){
     //Get the Floor object from the Building singleton for the current floor the elevator is on
     auto& currFloor = building.floors.at(currentFloorNumber-1);
-    if(state == STOPPED_GOING_DOWN){
+    if(state == STOPPED_GOING_DOWN 
+        || (state == STOPPED_NO_PASSENGERS && currFloor.passengersGoingDown.size() > 0) ){
         //while elevator is not full and Floor has passengers waiting to queue
         while(currFloor.passengersGoingDown.size() > 0 
             && this->num_passengers < MAX_PASSENGERS) 
@@ -336,13 +350,10 @@ void Elevator::loadPassengers(Building &building){
         }
     }
     
-    // if(currFloor.passengersGoingDown.size() == 0 && currFloor.passengersGoingUp.size() == 0){
-    //     //if no passengers are awaiting pickup on this floor, remove floor number from floorsRequestingPickup
-    //     building.floorsRequestingPickup.erase(std::remove(
-    //             building.floorsRequestingPickup.begin(),
-    //             building.floorsRequestingPickup.end(), 
-    //             currentFloorNumber));
-    // }
+    if(currFloor.passengersGoingDown.size() == 0 && currFloor.passengersGoingUp.size() == 0){
+        //if no passengers are awaiting pickup on this floor, remove floor number from floorsRequestingPickup
+        building.floorsRequestingPickup.erase(currentFloorNumber);
+    }
 }
 
 void Elevator::unloadPassengers(Building &building) {
@@ -416,7 +427,7 @@ void Building::getFloorsAndCallStatuses(){
     for (Floor f : floors){
         Floor::CallState c = f.isStopRequested();
         if (c != Floor::CallState::NONE){
-            floorsRequestingPickup.push_back(f.floorNumber);
+            floorsRequestingPickup.insert(f.floorNumber);
             floorsCallState.push_back(c);
         }
     }
@@ -450,10 +461,10 @@ void Building::markPassengersAtDestination(int numPassengers){
     cout << "Passengers at destination: " << passengersAtDestination << endl;
 
     if(passengersAtDestination % 5 == 0){
-        cout << "Floors awaiting pickup" << this->floorsRequestingPickup.size() << endl;
+        cout << "Floors awaiting pickup " << this->floorsRequestingPickup.size() << endl;
     }
 
-    if(passengersAtDestination == 77)
+    if(passengersAtDestination == 55 || passengersAtDestination == 77 || passengersAtDestination == 358)
     {
         for(int i = 0; i < this->elevators.size(); i++){
             cout << "state number " << this->elevators.at(i).get_state() << endl;
