@@ -134,7 +134,7 @@ class Elevator {
     const int DEFAULT_START_FLOOR = 1;
     const int TIME_BETWEEN_FLOORS;
 };
-/// @brief Building class is the shell encompassing the floor, elevator and 
+/// @brief Building class is the shell encompassing the floor, elevator and
 /// passenger classes. it will act as the controller for the simulation
 /// called by the runsimulation class
 class Building {
@@ -472,7 +472,6 @@ Building::Building(int num_elevators, int num_floors, int time_between_floors) {
 /// @param t time in seconds
 void Building::setCurrentTime(int t) { current_time = t; }
 
-
 /// @brief Update the floor call status for all floors in building
 /// this will move passengers from the notOnFloorYet queue to their
 /// corresponding floors and then when the floors are checked for status
@@ -586,7 +585,7 @@ void Building::debugGetNumberOfFloorsWithQueuedPassengers() {
 }
 
 /// @brief method to run the simulation
-/// @param timeBetweenFloors used to update the travel time and allow for 
+/// @param timeBetweenFloors used to update the travel time and allow for
 /// analysis on elevator speed
 RunSimulation::RunSimulation(int timeBetweenFloors) {
     TIME_BETWEEN_FLOORS = timeBetweenFloors;
