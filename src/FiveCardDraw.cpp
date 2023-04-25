@@ -210,48 +210,36 @@ class Hand {
     bool royalFlush = false;
 };
 
-int Hand::bet(int minAmount, int maxRaise, bool isAnte){
-
-    if (isAnte)
-    {
-        money-=minAmount;
+int Hand::bet(int minAmount, int maxRaise, bool isAnte) {
+    if (isAnte) {
+        money -= minAmount;
         return minAmount;
 
-    } else if (human)
-    {
+    } else if (human) {
         int i = 0;
         bool inputInvalid = true;
-        do
-        {
-            
+        do {
             cout << "Enter the value for your bet\n";
             cout << "Minumum Bet: " << minAmount << "\n";
             cout << "Maximum Raise: " << maxRaise << "\n";
             cin >> i;
 
-            if (i<minAmount)
-            {
-               cout << "Input less than current bet, bet more";
-            } else if ((i-minAmount) > maxRaise)
-            {
-               cout << "maximum raise is:" << maxRaise << "bet less";
-            } else{
+            if (i < minAmount) {
+                cout << "Input less than current bet, bet more";
+            } else if ((i - minAmount) > maxRaise) {
+                cout << "maximum raise is:" << maxRaise << "bet less";
+            } else {
                 inputInvalid = false;
             }
-            
-            
+
         } while (inputInvalid);
 
         money -= i;
         return i;
 
-    } else
-    {
-       return 5;
+    } else {
+        return 5;
     }
-    
-    
-
 }
 
 void Hand::setFolded() { folded = true; }
@@ -454,41 +442,40 @@ void PokerGame::betRound() {
     int minBet = 0;
     int betAmount = 0;
 
-    //small blind
-    minBet = playerHands[0].bet(1,0,true);
+    // small blind
+    minBet = playerHands[0].bet(1, 0, true);
     pot += minBet;
 
-    //big blind
-    minBet = playerHands[1].bet(2,0,true);
+    // big blind
+    minBet = playerHands[1].bet(2, 0, true);
     pot += minBet;
 
-    //betting begins with player after big blind, rotate 2 so the betting begins
-    //with the player after the big blind
-    std::rotate(playerHands.begin(),playerHands.begin()+2,playerHands.end());
+    // betting begins with player after big blind, rotate 2 so the betting
+    // begins with the player after the big blind
+    std::rotate(playerHands.begin(), playerHands.begin() + 2,
+                playerHands.end());
 
-
-
-    // TODO implement betting using the bet() function to determine call,raise,fold
-    // and any other case
-    // this for loop will likely be a do... while loop and will have to check 
-    // conditions for the betting to continue or to proceed to the card exchange 
-    // round.
+    // TODO implement betting using the bet() function to determine
+    // call,raise,fold and any other case this for loop will likely be a do...
+    // while loop and will have to check conditions for the betting to continue
+    // or to proceed to the card exchange round.
 
     // if betamount == min bet then its a call
     // if betamount > min amount its a raise
     // maximum 3 raises per round
     // might need to add args to the Hand::bet() function
-    for (Hand &h : this->playerHands) { //for each player
-        if (!h.isFolded()) { //if they have not folded
+    for (Hand &h : this->playerHands) {  // for each player
+        if (!h.isFolded()) {             // if they have not folded
 
-            betAmount = h.bet(minBet, 5, false); //arg 2 is max raise of 5 for now
+            betAmount =
+                h.bet(minBet, 5, false);  // arg 2 is max raise of 5 for now
 
-            if (betAmount > 0) {            //if bet amount is > 0 pot +=
+            if (betAmount > 0) {  // if bet amount is > 0 pot +=
                 pot += betAmount;
                 minBet = betAmount;
-            } else if (betAmount == 0) {    //if 0 user folded
+            } else if (betAmount == 0) {  // if 0 user folded
                 h.setFolded();
-            } else if (betAmount == -1) {   //exception handle
+            } else if (betAmount == -1) {  // exception handle
                 //
             }
         }
