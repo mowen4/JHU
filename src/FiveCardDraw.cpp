@@ -88,6 +88,8 @@ Deck::Deck() {
     // std::shuffle(deck.begin(), deck.end(), g);
 
     // Fisher-Yates Shuffle
+    srand(time(NULL));
+
     int size = deck.size();
     for (int i = 0; i < size - 1; i++) {
         int j = i + rand() % (size - i);
@@ -180,7 +182,10 @@ class Hand {
     HandRanking getRank() const;
     vector<Card> getCards() const;
     bool isHuman();
+    bool isFolded();
+    void setFolded();
     void setHuman();
+    int bet(int minAmount, int maxRaise, bool isAnte);
 
     // array to store counts of card values in the hand
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
@@ -191,6 +196,8 @@ class Hand {
     HandRanking rank;
     int maximumHandSize;
     bool human = false;
+    bool folded = false;
+    int money = 100;
 
     // boolean flags for hand type determination
     bool pair = false;
@@ -203,7 +210,55 @@ class Hand {
     bool royalFlush = false;
 };
 
+int Hand::bet(int minAmount, int maxRaise, bool isAnte){
+
+    if (isAnte)
+    {
+        money-=minAmount;
+        return minAmount;
+
+    } else if (human)
+    {
+        int i = 0;
+        bool inputInvalid = true;
+        do
+        {
+            
+            cout << "Enter the value for your bet\n";
+            cout << "Minumum Bet: " << minAmount << "\n";
+            cout << "Maximum Raise: " << maxRaise << "\n";
+            cin >> i;
+
+            if (i<minAmount)
+            {
+               cout << "Input less than current bet, bet more";
+            } else if ((i-minAmount) > maxRaise)
+            {
+               cout << "maximum raise is:" << maxRaise << "bet less";
+            } else{
+                inputInvalid = false;
+            }
+            
+            
+        } while (inputInvalid);
+
+        money -= i;
+        return i;
+
+    } else
+    {
+       return 5;
+    }
+    
+    
+
+}
+
+void Hand::setFolded() { folded = true; }
+
 void Hand::setHuman() { human = true; }
+
+bool Hand::isFolded() { return folded; }
 
 bool Hand::isHuman() { return human; }
 
@@ -371,6 +426,7 @@ class PokerGame {
     void setNumberOfHumans(int numHumans);
     void dealInitialHands();
     void assignSeats();
+    void betRound();
 
    private:
     Deck deck;
@@ -391,6 +447,53 @@ class PokerGame {
 
    protected:
 };
+
+void PokerGame::betRound() {
+    int pot = 0;
+    int highBet = 0;
+    int minBet = 0;
+    int betAmount = 0;
+
+    //small blind
+    minBet = playerHands[0].bet(1,0,true);
+    pot += minBet;
+
+    //big blind
+    minBet = playerHands[1].bet(2,0,true);
+    pot += minBet;
+
+    //betting begins with player after big blind, rotate 2 so the betting begins
+    //with the player after the big blind
+    std::rotate(playerHands.begin(),playerHands.begin()+2,playerHands.end());
+
+
+
+    // TODO implement betting using the bet() function to determine call,raise,fold
+    // and any other case
+    // this for loop will likely be a do... while loop and will have to check 
+    // conditions for the betting to continue or to proceed to the card exchange 
+    // round.
+
+    // if betamount == min bet then its a call
+    // if betamount > min amount its a raise
+    // maximum 3 raises per round
+    // might need to add args to the Hand::bet() function
+    for (Hand &h : this->playerHands) { //for each player
+        if (!h.isFolded()) { //if they have not folded
+
+            betAmount = h.bet(minBet, 5, false); //arg 2 is max raise of 5 for now
+
+            if (betAmount > 0) {            //if bet amount is > 0 pot +=
+                pot += betAmount;
+                minBet = betAmount;
+            } else if (betAmount == 0) {    //if 0 user folded
+                h.setFolded();
+            } else if (betAmount == -1) {   //exception handle
+                //
+            }
+        }
+    }
+}
 
 void PokerGame::assignSeats() {
     Hand hand;
@@ -823,11 +926,12 @@ int main() {
     // jsonTester.ProcessTestsInJsonFile();
 
     PokerGame game;
-    game.setNumberOfPlayers(4);
-    game.setNumberOfHumans(2);
+    game.setNumberOfPlayers(3);
+    game.setNumberOfHumans(3);
     game.assignSeats();
     game.dealInitialHands();
     game.showPlayerHands();
+    game.betRound();
 
     return 0;
 }
