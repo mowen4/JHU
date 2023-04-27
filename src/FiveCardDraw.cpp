@@ -185,7 +185,9 @@ class Hand {
     bool isFolded();
     void setFolded();
     void setHuman();
-    int bet(int minAmount, int maxRaise, bool isAnte);
+    int bet(int minAmount, int maxRaise, int countRaises, bool isAnte);
+    int amountBetThisRoundAlready = 0;
+    int discardCards();
 
     // array to store counts of card values in the hand
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
@@ -210,7 +212,13 @@ class Hand {
     bool royalFlush = false;
 };
 
-int Hand::bet(int minAmount, int maxRaise, bool isAnte) {
+int Hand::discardCards()
+{
+    //0 for now for compiling
+    return 0;
+}
+
+int Hand::bet(int minAmount, int maxRaise, int raisesRemaining, bool isAnte) {
     if (isAnte) {
         money -= minAmount;
         return minAmount;
@@ -218,27 +226,46 @@ int Hand::bet(int minAmount, int maxRaise, bool isAnte) {
     } else if (human) {
         int i = 0;
         bool inputInvalid = true;
+        if (minAmount == 0 && this->amountBetThisRoundAlready != 0) {
+            cout << "All seats called\n";
+            return -1;
+        }
         do {
-            cout << "Enter the value for your bet\n";
-            cout << "Minumum Bet: " << minAmount << "\n";
-            cout << "Maximum Raise: " << maxRaise << "\n";
-            cin >> i;
+            if (raisesRemaining > 0) {
+                cout << "Enter the value for your bet, 0 to check or fold\n";
+                cout << "Amount to call: " << minAmount << "\n";
+                cout << "Maximum Raise: " << maxRaise << "\n";
+                cin >> i;
+            } else {
+                cout << "Enter the value for your bet, 0 to check or fold\n";
+                cout << "No More Raises Allowed This Round. Required Bet: "
+                     << minAmount << "\n";
+                cin >> i;
+            }
 
-            if (i < minAmount) {
-                cout << "Input less than current bet, bet more";
-            } else if ((i - minAmount) > maxRaise) {
-                cout << "maximum raise is:" << maxRaise << "bet less";
+            if (i == 0) {
+                cout << "Check or Folding\n";
+                return i;
+            } else if (i < minAmount) {
+                cout << "Input less than current bet, bet more\n";
+            } else if ((i - minAmount) > maxRaise && raisesRemaining > 0) {
+                cout << "maximum raise is: " << maxRaise << " bet less\n";
+            } else if (i != minAmount && raisesRemaining == 0) {
+                cout << "No Raises remain, call or fold\n";
             } else {
                 inputInvalid = false;
             }
 
         } while (inputInvalid);
 
+        cout << "Bet is for " << i << "\n";
         money -= i;
+        this->amountBetThisRoundAlready += i;
         return i;
 
     } else {
-        return 5;
+        // computer always bets minAmount for now and never folds
+        return minAmount;
     }
 }
 
@@ -415,6 +442,7 @@ class PokerGame {
     void dealInitialHands();
     void assignSeats();
     void betRound();
+    void getDraw();
 
    private:
     Deck deck;
@@ -436,50 +464,112 @@ class PokerGame {
    protected:
 };
 
+void PokerGame::getDraw()
+{
+    for (Hand &h : this->playerHands) {  // for each player
+        h.amountBetThisRoundAlready = 0;
+    }
+
+    //TODO return and get new cards from deck
+    for (Hand &h : this->playerHands) {  // for each player
+        int numToDeal = h.discardCards();
+        //write the discardCards() function
+        //prompt player to discard any number
+        //return num cards to deal
+        for (int i = 0; i < numToDeal; i++) {
+            Card c = deck.dealTopCard();
+                h.addCard(c);
+    }
+
+    }
+}
+
 void PokerGame::betRound() {
     int pot = 0;
     int highBet = 0;
-    int minBet = 0;
+    int toCall = 0;
     int betAmount = 0;
+    int raisesRemaining =
+        numberOfPlayers + 2;  // possibly change to num players
+    int numCalls = 0;
+    int numChecks = 0;
+    int numFolded = 0;
+    bool anotherRound = true;
 
     // small blind
-    minBet = playerHands[0].bet(1, 0, true);
-    pot += minBet;
+    // minBet = playerHands[0].bet(1, 0, 0, true);
+    // pot += minBet;
 
-    // big blind
-    minBet = playerHands[1].bet(2, 0, true);
-    pot += minBet;
+    // // big blind
+    // minBet = playerHands[1].bet(2, 0, 0, true);
+    // pot += minBet;
 
-    // betting begins with player after big blind, rotate 2 so the betting
-    // begins with the player after the big blind
-    std::rotate(playerHands.begin(), playerHands.begin() + 2,
-                playerHands.end());
+    // // betting begins with player after big blind, rotate 2 so the betting
+    // // begins with the player after the big blind
+    // std::rotate(playerHands.begin(), playerHands.begin() + 2,
+    //             playerHands.end());
 
     // TODO implement betting using the bet() function to determine
-    // call,raise,fold and any other case this for loop will likely be a do...
-    // while loop and will have to check conditions for the betting to continue
-    // or to proceed to the card exchange round.
+    // call,raise,fold,check and any other case this for loop will likely be a
+    // do... while loop and will have to check conditions for the betting to
+    // continue or to proceed to the card exchange round.
 
     // if betamount == min bet then its a call
     // if betamount > min amount its a raise
     // maximum 3 raises per round
     // might need to add args to the Hand::bet() function
-    for (Hand &h : this->playerHands) {  // for each player
-        if (!h.isFolded()) {             // if they have not folded
+    do {
+        for (Hand &h : this->playerHands) {  // for each player
+            cout << "The Pot is: " << pot << "\n";
+            if (!h.isFolded()) {  // if they have not folded
+                int betDiff = h.amountBetThisRoundAlready;
+                betAmount = h.bet(toCall - betDiff, 10, raisesRemaining,
+                                  false);  // arg 2 is max raise of 5 for now
 
-            betAmount =
-                h.bet(minBet, 5, false);  // arg 2 is max raise of 5 for now
+                if (betAmount > 0) {  // if bet amount is > 0 pot +=
+                    pot += betAmount;
+                    if (betAmount > (toCall - betDiff))  // raise
+                    {
+                        raisesRemaining--;
+                        numCalls = 0;
+                        toCall = h.amountBetThisRoundAlready;
+                        //     toCall = betAmount - toCall;
+                        // } else if (betAmount == toCall) {
+                    } else {
+                        numCalls++;
+                    }
 
-            if (betAmount > 0) {  // if bet amount is > 0 pot +=
-                pot += betAmount;
-                minBet = betAmount;
-            } else if (betAmount == 0) {  // if 0 user folded
-                h.setFolded();
-            } else if (betAmount == -1) {  // exception handle
-                //
+                } else if (betAmount == 0) {  // if 0 user folded unless no bets
+                                              // then its a check
+                    if (raisesRemaining == this->numberOfPlayers &&
+                        numCalls == 0) {
+                        numChecks++;
+                    } else {
+                        h.setFolded();  // if there are bets then a 0 bet  ==
+                        numFolded++;    // folded
+                        if (numFolded == (numberOfPlayers - 1)) {
+                            anotherRound = false;
+                            break;
+                        }
+                    }
+
+                } else if (betAmount == -1) {  // all have called. round over
+                    anotherRound = false;
+                    break;
+                }
             }
         }
-    }
+
+        playerHands.erase(std::remove_if(playerHands.begin(),playerHands.end(),
+            [](Hand p) {return p.isFolded();}), playerHands.end());
+
+        if (this->numberOfPlayers == numCalls ||
+            this->numberOfPlayers == numChecks ||
+            this->numberOfPlayers == numFolded) {
+            anotherRound = false;
+        }
+
+    } while (anotherRound);
 }
 
 void PokerGame::assignSeats() {
@@ -919,6 +1009,9 @@ int main() {
     game.dealInitialHands();
     game.showPlayerHands();
     game.betRound();
+    game.getDraw();
+    game.betRound();
+    //game.determineWinner();
 
     return 0;
 }
