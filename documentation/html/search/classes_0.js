@@ -1,11 +1,22 @@
 var searchData=
 [
-  ['always_5ffalse_0',['always_false',['../struct_catch_1_1always__false.html',1,'Catch']]],
-  ['approx_1',['Approx',['../class_catch_1_1_detail_1_1_approx.html',1,'Catch::Detail']]],
-  ['approxmatcher_2',['ApproxMatcher',['../struct_catch_1_1_matchers_1_1_vector_1_1_approx_matcher.html',1,'Catch::Matchers::Vector']]],
-  ['as_3',['as',['../struct_catch_1_1_generators_1_1as.html',1,'Catch::Generators']]],
-  ['assertionhandler_4',['AssertionHandler',['../class_catch_1_1_assertion_handler.html',1,'Catch']]],
-  ['assertioninfo_5',['AssertionInfo',['../struct_catch_1_1_assertion_info.html',1,'Catch']]],
-  ['assertionreaction_6',['AssertionReaction',['../struct_catch_1_1_assertion_reaction.html',1,'Catch']]],
-  ['autoreg_7',['AutoReg',['../struct_catch_1_1_auto_reg.html',1,'Catch']]]
+  ['absolutetimedateformat_0',['AbsoluteTimeDateFormat',['../classlog4cxx_1_1helpers_1_1_absolute_time_date_format.html',1,'log4cxx::helpers']]],
+  ['action_1',['Action',['../classlog4cxx_1_1rolling_1_1_action.html',1,'log4cxx::rolling']]],
+  ['add_2',['Add',['../class_add.html',1,'']]],
+  ['addnode_3',['AddNode',['../class_add_node.html',1,'']]],
+  ['always_5ffalse_4',['always_false',['../struct_catch_1_1always__false.html',1,'Catch']]],
+  ['andfilter_5',['AndFilter',['../classlog4cxx_1_1filter_1_1_and_filter.html',1,'log4cxx::filter']]],
+  ['appender_6',['Appender',['../classlog4cxx_1_1_appender.html',1,'log4cxx']]],
+  ['appenderattachable_7',['AppenderAttachable',['../classlog4cxx_1_1spi_1_1_appender_attachable.html',1,'log4cxx::spi']]],
+  ['appenderattachableimpl_8',['AppenderAttachableImpl',['../classlog4cxx_1_1helpers_1_1_appender_attachable_impl.html',1,'log4cxx::helpers']]],
+  ['appenderskeleton_9',['AppenderSkeleton',['../classlog4cxx_1_1_appender_skeleton.html',1,'log4cxx']]],
+  ['approx_10',['Approx',['../class_catch_1_1_detail_1_1_approx.html',1,'Catch::Detail']]],
+  ['approxmatcher_11',['ApproxMatcher',['../struct_catch_1_1_matchers_1_1_vector_1_1_approx_matcher.html',1,'Catch::Matchers::Vector']]],
+  ['aprinitializer_12',['APRInitializer',['../classlog4cxx_1_1helpers_1_1_a_p_r_initializer.html',1,'log4cxx::helpers']]],
+  ['as_13',['as',['../struct_catch_1_1_generators_1_1as.html',1,'Catch::Generators']]],
+  ['assertionhandler_14',['AssertionHandler',['../class_catch_1_1_assertion_handler.html',1,'Catch']]],
+  ['assertioninfo_15',['AssertionInfo',['../struct_catch_1_1_assertion_info.html',1,'Catch']]],
+  ['assertionreaction_16',['AssertionReaction',['../struct_catch_1_1_assertion_reaction.html',1,'Catch']]],
+  ['asyncappender_17',['AsyncAppender',['../classlog4cxx_1_1_async_appender.html',1,'log4cxx']]],
+  ['autoreg_18',['AutoReg',['../struct_catch_1_1_auto_reg.html',1,'Catch']]]
 ];

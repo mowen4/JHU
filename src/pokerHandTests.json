@@ -1,4 +1,22 @@
 {
+    "royalFlushTests": [
+        {
+            "p1": [
+                "AS",
+                "KS",
+                "QS",
+                "JS",
+                "TS"
+            ],
+            "p2": [
+                "8H",
+                "7H",
+                "6H",
+                "5H",
+                "4H"
+            ]
+        }
+    ],
     "straightFlushTests": [
         {
             "p1": [

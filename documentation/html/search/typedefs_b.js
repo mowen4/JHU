@@ -1,4 +1,20 @@
 var searchData=
 [
-  ['pointer_0',['pointer',['../class_json_1_1_secure_allocator.html#a442c09b3267622d23416d9072ea1afe9',1,'Json::SecureAllocator::pointer()'],['../class_json_1_1_secure_allocator.html#a442c09b3267622d23416d9072ea1afe9',1,'Json::SecureAllocator::pointer()'],['../class_json_1_1_value_const_iterator.html#ae78a1f4d05351dec67165c7063462212',1,'Json::ValueConstIterator::pointer()'],['../class_json_1_1_value_iterator.html#a3705be714322498068bc1ed378e9e07c',1,'Json::ValueIterator::pointer()']]]
+  ['largestint_0',['LargestInt',['../class_json_1_1_value.html#a6ce811c4ceb845590426eee1ac95fc99',1,'Json::Value::LargestInt()'],['../namespace_json.html#a218d880af853ce786cd985e82571d297',1,'Json::LargestInt()']]],
+  ['largestuint_1',['LargestUInt',['../class_json_1_1_value.html#a6e5a59766fcd42192dd0a46c13a9a55b',1,'Json::Value::LargestUInt()'],['../namespace_json.html#ae202ecad69725e23443f465e257456d0',1,'Json::LargestUInt()']]],
+  ['layoutptr_2',['LayoutPtr',['../namespacelog4cxx.html#abdcdc973d46623f53379dbb4ba33ae86',1,'log4cxx']]],
+  ['levelptr_3',['LevelPtr',['../namespacelog4cxx.html#abab74d1809c0c810f3f7eae2c3fa511e',1,'log4cxx']]],
+  ['location_4',['Location',['../class_json_1_1_reader.html#ab8ce1ea3970e97a9b748ba17754fbe4b',1,'Json::Reader::Location()'],['../class_json_1_1_our_reader.html#a9cbbee13b829f8270b2943a248048a73',1,'Json::OurReader::Location()']]],
+  ['log4cxx_5fint64_5ft_5',['log4cxx_int64_t',['../log4cxx_8h.html#a9428ea88111d30223da12c76693b0b35',1,'log4cxx.h']]],
+  ['log4cxx_5fstatus_5ft_6',['log4cxx_status_t',['../log4cxx_8h.html#a5fafb40b34a1643582bd2e830f654ff7',1,'log4cxx.h']]],
+  ['log4cxx_5ftime_5ft_7',['log4cxx_time_t',['../log4cxx_8h.html#adcf85375d350e7045ac5570a2c922aec',1,'log4cxx.h']]],
+  ['log4cxx_5fuint32_5ft_8',['log4cxx_uint32_t',['../log4cxx_8h.html#a6205efa6a69ce0ecf2eb05e52a75d891',1,'log4cxx.h']]],
+  ['logcharmessagebuffer_9',['LogCharMessageBuffer',['../namespacelog4cxx_1_1helpers.html#ade64e10509be65a6366f4ba99659ae99',1,'log4cxx::helpers']]],
+  ['loggerfactoryptr_10',['LoggerFactoryPtr',['../namespacelog4cxx_1_1spi.html#a1ecb69c51265df069784fb6bde79dae5',1,'log4cxx::spi']]],
+  ['loggerlist_11',['LoggerList',['../namespacelog4cxx.html#ae64ef75ca642eee661fb51aa04b6c227',1,'log4cxx']]],
+  ['loggerptr_12',['LoggerPtr',['../namespacelog4cxx.html#acd073adf77cc8545b10ac024a474be0d',1,'log4cxx']]],
+  ['loggerrepositoryptr_13',['LoggerRepositoryPtr',['../namespacelog4cxx_1_1spi.html#a38a7dc69832e0647515f643f01be6fa5',1,'log4cxx::spi']]],
+  ['loggingeventptr_14',['LoggingEventPtr',['../namespacelog4cxx_1_1spi.html#aae6992e1b33222c26bdc1173b6aedc6c',1,'log4cxx::spi']]],
+  ['logstream_5fmanipulator_15',['logstream_manipulator',['../namespacelog4cxx.html#a52717feca3ae327f1ed1ec3c117cf9f6',1,'log4cxx']]],
+  ['logstring_16',['LogString',['../namespacelog4cxx.html#aa2308ed05fef2a1366066cb38b177e94',1,'log4cxx']]]
 ];

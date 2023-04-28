@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['dynamic_5fsection_0',['DYNAMIC_SECTION',['../catch_8hpp.html#aa1caa37b980555de35faefa9191b5128',1,'catch.hpp']]]
+  ['begin_5flog4cxx_5fcast_5fmap_0',['BEGIN_LOG4CXX_CAST_MAP',['../object_8h.html#ac8ff8f70159e03fe7d8c4aa743cc9cda',1,'object.h']]],
+  ['boost_5fshared_5fmutex_5ffound_1',['Boost_SHARED_MUTEX_FOUND',['../boost-std-configuration_8h.html#aeab08346a0cccede56f13cfd859c9346',1,'boost-std-configuration.h']]]
 ];

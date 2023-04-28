@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['threeofakind_0',['ThreeOfAKind',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a12c44b3ab8c3af2b17761c3c3eb40b74',1,'ThreeOfAKind():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a12c44b3ab8c3af2b17761c3c3eb40b74',1,'ThreeOfAKind():&#160;PokerHandsV2.cpp']]],
-  ['threwexception_1',['ThrewException',['../struct_catch_1_1_result_was.html#a624e1ee3661fcf6094ceef1f654601efa3bb56296483947280cf7fa1ad074ab45',1,'Catch::ResultWas']]],
-  ['throws_2',['Throws',['../struct_catch_1_1_test_case_info.html#a39b232f74b4a7a6f2183b96759027eaca4704adf89ed7f7ad653d08f99813a974',1,'Catch::TestCaseInfo']]],
-  ['twopairs_3',['TwoPairs',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6927082734d37e0460ba3a589e4485da',1,'TwoPairs():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6927082734d37e0460ba3a589e4485da',1,'TwoPairs():&#160;PokerHandsV2.cpp']]]
+  ['realvalue_0',['realValue',['../namespace_json.html#a7d654b75c16a57007925868e38212b4eab837c7b869c14d8be712deb45c9e490e',1,'Json']]],
+  ['riding_5felevator_1',['RIDING_ELEVATOR',['../class_passenger.html#a8ea52f39ccf01ac824a339f3564db987a73d6cb0b6b4a40d03c4a8751b1fc1694',1,'Passenger']]],
+  ['royalflush_2',['RoyalFlush',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb',1,'RoyalFlush():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb',1,'RoyalFlush():&#160;PokerHandsV2.cpp']]]
 ];

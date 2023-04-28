@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['char_0',['Char',['../class_json_1_1_reader.html#a068ce78fe0105dce714f8f5ff1928634',1,'Json::Reader::Char()'],['../class_json_1_1_our_reader.html#a7a9ca3c7eba58f0268005036fb38fd3d',1,'Json::OurReader::Char()']]],
-  ['charreaderptr_1',['CharReaderPtr',['../namespace_json.html#aee1e17f0e8a9c525428e46509aed6bb7',1,'Json']]],
-  ['const_5fiterator_2',['const_iterator',['../class_catch_1_1_string_ref.html#ac3aa3d16f48b5429a480f823c504f93c',1,'Catch::StringRef::const_iterator()'],['../class_json_1_1_value.html#a6ebbc5b370efbb09c0973d7a4d7cd936',1,'Json::Value::const_iterator()']]],
-  ['const_5fpointer_3',['const_pointer',['../class_json_1_1_secure_allocator.html#a464b356817c78ea996cd3a7403f7e735',1,'Json::SecureAllocator::const_pointer()'],['../class_json_1_1_secure_allocator.html#a464b356817c78ea996cd3a7403f7e735',1,'Json::SecureAllocator::const_pointer()']]],
-  ['const_5freference_4',['const_reference',['../class_json_1_1_secure_allocator.html#a3f0327d609dcd1942c8c7fa4d4f227e5',1,'Json::SecureAllocator::const_reference()'],['../class_json_1_1_secure_allocator.html#a3f0327d609dcd1942c8c7fa4d4f227e5',1,'Json::SecureAllocator::const_reference()']]]
+  ['base_5fclass_0',['BASE_CLASS',['../classlog4cxx_1_1filter_1_1_deny_all_filter.html#aeca122b108a39024e0686a8c77d7401e',1,'log4cxx::filter::DenyAllFilter::BASE_CLASS()'],['../classlog4cxx_1_1filter_1_1_level_match_filter.html#a0d0dbdebde3bb3ae71d9a06842151d4a',1,'log4cxx::filter::LevelMatchFilter::BASE_CLASS()'],['../classlog4cxx_1_1filter_1_1_level_range_filter.html#ac5377b32092a7a4cac9d069d41a09791',1,'log4cxx::filter::LevelRangeFilter::BASE_CLASS()'],['../classlog4cxx_1_1filter_1_1_logger_match_filter.html#adc12e9c645cfaa3bcf139425aeda73c9',1,'log4cxx::filter::LoggerMatchFilter::BASE_CLASS()'],['../classlog4cxx_1_1filter_1_1_string_match_filter.html#ace88350fee03fa47ad58771369a4197a',1,'log4cxx::filter::StringMatchFilter::BASE_CLASS()']]]
 ];

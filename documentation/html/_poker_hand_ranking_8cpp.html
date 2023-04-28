@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/PokerHandRanking.cpp File Reference</title>
+<title>My Project: PokerHandRanking.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,8 +100,7 @@ $(document).ready(function(){initNavTree('_poker_hand_ranking_8cpp.html',''); in
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">PokerHandRanking.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -115,11 +114,6 @@ $(document).ready(function(){initNavTree('_poker_hand_ranking_8cpp.html',''); in
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for PokerHandRanking.cpp:</div>
-<div class="dyncontent">
-<div class="center"><img src="_poker_hand_ranking_8cpp__incl.png" border="0" usemap="#asrc_2_poker_hand_ranking_8cpp" alt=""/></div>
-</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -135,6 +129,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for facilitating the running of a poker game.  <a href="class_poker_game.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_json_poker_tests.html">JsonPokerTests</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs tests on a collection of hands stored in json format.  <a href="class_json_poker_tests.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -176,15 +171,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">int main is the program entry point  <br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a65aa209fa62c3ff6062f2b25b0c66ad1"><td class="memItemLeft" align="right" valign="top">map&lt; char, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hand_ranking_8cpp.html#a65aa209fa62c3ff6062f2b25b0c66ad1">cardValues</a></td></tr>
-<tr class="separator:a65aa209fa62c3ff6062f2b25b0c66ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5b862f2af67c25e6fafa6b43046e188"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hand_ranking_8cpp.html#ac5b862f2af67c25e6fafa6b43046e188">Suits</a> [4] = {'S', 'H', 'D', 'C'}</td></tr>
-<tr class="separator:ac5b862f2af67c25e6fafa6b43046e188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d59e52a72c938981c743e9595bf60c"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hand_ranking_8cpp.html#a08d59e52a72c938981c743e9595bf60c">Values</a> [13]</td></tr>
-<tr class="separator:a08d59e52a72c938981c743e9595bf60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="af95eb6277debde8d3bf3ffffc70ac2a4" name="af95eb6277debde8d3bf3ffffc70ac2a4"></a>
@@ -282,60 +268,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a65aa209fa62c3ff6062f2b25b0c66ad1" name="a65aa209fa62c3ff6062f2b25b0c66ad1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65aa209fa62c3ff6062f2b25b0c66ad1">&#9670;&#160;</a></span>cardValues</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">map&lt;char, int&gt; cardValues</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    {<span class="charliteral">&#39;2&#39;</span>, 2}, {<span class="charliteral">&#39;3&#39;</span>, 3},  {<span class="charliteral">&#39;4&#39;</span>, 4},  {<span class="charliteral">&#39;5&#39;</span>, 5},  {<span class="charliteral">&#39;6&#39;</span>, 6},  {<span class="charliteral">&#39;7&#39;</span>, 7}, {<span class="charliteral">&#39;8&#39;</span>, 8},</div>
-<div class="line">    {<span class="charliteral">&#39;9&#39;</span>, 9}, {<span class="charliteral">&#39;T&#39;</span>, 10}, {<span class="charliteral">&#39;J&#39;</span>, 11}, {<span class="charliteral">&#39;Q&#39;</span>, 12}, {<span class="charliteral">&#39;K&#39;</span>, 13}, {<span class="charliteral">&#39;A&#39;</span>, 14}}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac5b862f2af67c25e6fafa6b43046e188" name="ac5b862f2af67c25e6fafa6b43046e188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5b862f2af67c25e6fafa6b43046e188">&#9670;&#160;</a></span>Suits</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char Suits[4] = {'S', 'H', 'D', 'C'}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a08d59e52a72c938981c743e9595bf60c" name="a08d59e52a72c938981c743e9595bf60c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08d59e52a72c938981c743e9595bf60c">&#9670;&#160;</a></span>Values</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char Values[13]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="charliteral">&#39;2&#39;</span>, <span class="charliteral">&#39;3&#39;</span>, <span class="charliteral">&#39;4&#39;</span>, <span class="charliteral">&#39;5&#39;</span>, <span class="charliteral">&#39;6&#39;</span>, <span class="charliteral">&#39;7&#39;</span>, <span class="charliteral">&#39;8&#39;</span>,</div>
-<div class="line">                         <span class="charliteral">&#39;9&#39;</span>, <span class="charliteral">&#39;T&#39;</span>, <span class="charliteral">&#39;J&#39;</span>, <span class="charliteral">&#39;Q&#39;</span>, <span class="charliteral">&#39;K&#39;</span>, <span class="charliteral">&#39;A&#39;</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_poker_hand_ranking_8cpp.html">PokerHandRanking.cpp</a></li>
+    <li class="navelem"><a class="el" href="_poker_hand_ranking_8cpp.html">PokerHandRanking.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

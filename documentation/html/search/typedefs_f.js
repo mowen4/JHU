@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['uint_0',['UInt',['../class_json_1_1_value.html#a10794060631f3e5f895739cfd2cc98b2',1,'Json::Value::UInt()'],['../namespace_json.html#a800fb90eb6ee8d5d62b600c06f87f7d4',1,'Json::UInt()']]],
-  ['uint64_1',['UInt64',['../class_json_1_1_value.html#a76faed915871e5b6b8d24e923f7ca6bc',1,'Json::Value::UInt64()'],['../namespace_json.html#adf3fa5cb60c619e4f02315ad355e0ca1',1,'Json::UInt64()']]],
-  ['uinttostringbuffer_2',['UIntToStringBuffer',['../namespace_json.html#a2fa31e983df5901247e0b89441fea4bd',1,'Json']]]
+  ['reference_0',['reference',['../class_json_1_1_secure_allocator.html#a55b243c56812b3852b59c1a9b0a21c65',1,'Json::SecureAllocator::reference()'],['../class_json_1_1_secure_allocator.html#a55b243c56812b3852b59c1a9b0a21c65',1,'Json::SecureAllocator::reference()'],['../class_json_1_1_value_const_iterator.html#a4e04dea5719630f67806875296eb4751',1,'Json::ValueConstIterator::reference()'],['../class_json_1_1_value_iterator.html#a650c999384cd2a90ad68ca6d028124de',1,'Json::ValueIterator::reference()']]],
+  ['result_5ftype_1',['result_type',['../class_catch_1_1_simple_pcg32.html#a220ca38f6d16804c6e99937a673ec3ff',1,'Catch::SimplePcg32']]],
+  ['ruleptr_2',['RulePtr',['../namespacelog4cxx_1_1rule.html#ab5d5d9c27682b7504c756530f9cf151c',1,'log4cxx::rule']]]
 ];

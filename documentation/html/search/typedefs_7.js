@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['jsoncpp_5fistream_0',['JSONCPP_ISTREAM',['../json-forwards_8h.html#ac2972f7be5297e918438b401cd2b9059',1,'JSONCPP_ISTREAM():&#160;json-forwards.h'],['../json_8h.html#ac2972f7be5297e918438b401cd2b9059',1,'JSONCPP_ISTREAM():&#160;json.h']]],
-  ['jsoncpp_5fistringstream_1',['JSONCPP_ISTRINGSTREAM',['../json-forwards_8h.html#a9fbaa2afa16c2335e4f8dbe5e269ce0b',1,'JSONCPP_ISTRINGSTREAM():&#160;json-forwards.h'],['../json_8h.html#a9fbaa2afa16c2335e4f8dbe5e269ce0b',1,'JSONCPP_ISTRINGSTREAM():&#160;json.h']]],
-  ['jsoncpp_5fostream_2',['JSONCPP_OSTREAM',['../json-forwards_8h.html#a6b0cafb1bcec31bf31513ed4754b71b5',1,'JSONCPP_OSTREAM():&#160;json-forwards.h'],['../json_8h.html#a6b0cafb1bcec31bf31513ed4754b71b5',1,'JSONCPP_OSTREAM():&#160;json.h']]],
-  ['jsoncpp_5fostringstream_3',['JSONCPP_OSTRINGSTREAM',['../json-forwards_8h.html#a37956168d339f2cc6ed9b9a29ad16ebe',1,'JSONCPP_OSTRINGSTREAM():&#160;json-forwards.h'],['../json_8h.html#a37956168d339f2cc6ed9b9a29ad16ebe',1,'JSONCPP_OSTRINGSTREAM():&#160;json.h']]],
-  ['jsoncpp_5fstring_4',['JSONCPP_STRING',['../json-forwards_8h.html#ab6e95760e8118fde575ebf7227d7428a',1,'JSONCPP_STRING():&#160;json-forwards.h'],['../json_8h.html#ab6e95760e8118fde575ebf7227d7428a',1,'JSONCPP_STRING():&#160;json.h']]]
+  ['handle_0',['HANDLE',['../classlog4cxx_1_1nt_1_1_n_t_event_log_appender.html#a112956b99a29fdde362f3b2c4598e84d',1,'log4cxx::nt::NTEventLogAppender']]]
 ];

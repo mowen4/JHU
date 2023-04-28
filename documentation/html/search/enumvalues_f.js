@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['uinttostringbuffersize_0',['uintToStringBufferSize',['../namespace_json.html#a7ecb56fc8de76a41123995225ca54986ae4f2008c7919f20d81286121d1374424',1,'Json']]],
-  ['uintvalue_1',['uintValue',['../namespace_json.html#a7d654b75c16a57007925868e38212b4eaea788d9a3bb00adc6d68d97d43e1ccd3',1,'Json']]],
-  ['unknown_2',['Unknown',['../struct_catch_1_1_result_was.html#a624e1ee3661fcf6094ceef1f654601efa65721dda02fe5efb522e7449e496608a',1,'Catch::ResultWas']]]
+  ['sc_5fserializable_0',['SC_SERIALIZABLE',['../classlog4cxx_1_1helpers_1_1_object_output_stream.html#adbdfdb87b76cf7207f45aac0e8384781abede66904b39facbe1230a45c1ed7be0',1,'log4cxx::helpers::ObjectOutputStream']]],
+  ['sc_5fwrite_5fmethod_1',['SC_WRITE_METHOD',['../classlog4cxx_1_1helpers_1_1_object_output_stream.html#adbdfdb87b76cf7207f45aac0e8384781a2044cf96290755832bf4149968316334',1,'log4cxx::helpers::ObjectOutputStream']]],
+  ['scalene_2',['scalene',['../class_triangle.html#a0a73a2cc4f6d278530139923cc7f7e7da21a9415d859c577714d78db62faa41fd',1,'Triangle']]],
+  ['shouldfail_3',['ShouldFail',['../struct_catch_1_1_test_case_info.html#a39b232f74b4a7a6f2183b96759027eacaf9002285bccfc343935958f3953f4c01',1,'Catch::TestCaseInfo']]],
+  ['significantdigits_4',['significantDigits',['../namespace_json.html#af6e1447a3c43e3a62e11050dd0a11ce8abb30ddeaa820d370a2438dda7a08996a',1,'Json']]],
+  ['stopped_5fgoing_5fdown_5',['STOPPED_GOING_DOWN',['../class_elevator.html#aed788179c9a59fc27f29f6b9a65b4708a79bc8ac2eb18928d8d8ba8d3d62161b1',1,'Elevator']]],
+  ['stopped_5fgoing_5fup_6',['STOPPED_GOING_UP',['../class_elevator.html#aed788179c9a59fc27f29f6b9a65b4708ad0d982ccf5276f27107f3ad655e5a87b',1,'Elevator']]],
+  ['stopped_5fno_5fpassengers_7',['STOPPED_NO_PASSENGERS',['../class_elevator.html#aed788179c9a59fc27f29f6b9a65b4708a5368240ee1bf81cc180c94496fd3f572',1,'Elevator']]],
+  ['stopping_5fgoing_5fdown_8',['STOPPING_GOING_DOWN',['../class_elevator.html#aed788179c9a59fc27f29f6b9a65b4708ae7a127b94c547a7dcb87e7f3997bca02',1,'Elevator']]],
+  ['stopping_5fgoing_5fup_9',['STOPPING_GOING_UP',['../class_elevator.html#aed788179c9a59fc27f29f6b9a65b4708a217e2796945155a508246a1c1a8e5274',1,'Elevator']]],
+  ['straight_10',['Straight',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4ada4cdade2120d083fe09b30940e51c12',1,'Straight():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4ada4cdade2120d083fe09b30940e51c12',1,'Straight():&#160;PokerHandsV2.cpp']]],
+  ['straightflush_11',['StraightFlush',['../_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a90663bbcbca6416ad39e70b52a053b99',1,'StraightFlush():&#160;PokerHandRanking.cpp'],['../_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a90663bbcbca6416ad39e70b52a053b99',1,'StraightFlush():&#160;PokerHandsV2.cpp']]],
+  ['stream_5fmagic_12',['STREAM_MAGIC',['../classlog4cxx_1_1helpers_1_1_object_output_stream.html#a9ddd8cd8c2a4d26be10eebd1eef6df5aa2b471c212a1ff19b4bf1d25451e388b8',1,'log4cxx::helpers::ObjectOutputStream']]],
+  ['stream_5fversion_13',['STREAM_VERSION',['../classlog4cxx_1_1helpers_1_1_object_output_stream.html#a238c7ac1da3c18f122c92099fad43bb2a7d3368523113267c50c529821c934c15',1,'log4cxx::helpers::ObjectOutputStream']]],
+  ['stringvalue_14',['stringValue',['../namespace_json.html#a7d654b75c16a57007925868e38212b4ea804ef857affea2d415843c73f261c258',1,'Json']]],
+  ['suppressfail_15',['SuppressFail',['../struct_catch_1_1_result_disposition.html#a3396cad6e2259af326b3aae93e23e9d8a1a88eb6004bddee4ccae4b421991bf54',1,'Catch::ResultDisposition']]]
 ];

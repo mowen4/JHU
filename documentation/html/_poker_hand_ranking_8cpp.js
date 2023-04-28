@@ -28,8 +28,5 @@ var _poker_hand_ranking_8cpp =
       [ "RoyalFlush", "_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb", null ]
     ] ],
     [ "main", "_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ],
-    [ "operator<<", "_poker_hand_ranking_8cpp.html#a04dc6f95af070291e23534042e1e7f8c", null ],
-    [ "cardValues", "_poker_hand_ranking_8cpp.html#a65aa209fa62c3ff6062f2b25b0c66ad1", null ],
-    [ "Suits", "_poker_hand_ranking_8cpp.html#ac5b862f2af67c25e6fafa6b43046e188", null ],
-    [ "Values", "_poker_hand_ranking_8cpp.html#a08d59e52a72c938981c743e9595bf60c", null ]
+    [ "operator<<", "_poker_hand_ranking_8cpp.html#a04dc6f95af070291e23534042e1e7f8c", null ]
 ];

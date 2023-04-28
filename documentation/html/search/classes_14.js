@@ -5,5 +5,6 @@ var searchData=
   ['withinabsmatcher_2',['WithinAbsMatcher',['../struct_catch_1_1_matchers_1_1_floating_1_1_within_abs_matcher.html',1,'Catch::Matchers::Floating']]],
   ['withinrelmatcher_3',['WithinRelMatcher',['../struct_catch_1_1_matchers_1_1_floating_1_1_within_rel_matcher.html',1,'Catch::Matchers::Floating']]],
   ['withinulpsmatcher_4',['WithinUlpsMatcher',['../struct_catch_1_1_matchers_1_1_floating_1_1_within_ulps_matcher.html',1,'Catch::Matchers::Floating']]],
-  ['writer_5',['Writer',['../class_json_1_1_writer.html',1,'Json']]]
+  ['writer_5',['Writer',['../class_json_1_1_writer.html',1,'Json::Writer'],['../classlog4cxx_1_1helpers_1_1_writer.html',1,'log4cxx::helpers::Writer']]],
+  ['writerappender_6',['WriterAppender',['../classlog4cxx_1_1_writer_appender.html',1,'log4cxx']]]
 ];

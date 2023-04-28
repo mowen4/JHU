@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['reference_0',['reference',['../class_json_1_1_secure_allocator.html#a55b243c56812b3852b59c1a9b0a21c65',1,'Json::SecureAllocator::reference()'],['../class_json_1_1_secure_allocator.html#a55b243c56812b3852b59c1a9b0a21c65',1,'Json::SecureAllocator::reference()'],['../class_json_1_1_value_const_iterator.html#a4e04dea5719630f67806875296eb4751',1,'Json::ValueConstIterator::reference()'],['../class_json_1_1_value_iterator.html#a650c999384cd2a90ad68ca6d028124de',1,'Json::ValueIterator::reference()']]],
-  ['result_5ftype_1',['result_type',['../class_catch_1_1_simple_pcg32.html#a220ca38f6d16804c6e99937a673ec3ff',1,'Catch::SimplePcg32']]]
+  ['map_0',['Map',['../classlog4cxx_1_1_m_d_c.html#afc1b9ecb08d6983d2647ff510d8d1e31',1,'log4cxx::MDC']]],
+  ['members_1',['Members',['../class_json_1_1_value.html#a3b47cdb320b208e40f53b4d1c48fbe52',1,'Json::Value']]],
+  ['messagebuffer_2',['MessageBuffer',['../namespacelog4cxx_1_1helpers.html#a6aec027cd3533f23ad9014585f8c7f9d',1,'log4cxx::helpers']]]
 ];

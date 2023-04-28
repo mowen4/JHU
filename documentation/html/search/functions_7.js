@@ -10,10 +10,15 @@ var searchData=
   ['handleincomplete_7',['handleIncomplete',['../struct_catch_1_1_i_result_capture.html#a89b89372eb09cc44f8dcad363de6157d',1,'Catch::IResultCapture']]],
   ['handlemessage_8',['handleMessage',['../struct_catch_1_1_i_result_capture.html#a21788ebc64571abf322b80c8cc51794d',1,'Catch::IResultCapture::handleMessage()'],['../class_catch_1_1_assertion_handler.html#abdb4c180ed83ec2858b2fb87712c516d',1,'Catch::AssertionHandler::handleMessage()']]],
   ['handlenonexpr_9',['handleNonExpr',['../struct_catch_1_1_i_result_capture.html#ab7dbdf8aa28427119583e24dbb302c63',1,'Catch::IResultCapture']]],
-  ['handlethrowingcallskipped_10',['handleThrowingCallSkipped',['../class_catch_1_1_assertion_handler.html#a67a194d5518f307c4a16faa03a7f7442',1,'Catch::AssertionHandler']]],
-  ['handleunexpectedexceptionnotthrown_11',['handleUnexpectedExceptionNotThrown',['../struct_catch_1_1_i_result_capture.html#a6382ed20486e2d9a020da971c6d5c53d',1,'Catch::IResultCapture::handleUnexpectedExceptionNotThrown()'],['../class_catch_1_1_assertion_handler.html#a7764d0adb6ed5eeb10964f6abc02fab1',1,'Catch::AssertionHandler::handleUnexpectedExceptionNotThrown()']]],
-  ['handleunexpectedinflightexception_12',['handleUnexpectedInflightException',['../struct_catch_1_1_i_result_capture.html#afc97bc69829185222f955ebeef97adfe',1,'Catch::IResultCapture::handleUnexpectedInflightException()'],['../class_catch_1_1_assertion_handler.html#aa2504dad6a91f3645e5f52c932c11270',1,'Catch::AssertionHandler::handleUnexpectedInflightException()']]],
-  ['hascomment_13',['hasComment',['../class_json_1_1_value.html#a65d8e3ab6a5871cbd019a3e0f0b944a3',1,'Json::Value']]],
-  ['hasgenerator_14',['hasGenerator',['../struct_catch_1_1_i_generator_tracker.html#ae88084f9af27c8b9a5d5775b9c148498',1,'Catch::IGeneratorTracker']]],
-  ['hastestfilters_15',['hasTestFilters',['../struct_catch_1_1_i_config.html#a49a475bbeb3180c06799d6d958914649',1,'Catch::IConfig']]]
+  ['handlesthrowable_10',['handlesThrowable',['../classlog4cxx_1_1pattern_1_1_logging_event_pattern_converter.html#af5f46da7371a1ebb868375134ad83477',1,'log4cxx::pattern::LoggingEventPatternConverter::handlesThrowable()'],['../classlog4cxx_1_1pattern_1_1_throwable_information_pattern_converter.html#a898c79f4fb99f100db94e0e6cffc3fb0',1,'log4cxx::pattern::ThrowableInformationPatternConverter::handlesThrowable()']]],
+  ['handlethrowingcallskipped_11',['handleThrowingCallSkipped',['../class_catch_1_1_assertion_handler.html#a67a194d5518f307c4a16faa03a7f7442',1,'Catch::AssertionHandler']]],
+  ['handleunexpectedexceptionnotthrown_12',['handleUnexpectedExceptionNotThrown',['../struct_catch_1_1_i_result_capture.html#a6382ed20486e2d9a020da971c6d5c53d',1,'Catch::IResultCapture::handleUnexpectedExceptionNotThrown()'],['../class_catch_1_1_assertion_handler.html#a7764d0adb6ed5eeb10964f6abc02fab1',1,'Catch::AssertionHandler::handleUnexpectedExceptionNotThrown()']]],
+  ['handleunexpectedinflightexception_13',['handleUnexpectedInflightException',['../struct_catch_1_1_i_result_capture.html#afc97bc69829185222f955ebeef97adfe',1,'Catch::IResultCapture::handleUnexpectedInflightException()'],['../class_catch_1_1_assertion_handler.html#aa2504dad6a91f3645e5f52c932c11270',1,'Catch::AssertionHandler::handleUnexpectedInflightException()']]],
+  ['hascomment_14',['hasComment',['../class_json_1_1_value.html#a65d8e3ab6a5871cbd019a3e0f0b944a3',1,'Json::Value']]],
+  ['hasgenerator_15',['hasGenerator',['../struct_catch_1_1_i_generator_tracker.html#ae88084f9af27c8b9a5d5775b9c148498',1,'Catch::IGeneratorTracker']]],
+  ['hasmoretokens_16',['hasMoreTokens',['../classlog4cxx_1_1helpers_1_1_string_tokenizer.html#a2f13cd9dc08a6fe5f51f5aaab0deb646',1,'log4cxx::helpers::StringTokenizer']]],
+  ['haspassengeroncurrentfloor_17',['hasPassengerOnCurrentFloor',['../class_elevator.html#ada53faef6855570f206325054531e8a6',1,'Elevator']]],
+  ['hasstream_18',['hasStream',['../classlog4cxx_1_1helpers_1_1_char_message_buffer.html#a24a9b6d2feeb02c93169df611eeb8294',1,'log4cxx::helpers::CharMessageBuffer']]],
+  ['hastestfilters_19',['hasTestFilters',['../struct_catch_1_1_i_config.html#a49a475bbeb3180c06799d6d958914649',1,'Catch::IConfig']]],
+  ['htmllayout_20',['HTMLLayout',['../classlog4cxx_1_1_h_t_m_l_layout.html#a40604ca7e4deab6bdca95c098d2b46c4',1,'log4cxx::HTMLLayout']]]
 ];
