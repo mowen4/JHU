@@ -237,7 +237,7 @@ int Hand::discardCards() {
                 std::cout << c.value << c.suit << " Selected for discard\n";
                 cardsToDiscard[input - 1] = true;
             } else if (input == 0) {
-                cout << "Choices Comitted\n";
+                cout << "Choices Committed\n";
             }
         }
 
