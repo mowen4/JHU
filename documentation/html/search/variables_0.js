@@ -10,7 +10,8 @@ var searchData=
   ['allowsinglequotes_5f_7',['allowSingleQuotes_',['../class_json_1_1_our_features.html#abbd6c196d7a22e2a360a59887eda4610',1,'Json::OurFeatures']]],
   ['allowspecialfloats_5f_8',['allowSpecialFloats_',['../class_json_1_1_our_features.html#af760f91cc2a7af37e44f78fb466061bb',1,'Json::OurFeatures']]],
   ['allowtrailingcommas_5f_9',['allowTrailingCommas_',['../class_json_1_1_our_features.html#a6354b6eed2e0cf4083a742f467f6c63b',1,'Json::OurFeatures']]],
-  ['appenderlist_10',['appenderList',['../classlog4cxx_1_1helpers_1_1_appender_attachable_impl.html#a4c12006945901a6ab4522c429d2e08c1',1,'log4cxx::helpers::AppenderAttachableImpl']]],
-  ['approx_11',['approx',['../struct_catch_1_1_matchers_1_1_vector_1_1_approx_matcher.html#a0da9e77e66822ed7fd0164fc42420fa5',1,'Catch::Matchers::Vector::ApproxMatcher']]],
-  ['assertions_12',['assertions',['../struct_catch_1_1_totals.html#a885ded66df752147b30c3d45aa602ec9',1,'Catch::Totals']]]
+  ['amountbetthisroundalready_10',['amountBetThisRoundAlready',['../class_hand.html#a286a6fe8e05fbbbe2f002745334a18c3',1,'Hand']]],
+  ['appenderlist_11',['appenderList',['../classlog4cxx_1_1helpers_1_1_appender_attachable_impl.html#a4c12006945901a6ab4522c429d2e08c1',1,'log4cxx::helpers::AppenderAttachableImpl']]],
+  ['approx_12',['approx',['../struct_catch_1_1_matchers_1_1_vector_1_1_approx_matcher.html#a0da9e77e66822ed7fd0164fc42420fa5',1,'Catch::Matchers::Vector::ApproxMatcher']]],
+  ['assertions_13',['assertions',['../struct_catch_1_1_totals.html#a885ded66df752147b30c3d45aa602ec9',1,'Catch::Totals']]]
 ];

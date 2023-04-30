@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: PokerHandsV2.cpp File Reference</title>
+<title>My Project: FiveCardDraw.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('_poker_hands_v2_8cpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('_five_card_draw_8cpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,18 +100,20 @@ $(document).ready(function(){initNavTree('_poker_hands_v2_8cpp.html',''); initRe
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">PokerHandsV2.cpp File Reference</div></div>
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">FiveCardDraw.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;deque&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="json_8h_source.html">json/json.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="jsoncpp_8cpp.html">jsoncpp.cpp</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -123,10 +125,16 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hand.html">Hand</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to hold a poker hand.  <a href="class_hand.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_poker_game.html">PokerGame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for facilitating the running of a poker game.  <a href="class_poker_game.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_json_poker_tests.html">JsonPokerTests</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs tests on a collection of hands stored in json format.  <a href="class_json_poker_tests.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:af95eb6277debde8d3bf3ffffc70ac2a4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4">HandRanking</a> { <br />
+<tr class="memitem:af95eb6277debde8d3bf3ffffc70ac2a4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4">HandRanking</a> { <br />
 &#160;&#160;<a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6117d6e94a71ab9e736a4d25e176e227">HighCard</a>
 , <a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a23b495652b0d0ae95bd1d13ef8872772">OnePair</a>
 , <a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6927082734d37e0460ba3a589e4485da">TwoPairs</a>
@@ -167,22 +175,25 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:af95eb6277debde8d3bf3ffffc70ac2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> { <br />
+&#160;&#160;<a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba7ac9ab6c2e98f6df96b82b175d42747a">Waiting</a>
+, <a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70bab07e993a3b7bdb2623a1ade34c337a33">Checked</a>
+, <a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba33a885186066c38bcd34066b143b30fe">Folded</a>
+, <a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba1d2d258e92567cbc6fabf9c2722bb6d6">Raised</a>
+, <br />
+&#160;&#160;<a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70bad62c0e64712dc0d04f506dadbe672e53">Called</a>
+<br />
+ }</td></tr>
+<tr class="separator:a67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a04dc6f95af070291e23534042e1e7f8c"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#a04dc6f95af070291e23534042e1e7f8c">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4">HandRanking</a> rank)</td></tr>
+<tr class="memitem:a04dc6f95af070291e23534042e1e7f8c"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_five_card_draw_8cpp.html#a04dc6f95af070291e23534042e1e7f8c">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4">HandRanking</a> rank)</td></tr>
+<tr class="memdesc:a04dc6f95af070291e23534042e1e7f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overriding the ostream &lt;&lt; operator Overiding this to make displaying <a class="el" href="class_hand.html" title="Class to hold a poker hand.">Hand</a> Rankings easier with cout.  <br /></td></tr>
 <tr class="separator:a04dc6f95af070291e23534042e1e7f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a65aa209fa62c3ff6062f2b25b0c66ad1"><td class="memItemLeft" align="right" valign="top">map&lt; char, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#a65aa209fa62c3ff6062f2b25b0c66ad1">cardValues</a></td></tr>
-<tr class="separator:a65aa209fa62c3ff6062f2b25b0c66ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5b862f2af67c25e6fafa6b43046e188"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#ac5b862f2af67c25e6fafa6b43046e188">Suits</a> [4] = {'S', 'H', 'D', 'C'}</td></tr>
-<tr class="separator:ac5b862f2af67c25e6fafa6b43046e188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d59e52a72c938981c743e9595bf60c"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_poker_hands_v2_8cpp.html#a08d59e52a72c938981c743e9595bf60c">Values</a> [13]</td></tr>
-<tr class="separator:a08d59e52a72c938981c743e9595bf60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_five_card_draw_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">int main is the program entry point  <br /></td></tr>
+<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="af95eb6277debde8d3bf3ffffc70ac2a4" name="af95eb6277debde8d3bf3ffffc70ac2a4"></a>
@@ -231,9 +242,30 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a67a0db04d321a74b7e7fcfd3f1a3f70b" name="a67a0db04d321a74b7e7fcfd3f1a3f70b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a0db04d321a74b7e7fcfd3f1a3f70b">&#9670;&#160;</a></span>Status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a67a0db04d321a74b7e7fcfd3f1a3f70ba7ac9ab6c2e98f6df96b82b175d42747a" name="a67a0db04d321a74b7e7fcfd3f1a3f70ba7ac9ab6c2e98f6df96b82b175d42747a"></a>Waiting&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a67a0db04d321a74b7e7fcfd3f1a3f70bab07e993a3b7bdb2623a1ade34c337a33" name="a67a0db04d321a74b7e7fcfd3f1a3f70bab07e993a3b7bdb2623a1ade34c337a33"></a>Checked&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a67a0db04d321a74b7e7fcfd3f1a3f70ba33a885186066c38bcd34066b143b30fe" name="a67a0db04d321a74b7e7fcfd3f1a3f70ba33a885186066c38bcd34066b143b30fe"></a>Folded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a67a0db04d321a74b7e7fcfd3f1a3f70ba1d2d258e92567cbc6fabf9c2722bb6d6" name="a67a0db04d321a74b7e7fcfd3f1a3f70ba1d2d258e92567cbc6fabf9c2722bb6d6"></a>Raised&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a67a0db04d321a74b7e7fcfd3f1a3f70bad62c0e64712dc0d04f506dadbe672e53" name="a67a0db04d321a74b7e7fcfd3f1a3f70bad62c0e64712dc0d04f506dadbe672e53"></a>Called&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&#160;</a></span>main()</h2>
+<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,11 +273,25 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>int main is the program entry point </p>
+<p>Runs the code for comparing poker hands. </p><dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -275,54 +321,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a65aa209fa62c3ff6062f2b25b0c66ad1" name="a65aa209fa62c3ff6062f2b25b0c66ad1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65aa209fa62c3ff6062f2b25b0c66ad1">&#9670;&#160;</a></span>cardValues</h2>
+<p>Overriding the ostream &lt;&lt; operator Overiding this to make displaying <a class="el" href="class_hand.html" title="Class to hold a poker hand.">Hand</a> Rankings easier with cout. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td></td></tr>
+    <tr><td class="paramname">rank</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">map&lt;char, int&gt; cardValues</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    {<span class="charliteral">&#39;2&#39;</span>, 2}, {<span class="charliteral">&#39;3&#39;</span>, 3},  {<span class="charliteral">&#39;4&#39;</span>, 4},  {<span class="charliteral">&#39;5&#39;</span>, 5},  {<span class="charliteral">&#39;6&#39;</span>, 6},  {<span class="charliteral">&#39;7&#39;</span>, 7}, {<span class="charliteral">&#39;8&#39;</span>, 8},</div>
-<div class="line">    {<span class="charliteral">&#39;9&#39;</span>, 9}, {<span class="charliteral">&#39;T&#39;</span>, 10}, {<span class="charliteral">&#39;J&#39;</span>, 11}, {<span class="charliteral">&#39;Q&#39;</span>, 12}, {<span class="charliteral">&#39;K&#39;</span>, 13}, {<span class="charliteral">&#39;A&#39;</span>, 14}}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac5b862f2af67c25e6fafa6b43046e188" name="ac5b862f2af67c25e6fafa6b43046e188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5b862f2af67c25e6fafa6b43046e188">&#9670;&#160;</a></span>Suits</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char Suits[4] = {'S', 'H', 'D', 'C'}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a08d59e52a72c938981c743e9595bf60c" name="a08d59e52a72c938981c743e9595bf60c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08d59e52a72c938981c743e9595bf60c">&#9670;&#160;</a></span>Values</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char Values[13]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="charliteral">&#39;2&#39;</span>, <span class="charliteral">&#39;3&#39;</span>, <span class="charliteral">&#39;4&#39;</span>, <span class="charliteral">&#39;5&#39;</span>, <span class="charliteral">&#39;6&#39;</span>, <span class="charliteral">&#39;7&#39;</span>, <span class="charliteral">&#39;8&#39;</span>,</div>
-<div class="line">                         <span class="charliteral">&#39;9&#39;</span>, <span class="charliteral">&#39;T&#39;</span>, <span class="charliteral">&#39;J&#39;</span>, <span class="charliteral">&#39;Q&#39;</span>, <span class="charliteral">&#39;K&#39;</span>, <span class="charliteral">&#39;A&#39;</span>}</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
@@ -330,7 +338,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="_poker_hands_v2_8cpp.html">PokerHandsV2.cpp</a></li>
+    <li class="navelem"><a class="el" href="_five_card_draw_8cpp.html">FiveCardDraw.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

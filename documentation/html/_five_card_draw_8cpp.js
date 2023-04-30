@@ -1,11 +1,11 @@
-var _poker_hand_ranking_8cpp =
+var _five_card_draw_8cpp =
 [
     [ "Card", "struct_card.html", "struct_card" ],
     [ "Deck", "class_deck.html", "class_deck" ],
     [ "Hand", "class_hand.html", "class_hand" ],
     [ "PokerGame", "class_poker_game.html", "class_poker_game" ],
     [ "JsonPokerTests", "class_json_poker_tests.html", "class_json_poker_tests" ],
-    [ "HandRanking", "_poker_hand_ranking_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4", [
+    [ "HandRanking", "_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4", [
       [ "HighCard", "_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6117d6e94a71ab9e736a4d25e176e227", null ],
       [ "OnePair", "_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a23b495652b0d0ae95bd1d13ef8872772", null ],
       [ "TwoPairs", "_five_card_draw_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a6927082734d37e0460ba3a589e4485da", null ],
@@ -37,6 +37,13 @@ var _poker_hand_ranking_8cpp =
       [ "StraightFlush", "_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a90663bbcbca6416ad39e70b52a053b99", null ],
       [ "RoyalFlush", "_poker_hands_v2_8cpp.html#af95eb6277debde8d3bf3ffffc70ac2a4a426db37e862969c16e3fc0a719b852cb", null ]
     ] ],
-    [ "main", "_poker_hand_ranking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ],
-    [ "operator<<", "_poker_hand_ranking_8cpp.html#a04dc6f95af070291e23534042e1e7f8c", null ]
+    [ "Status", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70b", [
+      [ "Waiting", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba7ac9ab6c2e98f6df96b82b175d42747a", null ],
+      [ "Checked", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70bab07e993a3b7bdb2623a1ade34c337a33", null ],
+      [ "Folded", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba33a885186066c38bcd34066b143b30fe", null ],
+      [ "Raised", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba1d2d258e92567cbc6fabf9c2722bb6d6", null ],
+      [ "Called", "_five_card_draw_8cpp.html#a67a0db04d321a74b7e7fcfd3f1a3f70bad62c0e64712dc0d04f506dadbe672e53", null ]
+    ] ],
+    [ "main", "_five_card_draw_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97", null ],
+    [ "operator<<", "_five_card_draw_8cpp.html#a04dc6f95af070291e23534042e1e7f8c", null ]
 ];

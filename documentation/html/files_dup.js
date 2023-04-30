@@ -6,6 +6,7 @@ var files_dup =
     [ "catch.hpp", "catch_8hpp.html", "catch_8hpp" ],
     [ "elevator.cpp", "elevator_8cpp.html", "elevator_8cpp" ],
     [ "ExpressionEvaluator.cpp", "_expression_evaluator_8cpp.html", "_expression_evaluator_8cpp" ],
+    [ "FiveCardDraw.cpp", "_five_card_draw_8cpp.html", "_five_card_draw_8cpp" ],
     [ "InputOutput.cpp", "_input_output_8cpp.html", "_input_output_8cpp" ],
     [ "jsoncpp.cpp", "jsoncpp_8cpp.html", "jsoncpp_8cpp" ],
     [ "PokerHandRanking.cpp", "_poker_hand_ranking_8cpp.html", "_poker_hand_ranking_8cpp" ],

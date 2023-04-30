@@ -26,7 +26,7 @@ var searchData=
   ['_7edate_23',['~Date',['../classlog4cxx_1_1helpers_1_1_date.html#a43f0a4e7fae4310660099d3e2dc42a40',1,'log4cxx::helpers::Date']]],
   ['_7edateformat_24',['~DateFormat',['../classlog4cxx_1_1helpers_1_1_date_format.html#adcc7b813508ecd35fe488c776c8a65de',1,'log4cxx::helpers::DateFormat']]],
   ['_7edatelayout_25',['~DateLayout',['../classlog4cxx_1_1helpers_1_1_date_layout.html#a5368128e307e4983ac7e3c531f2e897e',1,'log4cxx::helpers::DateLayout']]],
-  ['_7edeck_26',['~Deck',['../class_deck.html#a7d1331cc558c302fdf44e5ae8aae1a95',1,'Deck::~Deck()'],['../class_deck.html#a7d1331cc558c302fdf44e5ae8aae1a95',1,'Deck::~Deck()']]],
+  ['_7edeck_26',['~Deck',['../class_deck.html#a7d1331cc558c302fdf44e5ae8aae1a95',1,'Deck::~Deck()'],['../class_deck.html#a7d1331cc558c302fdf44e5ae8aae1a95',1,'Deck::~Deck()'],['../class_deck.html#a7d1331cc558c302fdf44e5ae8aae1a95',1,'Deck::~Deck()']]],
   ['_7eenuminfo_27',['~EnumInfo',['../struct_catch_1_1_detail_1_1_enum_info.html#ab6608593c00614a688045fe8d911258d',1,'Catch::Detail::EnumInfo']]],
   ['_7eerrorhandler_28',['~ErrorHandler',['../classlog4cxx_1_1spi_1_1_error_handler.html#a240993bbbd9758b6353c92a1240e3f92',1,'log4cxx::spi::ErrorHandler']]],
   ['_7eexception_29',['~Exception',['../class_json_1_1_exception.html#a4082191598f5df7bf0a62a6cadbb2db8',1,'Json::Exception']]],

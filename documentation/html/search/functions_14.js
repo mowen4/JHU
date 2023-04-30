@@ -7,8 +7,8 @@ var searchData=
   ['unorderedequalsmatcher_4',['UnorderedEqualsMatcher',['../struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher.html#ab78e6bbbad05472815a695650edc062c',1,'Catch::Matchers::Vector::UnorderedEqualsMatcher']]],
   ['unregistercleanup_5',['unregisterCleanup',['../classlog4cxx_1_1helpers_1_1_a_p_r_initializer.html#adf9ce4d6debaea0b929e55db4cf2cb23',1,'log4cxx::helpers::APRInitializer']]],
   ['update_6',['update',['../class_elevator.html#ad0e03a3342170ece2dde4bc1f80c33ea',1,'Elevator::update(Building &amp;building)'],['../class_elevator.html#a5d697f4b2b31c3a5b7067e9f6078867b',1,'Elevator::update()']]],
-  ['updateelevatormovement_7',['updateElevatorMovement',['../class_building.html#af827f5e04fa7e2634090d3c5b31f9948',1,'Building']]],
-  ['updateelevatormovement_8',['UpdateElevatorMovement',['../class_building.html#adb8ea03bca7b2b9fb2c62692f5a5de7e',1,'Building']]],
+  ['updateelevatormovement_7',['UpdateElevatorMovement',['../class_building.html#adb8ea03bca7b2b9fb2c62692f5a5de7e',1,'Building']]],
+  ['updateelevatormovement_8',['updateElevatorMovement',['../class_building.html#af827f5e04fa7e2634090d3c5b31f9948',1,'Building']]],
   ['updatefloorcallstatus_9',['updateFloorCallStatus',['../class_building.html#a3e26543410811622430a7354b8ca50cc',1,'Building::updateFloorCallStatus()'],['../class_building.html#a3e26543410811622430a7354b8ca50cc',1,'Building::updateFloorCallStatus()']]],
   ['usecolour_10',['useColour',['../struct_catch_1_1_i_config.html#a87ec19a6b486eb5b5015cf7738fee026',1,'Catch::IConfig']]]
 ];
