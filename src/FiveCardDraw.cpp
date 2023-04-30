@@ -1127,28 +1127,34 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
 ///
 /// Runs the code for comparing poker hands.
 /// @return
-int main() {
-    // JsonPokerTests jsonTester("PokerHandTests.json");
-    // jsonTester.ProcessTestsInJsonFile();
-    int again = 0;
-    PokerGame game;
-    game.setNumberOfPlayers(3);
-    game.setNumberOfHumans(3);
-    game.assignSeats();
+int main(int argc, char* argv[]) {
+    //if no argument is passed or the argument != "handtests", play the game      
+    if (argc < 2 
+        || strcmp(argv[1], "handtests") != 0) {                
+        int again = 0;
+        PokerGame game;
+        game.setNumberOfPlayers(3);
+        game.setNumberOfHumans(3);
+        game.assignSeats();
 
-    do {
-        game.dealInitialHands();
-        game.showPlayerHands();
-        game.betRound();
-        game.getDraw();
-        game.betRound();
-        game.getRoundWinner();
+        do {
+            game.dealInitialHands();
+            game.showPlayerHands();
+            game.betRound();
+            game.getDraw();
+            game.betRound();
+            game.getRoundWinner();
 
-        cout << "\nAnother Round?\n";
-        cout << "1 for yes, any other input = no:\n";
-        cin >> again;
+            cout << "\nAnother Round?\n";
+            cout << "1 for yes, any other input = no:\n";
+            cin >> again;
 
-    } while (again);
-
-    return 0;
+        } while (again);
+    }   
+    //otherwise run the set of pairwise comparison tests   
+    else{    
+        JsonPokerTests jsonTester("PokerHandTests.json");  
+        jsonTester.ProcessTestsInJsonFile();  
+    }
+    return 0;    
 }
