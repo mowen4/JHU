@@ -225,7 +225,7 @@ int Hand::discardCards() {
     int numToDiscard = 0;
     if (this->isHuman()) {
         cout << "Current Player, choose cards to discard by index:\n";
-        cout << "Index 1 though 5, 0 stop\n";
+        cout << "Index 1 through 5, 0 stop\n";
         this->showHand();
         int input = -1;
         while (input != 0) {
