@@ -165,6 +165,8 @@ std::ostream &operator<<(std::ostream &os, const HandRanking rank) {
     return os;
 }
 
+enum Status { Waiting, Checked, Folded, Raised, Called };
+
 /// @brief Class to hold a poker hand
 ///
 /// The Hand class holds a collection of Card objects in the vector 'cards.' The
@@ -185,7 +187,7 @@ class Hand {
     bool isFolded();
     void setFolded();
     void setHuman();
-    int bet(int minAmount, int maxRaise, int countRaises, bool isAnte);
+    int bet(int minAmount, int maxRaise, int countRaises);
     int amountBetThisRoundAlready = 0;
     int discardCards();
 
@@ -193,13 +195,18 @@ class Hand {
     int handCounts[13] = {0};  // 2 3 4 5 6 7 8 9 T J Q K A
     // array to store counts of suits within the hand
     int suitCounts[4] = {0};  // Club Diamond Heart Spade
+
+    Status status = Waiting;
+    Status getStatus();
+    void setStatus();
+    int money = 100;
+
    private:
     vector<Card> cards;
     HandRanking rank;
     int maximumHandSize;
     bool human = false;
     bool folded = false;
-    int money = 100;
 
     // boolean flags for hand type determination
     bool pair = false;
@@ -212,45 +219,83 @@ class Hand {
     bool royalFlush = false;
 };
 
-int Hand::discardCards()
-{
-    //0 for now for compiling
-    return 0;
+int Hand::discardCards() {
+    bool cardsToDiscard[5] = {false};
+    int numToDiscard = 0;
+    if (this->isHuman()) {
+        cout << "Current Player, choose cards to discard by index:\n";
+        cout << "Index 1 though 5, 0 stop\n";
+        this->showHand();
+        int input = -1;
+        while (input != 0) {
+            cin >> input;
+            if (input < 0 || input > 5) {
+                cout << "Valid Choices are integers 0-5";
+            } else if (input > 0 && input < 6) {
+                Card c = this->cards[input - 1];
+                std::cout << c.value << c.suit << " Selected for discard\n";
+                cardsToDiscard[input - 1] = true;
+            } else if (input == 0) {
+                cout << "Choices Comitted\n";
+            }
+        }
+
+        for (int i = 4; i >= 0; i--) {
+            if (cardsToDiscard[i]) {
+                numToDiscard++;
+                cards.erase(cards.begin() + i);
+            }
+        }
+    } else {
+        // computer randomly puts back one card
+        srand((unsigned)time(NULL));
+        int putBack = (rand() % 5) + 1;
+        cardsToDiscard[putBack] = true;
+
+        for (int i = 5; i >= 0; i--) {
+            if (cardsToDiscard[i]) {
+                numToDiscard++;
+                cards.erase(cards.begin() + i);
+            }
+        }
+    }
+
+    return numToDiscard;
 }
 
-int Hand::bet(int minAmount, int maxRaise, int raisesRemaining, bool isAnte) {
-    if (isAnte) {
-        money -= minAmount;
-        return minAmount;
-
-    } else if (human) {
+int Hand::bet(int toCall, int maxRaise, int raisesRemaining) {
+    cout << "\n" << endl;
+    if (human) {
         int i = 0;
         bool inputInvalid = true;
-        if (minAmount == 0 && this->amountBetThisRoundAlready != 0) {
-            cout << "All seats called\n";
+        if (toCall == 0 && amountBetThisRoundAlready != 0) {
+            cout << "All active seats called\n";
             return -1;
         }
         do {
             if (raisesRemaining > 0) {
                 cout << "Enter the value for your bet, 0 to check or fold\n";
-                cout << "Amount to call: " << minAmount << "\n";
+                cout << "Amount to call: " << toCall << "\n";
                 cout << "Maximum Raise: " << maxRaise << "\n";
                 cin >> i;
             } else {
                 cout << "Enter the value for your bet, 0 to check or fold\n";
                 cout << "No More Raises Allowed This Round. Required Bet: "
-                     << minAmount << "\n";
+                     << toCall << "\n";
                 cin >> i;
             }
 
-            if (i == 0) {
-                cout << "Check or Folding\n";
+            if (i == 0 && toCall != 0) {
+                cout << "Fold\n";
                 return i;
-            } else if (i < minAmount) {
+            } else if (i == 0) {
+                cout << "Check\n";
+                return i;
+            } else if (i < toCall) {
                 cout << "Input less than current bet, bet more\n";
-            } else if ((i - minAmount) > maxRaise && raisesRemaining > 0) {
+            } else if ((i - toCall) > maxRaise && raisesRemaining > 0) {
                 cout << "maximum raise is: " << maxRaise << " bet less\n";
-            } else if (i != minAmount && raisesRemaining == 0) {
+            } else if (i != toCall && raisesRemaining == 0) {
                 cout << "No Raises remain, call or fold\n";
             } else {
                 inputInvalid = false;
@@ -265,7 +310,7 @@ int Hand::bet(int minAmount, int maxRaise, int raisesRemaining, bool isAnte) {
 
     } else {
         // computer always bets minAmount for now and never folds
-        return minAmount;
+        return toCall;
     }
 }
 
@@ -432,6 +477,7 @@ void Hand::setRank() {
 /// if two hands have the same rank
 class PokerGame {
    public:
+    vector<Hand> endOfRoundHands;
     vector<Hand> playerHands;
     void addPlayerHand();
     void addPlayerHand(vector<Card> cards);
@@ -443,14 +489,17 @@ class PokerGame {
     void assignSeats();
     void betRound();
     void getDraw();
+    void getRoundWinner();
+    bool cleanupRound();
 
    private:
     Deck deck;
     int numberOfPlayers = 0;
     int numberOfHumans = 0;
     int handSize = 5;
+    int pot = 0;
 
-    void breakTie(HandRanking tiedRank, Hand player1, Hand player2);
+    int breakTie(HandRanking tiedRank, Hand player1, Hand player2);
     int highCardTieBreaker(Hand player1, Hand player2);
     int onePairTieBreaker(Hand player1, Hand player2);
     int twoPairsTieBreaker(Hand player1, Hand player2);
@@ -464,28 +513,90 @@ class PokerGame {
    protected:
 };
 
-void PokerGame::getDraw()
-{
+void PokerGame::getRoundWinner() {
+    int i = 0;
+    int highRankHandValue = 0;
+    vector<bool> winner;
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+        winner.push_back(true);
+    }
+
+    for (Hand &h : this->playerHands) {
+        if (!h.isFolded()) {
+            h.setRank();
+            cout << "Player " << (i + 1) << " has hand of type: " << h.getRank()
+                 << "\nEnumerated Rank: " << (int)h.getRank();
+            std::cout << std::endl;
+            if ((int)h.getRank() > highRankHandValue) {
+                highRankHandValue = (int)h.getRank();
+            }
+        } else {
+            cout << "Player " << (i + 1) << " Folded\n";
+        }
+        i++;
+    }
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+        if (playerHands[i].isFolded()) {
+            winner[i] = false;
+        }
+        if (!winner[i]) {
+            break;
+        }
+        for (int j = 0; j < numberOfPlayers; j++) {
+            if (!winner[j]) {
+                break;
+            } else if (i != j) {
+                int irank = (int)playerHands[i].getRank();
+                int jrank = (int)playerHands[j].getRank();
+
+                if (irank > jrank) {
+                    winner[j] = false;
+                } else if (irank = jrank) {
+                    int t = breakTie(playerHands[i].getRank(), playerHands[i],
+                                     playerHands[j]);
+                    if (t == 1) {
+                        winner[j] = false;
+                    }
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+        if (winner[i]) {
+            cout << "Player " << (i + 1) << "has won!\n";
+            cout << "The pot is: " << pot << "\n";
+            playerHands[i].showHand();
+
+            playerHands[i].money += pot;
+        }
+    }
+
+}
+
+void PokerGame::getDraw() {
+    // TODO return and get new cards from deck
     for (Hand &h : this->playerHands) {  // for each player
+        // reset the amount bet this round
         h.amountBetThisRoundAlready = 0;
-    }
-
-    //TODO return and get new cards from deck
-    for (Hand &h : this->playerHands) {  // for each player
-        int numToDeal = h.discardCards();
-        //write the discardCards() function
-        //prompt player to discard any number
-        //return num cards to deal
-        for (int i = 0; i < numToDeal; i++) {
-            Card c = deck.dealTopCard();
+        if (!h.isFolded()) {
+            int numToDeal = h.discardCards();
+            // write the discardCards() function
+            // prompt player to discard any number
+            // return num cards to deal
+            for (int i = 0; i < numToDeal; i++) {
+                Card c = deck.dealTopCard();
                 h.addCard(c);
-    }
-
+            }
+        }
+        // sort for good measure
+        h.sortHand();
     }
 }
 
 void PokerGame::betRound() {
-    int pot = 0;
     int highBet = 0;
     int toCall = 0;
     int betAmount = 0;
@@ -520,37 +631,33 @@ void PokerGame::betRound() {
     // might need to add args to the Hand::bet() function
     do {
         for (Hand &h : this->playerHands) {  // for each player
-            cout << "The Pot is: " << pot << "\n";
+            cout << "The Pot is: " << this->pot;
             if (!h.isFolded()) {  // if they have not folded
-                int betDiff = h.amountBetThisRoundAlready;
-                betAmount = h.bet(toCall - betDiff, 10, raisesRemaining,
-                                  false);  // arg 2 is max raise of 5 for now
+                int toCall = highBet - h.amountBetThisRoundAlready;
+                betAmount = h.bet(toCall, 10, raisesRemaining);
 
                 if (betAmount > 0) {  // if bet amount is > 0 pot +=
-                    pot += betAmount;
-                    if (betAmount > (toCall - betDiff))  // raise
+                    this->pot += betAmount;
+                    if (betAmount > (toCall))  // raise
                     {
+                        highBet = h.amountBetThisRoundAlready;
                         raisesRemaining--;
                         numCalls = 0;
-                        toCall = h.amountBetThisRoundAlready;
-                        //     toCall = betAmount - toCall;
-                        // } else if (betAmount == toCall) {
                     } else {
+                        highBet = h.amountBetThisRoundAlready;
                         numCalls++;
                     }
 
                 } else if (betAmount == 0) {  // if 0 user folded unless no bets
                                               // then its a check
-                    if (raisesRemaining == this->numberOfPlayers &&
-                        numCalls == 0) {
+                    if (highBet != 0) {
+                        // fold
+                        h.setFolded();
+                        numFolded++;
+
+                    } else if (highBet == 0) {
+                        // check
                         numChecks++;
-                    } else {
-                        h.setFolded();  // if there are bets then a 0 bet  ==
-                        numFolded++;    // folded
-                        if (numFolded == (numberOfPlayers - 1)) {
-                            anotherRound = false;
-                            break;
-                        }
                     }
 
                 } else if (betAmount == -1) {  // all have called. round over
@@ -560,8 +667,8 @@ void PokerGame::betRound() {
             }
         }
 
-        playerHands.erase(std::remove_if(playerHands.begin(),playerHands.end(),
-            [](Hand p) {return p.isFolded();}), playerHands.end());
+        // playerHands.erase(std::remove_if(playerHands.begin(),playerHands.end(),
+        //     [](Hand p) {return p.isFolded();}), playerHands.end());
 
         if (this->numberOfPlayers == numCalls ||
             this->numberOfPlayers == numChecks ||
@@ -660,7 +767,7 @@ void PokerGame::determineHandWinner() {
         HandRanking tiedRank = playerHands[0].getRank();
         Hand player1 = playerHands[0];
         Hand player2 = playerHands[1];
-        breakTie(tiedRank, player1, player2);
+        int doesntmatter = breakTie(tiedRank, player1, player2);
     }
 }
 
@@ -668,7 +775,7 @@ void PokerGame::determineHandWinner() {
 /// @param tiedRank The rank of the hands of the tied players
 /// @param player1
 /// @param player2
-void PokerGame::breakTie(HandRanking tiedRank, Hand player1, Hand player2) {
+int PokerGame::breakTie(HandRanking tiedRank, Hand player1, Hand player2) {
     int winner = -1;
     switch (tiedRank) {
         case HandRanking::HighCard:
@@ -714,6 +821,7 @@ void PokerGame::breakTie(HandRanking tiedRank, Hand player1, Hand player2) {
     } else {
         std::cout << "It's a tie! The hands are of equal rank.\n";
     }
+    return winner;
 }
 
 /// @brief Break Ties between two hands of rank 'High Card'
@@ -740,8 +848,9 @@ int PokerGame::highCardTieBreaker(Hand player1, Hand player2) {
 
 /// @brief Break ties between two hands of rank 'one pair'
 ///
-/// The code will first see if one pair is higher than the other. If they are
-/// the same pair value, high card rules will be used as backup tie breakers.
+/// The code will first see if one pair is higher than the other. If they
+/// are the same pair value, high card rules will be used as backup tie
+/// breakers.
 int PokerGame::onePairTieBreaker(Hand player1, Hand player2) {
     auto cards1 = player1.getCards();
     auto cards2 = player2.getCards();
@@ -760,7 +869,8 @@ int PokerGame::onePairTieBreaker(Hand player1, Hand player2) {
     } else if (pairValuePlayer1 < pairValuePlayer2) {
         return 2;
     } else {
-        // the pairs are the same, resolve the tie by looking for best high-card
+        // the pairs are the same, resolve the tie by looking for best
+        // high-card
         for (int i = handSize - 1; i >= 0; i--) {
             if (cards1[i] > cards2[i]) {
                 return 1;
@@ -907,7 +1017,8 @@ int PokerGame::fullHouseTieBreaker(Hand player1, Hand player2) {
     if (index2 > index1) {
         return 2;
     }
-    // both the three of a kind and the pair are a tie so the hands are tied.
+    // both the three of a kind and the pair are a tie so the hands are
+    // tied.
     return -1;
 }
 
@@ -969,8 +1080,8 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
              << "\n";
         Json::Value currentCategory = jsonData[propertyName];
 
-        // iterate through all the hands in the current category (e.g. all the
-        // straight flush tests)
+        // iterate through all the hands in the current category (e.g. all
+        // the straight flush tests)
         for (const auto &handPair : currentCategory) {
             vector<Card> cardsP1;
             vector<Card> cardsP2;
@@ -1011,7 +1122,10 @@ int main() {
     game.betRound();
     game.getDraw();
     game.betRound();
-    //game.determineWinner();
+    game.getRoundWinner();
+
+    // game.determineWinner();
+    // playanotherround();
 
     return 0;
 }
