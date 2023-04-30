@@ -570,7 +570,7 @@ void PokerGame::getRoundWinner() {
 
     for (int i = 0; i < numberOfPlayers; i++) {
         if (winner[i]) {
-            cout << "Player " << (i + 1) << "has won!\n";
+            cout << "Player " << (i + 1) << " has won the round!\n";
             cout << "The pot is: " << pot << "\n";
             playerHands[i].showHand();
 
