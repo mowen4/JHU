@@ -545,22 +545,23 @@ void PokerGame::getRoundWinner() {
             winner[i] = false;
         }
         if (!winner[i]) {
-            break;
-        }
-        for (int j = 0; j < numberOfPlayers; j++) {
-            if (!winner[j]) {
-                break;
-            } else if (i != j) {
-                int irank = (int)playerHands[i].getRank();
-                int jrank = (int)playerHands[j].getRank();
+            // break;
+        } else {
+            for (int j = 0; j < numberOfPlayers; j++) {
+                if (!winner[j]) {
+                    break;
+                } else if (i != j) {
+                    int irank = (int)playerHands[i].getRank();
+                    int jrank = (int)playerHands[j].getRank();
 
-                if (irank > jrank) {
-                    winner[j] = false;
-                } else if (irank = jrank) {
-                    int t = breakTie(playerHands[i].getRank(), playerHands[i],
-                                     playerHands[j]);
-                    if (t == 1) {
+                    if (irank > jrank) {
                         winner[j] = false;
+                    } else if (irank = jrank) {
+                        int t = breakTie(playerHands[i].getRank(),
+                                         playerHands[i], playerHands[j]);
+                        if (t == 1) {
+                            winner[j] = false;
+                        }
                     }
                 }
             }
