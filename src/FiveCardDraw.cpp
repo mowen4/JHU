@@ -186,6 +186,7 @@ class Hand {
     bool isHuman();
     bool isFolded();
     void setFolded();
+    void setFolded(bool t);
     void setHuman();
     int bet(int minAmount, int maxRaise, int countRaises);
     int amountBetThisRoundAlready = 0;
@@ -199,7 +200,7 @@ class Hand {
     Status status = Waiting;
     Status getStatus();
     void setStatus();
-    int money = 100;
+    int money = 500;
 
    private:
     vector<Card> cards;
@@ -313,6 +314,8 @@ int Hand::bet(int toCall, int maxRaise, int raisesRemaining) {
         return toCall;
     }
 }
+
+void Hand::setFolded(bool t) { folded = t; }
 
 void Hand::setFolded() { folded = true; }
 
@@ -574,6 +577,20 @@ void PokerGame::getRoundWinner() {
         }
     }
 
+    // reset players to stuff that matters
+    for (Hand &h : playerHands) {
+        h.discardHand();
+        h.setFolded(false);
+        h.amountBetThisRoundAlready = 0;
+    }
+
+    // rotate players 1 for dealer chip moving purposes
+    std::rotate(playerHands.begin(), playerHands.begin() + 1,
+                playerHands.end());
+
+    // instantiate new deck
+    Deck d;
+    this->deck = d;
 }
 
 void PokerGame::getDraw() {
@@ -1112,20 +1129,25 @@ void JsonPokerTests::ProcessTestsInJsonFile() {
 int main() {
     // JsonPokerTests jsonTester("PokerHandTests.json");
     // jsonTester.ProcessTestsInJsonFile();
-
+    int again = 0;
     PokerGame game;
     game.setNumberOfPlayers(3);
     game.setNumberOfHumans(3);
     game.assignSeats();
-    game.dealInitialHands();
-    game.showPlayerHands();
-    game.betRound();
-    game.getDraw();
-    game.betRound();
-    game.getRoundWinner();
 
-    // game.determineWinner();
-    // playanotherround();
+    do {
+        game.dealInitialHands();
+        game.showPlayerHands();
+        game.betRound();
+        game.getDraw();
+        game.betRound();
+        game.getRoundWinner();
+
+        cout << "\nAnother Round?\n";
+        cout << "1 for yes, any other input = no:\n";
+        cin >> again;
+
+    } while (again);
 
     return 0;
 }
